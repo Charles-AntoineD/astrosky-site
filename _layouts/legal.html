@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="{{ page.lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page.title }}</title>
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+  :root { --night: #0A0F1F; --surface: #1C2C55; --text: #F3ECD8; --muted: #D9D2BE; --star: #E2B25A; --accent: #7C9BE0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--night); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 52rem; margin: 0 auto; padding: 2.5rem 1rem 3rem; }
+  h1 { font-weight: 500; font-size: 1.7rem; margin: 0 0 1rem; }
+  h2 { font-size: 1.15rem; margin: 2rem 0 0.75rem; color: var(--star); font-weight: 600; }
+  h3 { font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+  table { width: 100%; border-collapse: collapse; display: block; overflow-x: auto; }
+  th, td { padding: 0.45rem 0.4rem; border-bottom: 1px solid var(--surface); vertical-align: top; text-align: left; }
+  th { color: var(--star); font-weight: 600; }
+  code { background: var(--surface); padding: 0 0.25rem; border-radius: 0.2rem; }
+  a { color: var(--accent); }
+  nav, footer { color: var(--muted); font-size: 0.85rem; }
+  nav { margin-bottom: 1.5rem; }
+  footer { margin-top: 2.5rem; border-top: 1px solid var(--surface); padding-top: 1rem; }
+</style>
+</head>
+<body>
+<main>
+<nav><a href="/">astrosky.gg</a></nav>
+{{ content }}
+<footer><p>This page sets no cookies and uses no analytics. · Cette page ne dépose aucun témoin et n'utilise aucune
+analytique.</p></footer>
+</main>
+</body>
+</html>
