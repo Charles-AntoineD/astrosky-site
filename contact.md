@@ -6,7 +6,7 @@ permalink: /contact/
 ---
 # AstroSky — Contact
 
-**Version:** `2026-10-19`
+**Version:** `2026-10-22`
 
 ## Who runs AstroSky
 
@@ -42,12 +42,12 @@ is deleted. We never send them the player's data and never ask for an identity d
 
 ## Person in charge of the protection of personal information
 
-The operator of AstroSky — `support@astrosky.gg` (subject: "Privacy"). Our Privacy Policy is published before the server opens to players.
+The operator of AstroSky — `support@astrosky.gg` (subject: "Privacy"). Our [Privacy Policy](/privacy/) says what we record and why.
 
 ## Official addresses
 
 - Server and website: `astrosky.gg`
-- Store: opens with the server
+- Store: not open yet; when it opens, `astrosky.gg/store`
 - Email: `support@astrosky.gg`
 - Social accounts: the list on `astrosky.gg`
 

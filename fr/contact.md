@@ -6,7 +6,7 @@ permalink: /fr/contact/
 ---
 # AstroSky — Contact
 
-**Version :** `2026-10-19`
+**Version :** `2026-10-22`
 
 ## Qui exploite AstroSky
 
@@ -43,13 +43,12 @@ demandons jamais de pièce d'identité.
 
 ## Responsable de la protection des renseignements personnels
 
-L'exploitant d'AstroSky — `support@astrosky.gg` (objet : « Confidentialité »). Notre politique de
-confidentialité est publiée avant l'ouverture du serveur aux joueurs.
+L'exploitant d'AstroSky — `support@astrosky.gg` (objet : « Confidentialité »). Notre [politique de confidentialité](/fr/confidentialite/) dit ce que nous enregistrons et pourquoi.
 
 ## Adresses officielles
 
 - Serveur et site : `astrosky.gg`
-- Boutique : ouvre avec le serveur
+- Boutique : pas encore ouverte ; à son ouverture, `astrosky.gg/store`
 - Courriel : `support@astrosky.gg`
 - Réseaux sociaux : la liste sur `astrosky.gg`
 
