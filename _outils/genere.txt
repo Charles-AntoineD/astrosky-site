@@ -1,0 +1,13 @@
+404.html
+_layouts/legal.html
+discord/index.html
+faq/index.html
+fr/faq/index.html
+fr/index.html
+fr/liens/index.html
+fr/rejoindre/index.html
+index.html
+join/index.html
+links/index.html
+sitemap.xml
+store/index.html

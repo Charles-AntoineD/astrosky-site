@@ -1,0 +1,86 @@
+# Interrupteurs du site astrosky.gg.
+#
+# Règle : une phrase ne s'affiche que le jour où elle est vraie. Mettre une valeur à `true` seulement quand c'est
+# vrai en jeu ou en ligne ce jour-là. Après chaque changement :
+#
+#     py _outils/construire.py
+#
+# puis valider et pousser (voir _outils/LISEZMOI.md). Les pages légales (règles, confidentialité, conditions de la
+# boutique) n'ont pas d'interrupteur : le site les relie dès que leur fichier .md est dans le dépôt.
+
+[serveur]
+adresse = "astrosky.gg"
+# Versions de Minecraft: Java Edition acceptées, relevées au premier ping du serveur public.
+# Écrire "26.2–26.3" seulement si un client 26.3 a pu se connecter le jour même.
+versions = "26.2"
+# true seulement quand le serveur est ouvert à tous (ouverture prévue : lundi 2026-11-16, 18 h, heure du Québec).
+ouvert = false
+# Nombre de joueurs par île à afficher. 0 = ne donner aucun nombre (taille fixée à la bascule du 2026-11-06).
+taille_equipe = 0
+
+# Chaque fonction du jeu n'est décrite que si elle existe sur le serveur public ce jour-là.
+[jeu]
+hotel_des_ventes = true      # hôtel des ventes validé à l'essai (noyau, FR-027)
+coffres_boutiques = true     # coffres-boutiques des joueurs
+banque_ile = true            # compte commun de l'île
+defis = true                 # défis importés
+classement_iles = true       # classement du niveau d'île
+metiers = false              # métiers en jeu (Mise à jour 1, ou bascule du 2026-11-06)
+equipes_agrandies = false    # équipes d'île agrandies en jeu (Mise à jour 1)
+commande_report = false      # /report livré sous ce nom (P-022)
+
+[boutique]
+# true seulement quand la boutique Tebex est ouverte, avec ses prix visibles sans compte. Sans les conditions de la
+# boutique et la politique de confidentialité (EN et FR) dans le dépôt, le site la garde affichée fermée.
+ouverte = false
+adresse = "https://astrosky.tebex.store"
+
+[discord]
+# Lien d'invitation public (https://discord.gg/...), seulement quand les conditions D1 sont remplies.
+invitation = ""
+
+[vote]
+# true quand l'écouteur de votes est actif sur le serveur public, le test V3 passé sur le serveur public (aucune
+# adresse IP enregistrée), la ligne « vote » de la politique de confidentialité publiée, et chaque fiche ci-dessous en
+# ligne avec son adresse de vote. Sans la politique de confidentialité (EN et FR) dans le dépôt, la page ne se
+# construit pas.
+ouvert = false
+
+[[vote.sites]]
+nom = "minecraft-mp.com"
+adresse = ""
+
+[[vote.sites]]
+nom = "minecraftservers.org"
+adresse = ""
+
+[[vote.sites]]
+nom = "minecraft.buzz"
+adresse = ""
+
+# Comptes officiels (déjà en ligne).
+[[comptes]]
+reseau = "TikTok"
+nom = "@astrosky.gg"
+adresse = "https://www.tiktok.com/@astrosky.gg"
+
+[[comptes]]
+reseau = "YouTube"
+nom = "@astroskygg"
+adresse = "https://www.youtube.com/@astroskygg"
+
+[[comptes]]
+reseau = "Instagram"
+nom = "astrosky.gg"
+adresse = "https://www.instagram.com/astrosky.gg"
+
+[[comptes]]
+reseau = "X"
+nom = "@astroskygg"
+adresse = "https://x.com/astroskygg"
+
+# Nouvelles datées, la plus récente en premier ; l'accueil montre les trois premières.
+[[nouvelles]]
+date = 2026-10-18
+en = "AstroSky opens on Monday, November 16, 2026, at 6 p.m. Eastern Time (Québec time)."
+fr = "AstroSky ouvre le lundi 16 novembre 2026, à 18 h, heure du Québec."
