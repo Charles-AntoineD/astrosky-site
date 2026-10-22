@@ -84,8 +84,18 @@ def taille_png(chemin: Path) -> tuple[int, int]:
     return struct.unpack(">II", data)
 
 
+def ligne_vote_publiee(racine: Path = RACINE) -> bool:
+    """La politique de confidentialité publiée (EN et FR) contient-elle la ligne « vote » ? (spec 043, TS-1/TS-2)"""
+    try:
+        en = (racine / "privacy-policy.md").read_text(encoding="utf-8").lower()
+        fr = (racine / "fr" / "politique-de-confidentialite.md").read_text(encoding="utf-8").lower()
+    except OSError:
+        return False
+    return "vote journal" in en and "journal des votes" in fr
+
+
 class Contexte:
-    def __init__(self, etat: dict, legales_presentes: set[str]):
+    def __init__(self, etat: dict, legales_presentes: set[str], ligne_vote: bool = False):
         self.etat = etat
         self.presentes = legales_presentes
         s = etat["serveur"]
@@ -103,9 +113,10 @@ class Contexte:
         self.boutique_url = etat["boutique"]["adresse"]
         self.discord = etat["discord"]["invitation"].strip()
         sites = [v for v in etat["vote"]["sites"] if v["adresse"].strip()]
-        # Le vote ne s'ouvre qu'avec ses trois adresses et la politique de confidentialité (ligne « vote ») en ligne.
+        # Le vote ne s'ouvre qu'avec ses trois adresses et la politique de confidentialité en ligne avec sa ligne
+        # « vote » (« Vote journal » / « journal des votes », ajoutée par la PR du vote).
         self.vote_demande = bool(etat["vote"]["ouvert"])
-        self.vote = self.vote_demande and len(sites) == len(etat["vote"]["sites"]) and prive
+        self.vote = self.vote_demande and len(sites) == len(etat["vote"]["sites"]) and prive and ligne_vote
         self.votes = etat["vote"]["sites"]
         self.comptes = etat["comptes"]
         self.nouvelles = etat.get("nouvelles", [])
@@ -964,11 +975,11 @@ def main(argv: list[str] | None = None) -> int:
     for jeu_de_pages in (presentes, toutes):
         for variante in combinaisons(etat):
             nombre += 1
-            c = Contexte(variante, jeu_de_pages)
+            c = Contexte(variante, jeu_de_pages, ligne_vote=True)
             for err in verifier(construire(c), c):
                 if err not in erreurs:
                     erreurs.append(err)
-    c = Contexte(etat, presentes)
+    c = Contexte(etat, presentes, ligne_vote=ligne_vote_publiee())
     sorties = construire(c)
     for err in verifier(sorties, c):
         if err not in erreurs:
@@ -981,8 +992,8 @@ def main(argv: list[str] | None = None) -> int:
         print("Attention : boutique.ouverte est vrai, mais les conditions de la boutique ou la politique de "
               "confidentialité (EN et FR) ne sont pas dans le dépôt : la boutique reste affichée fermée.")
     if c.vote_demande and not c.vote:
-        print("Attention : vote.ouvert est vrai, mais une adresse de vote ou la politique de confidentialité (EN et "
-              "FR) manque : la page de vote n'est pas construite.")
+        print("Attention : vote.ouvert est vrai, mais une adresse de vote, la politique de confidentialité (EN et "
+              "FR) ou sa ligne « vote » manque : la page de vote n'est pas construite.")
     print(f"Vérifié : {nombre} combinaisons d'interrupteurs et de pages légales, {len(sorties)} fichiers.")
     if not args.verifier:
         ecrire(sorties)

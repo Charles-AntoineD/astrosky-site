@@ -8,6 +8,8 @@ permalink: /rules/
 
 **Version:** `2026-10-22`
 
+**Status:** AstroSky is not open yet: the server is closed to players (whitelist) and the store has not opened. This page describes how it will work from opening day; the version date changes if anything differs.
+
 ## The short version
 
 - AstroSky is for players **18 and over**, each with their own genuine Minecraft Java account.
@@ -121,8 +123,7 @@ permalink: /rules/
 
 ## 3. Report
 
-- **Report by email:** write to `support@astrosky.gg` with the subject "Report". Use email for anything serious or
-  private. Don't attach sexual images, especially if someone may be a minor: describe what you saw.
+- **Report by email:** write to `support@astrosky.gg` with the subject "Report". Use email for any report, and above all for anything serious or private. Don't attach sexual images, especially if someone may be a minor: describe what you saw.
 - **If someone is in immediate danger,** call your local emergency number (911 in Canada and the United States) first,
   then email us with the subject "Report" to say what happened.
 
@@ -132,7 +133,7 @@ person who reported, although the facts can sometimes make it clear.
 **What we record:** public chat and private messages are recorded for safety and deleted after 90 days at most. They
 are read only for a report, an incident or a written rule; a private message only if one of its participants reports
 it, for an incident or a rule about one of them, or if someone may be in danger. Before each look through our moderation
-tools, its reason is logged. Nobody watches them live. Details are in the [Privacy Policy](/privacy/).
+tools, its reason is logged. Nobody watches them live. Private messages between players are turned off for now; we will announce it before turning them on. Details are in the [Privacy Policy](/privacy/).
 
 ## 4. Sanctions
 
@@ -162,7 +163,7 @@ Every sanction is decided by a person and is proportionate to how serious the pr
 - We apply this grid. Getting around a sanction with another account gets the same measure as the sanction you got
   around. Chatting in another language than English or French only gets a reminder.
 - **Scams, and moving coins or items between your own accounts,** are seriousness **2** in the grid. The first time: only a warning; after that, the grid applies from its "1st time" column.
-- For a rule not listed, the person applies the closest level of this grid and names it in the notice.
+- For a rule not listed, the person applies the closest level of this grid and names it when it tells you about the sanction.
 - **Repeat offences** count as long as the previous sanction is kept: while it applies and for 12 months after it
   ends.
 - **No automated sanctions:** no automated tool mutes, suspends or bans anyone, and the anti-cheat only alerts us.

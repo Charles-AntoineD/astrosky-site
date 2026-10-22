@@ -8,6 +8,8 @@ permalink: /fr/regles/
 
 **Version :** `2026-10-22`
 
+**État :** AstroSky n'est pas encore ouvert : le serveur est fermé aux joueurs (liste blanche) et la boutique n'a pas ouvert. Cette page décrit son fonctionnement dès le jour de l'ouverture ; la date de version change si quelque chose diffère.
+
 ## En bref
 
 - AstroSky est réservé aux joueurs de **18 ans et plus**, chacun avec son propre compte Minecraft Java authentique.
@@ -130,8 +132,7 @@ permalink: /fr/regles/
 
 ## 3. Signaler
 
-- **Signaler par courriel :** écrivez à `support@astrosky.gg` avec l'objet « Signalement » (ou « Report »). Utilisez le
-  courriel pour tout ce qui est grave ou privé. N'envoyez aucune image à caractère sexuel, surtout si une personne
+- **Signaler par courriel :** écrivez à `support@astrosky.gg` avec l'objet « Signalement » (ou « Report »). Utilisez le courriel pour tout signalement, surtout pour ce qui est grave ou privé. N'envoyez aucune image à caractère sexuel, surtout si une personne
   peut être mineure : décrivez ce que vous avez vu.
 - **Si quelqu'un est en danger immédiat,** appelez d'abord le numéro d'urgence local (le 911 au Canada et aux
   États-Unis), puis écrivez-nous avec l'objet « Signalement » pour dire ce qui se passe.
@@ -142,8 +143,7 @@ nommons jamais la personne qui a fait le signalement, même si les faits peuvent
 **Ce que nous enregistrons :** le chat public et les messages privés sont enregistrés pour la sûreté et supprimés après
 90 jours au plus. Ils ne sont lus que pour un signalement, un incident ou une règle écrite ; un message privé,
 seulement si l'un des participants le signale, pour un incident ou une règle qui vise l'un d'eux, ou si quelqu'un peut
-être en danger. Nos outils de modération journalisent le motif avant chaque consultation. Personne ne les suit en direct. Les détails sont
-dans la [politique de confidentialité](/fr/confidentialite/).
+être en danger. Nos outils de modération journalisent le motif avant chaque consultation. Personne ne les suit en direct. Les messages privés entre joueurs sont désactivés pour l'instant ; nous l'annoncerons avant de les activer. Les détails sont dans la [politique de confidentialité](/fr/confidentialite/).
 
 ## 4. Sanctions
 
@@ -174,7 +174,7 @@ Chaque sanction est décidée par une personne et proportionnée à la gravité 
   contournée. Parler dans le chat public dans une autre langue que l'anglais ou le français n'entraîne qu'un rappel.
 - **Les arnaques, et le passage de coins ou d'objets entre vos propres comptes,** relèvent de la gravité 2. La première fois : seulement un avertissement ; ensuite, la grille s'applique à partir de sa
   colonne « 1re fois ».
-- Pour une règle non citée, la personne applique le niveau le plus proche de cette grille et le nomme dans l'avis.
+- Pour une règle non citée, la personne applique le niveau le plus proche de cette grille et le nomme quand elle vous informe de la sanction.
 - **La récidive** compte tant que la sanction précédente est conservée : pendant qu'elle s'applique, puis 12 mois après
   sa fin.
 - **Aucune sanction automatique :** aucun outil automatique ne met en sourdine, ne suspend ni ne bannit qui que ce

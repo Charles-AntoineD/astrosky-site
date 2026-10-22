@@ -8,6 +8,8 @@ permalink: /privacy/
 
 **Version:** `2026-10-22`
 
+**Status:** AstroSky is not open yet: the server is closed to players (whitelist) and the store has not opened. This page describes how it will work from opening day; the version date changes if anything differs.
+
 This policy covers the AstroSky Minecraft server (`astrosky.gg`), its store (`astrosky.gg/store`), its website
 (`astrosky.gg`) and its contact address (`support@astrosky.gg`).
 
@@ -74,7 +76,7 @@ section 10 if a player turns out to be under 18.
 | Server log: joins, leaves, usernames and anti-cheat alerts | operate the server, fix problems, detect cheating | 90 days |
 | Staff logs: who looked at which records and why, staff actions, permission changes | hold the operator, and any moderator, accountable | 24 months |
 | Purchases, as Tebex reports them to us: transaction ID, username, UUID, item, price, currency, date, status (paid, refunded, disputed), delivery | deliver your purchase, keep your purchase history, refund, prevent payment fraud, meet accounting and tax duties | cosmetics you own: as long as your account exists; accounting records: 6 years (the legal period) |
-| Emails you send us: your address, the content, attachments | answer you | deleted automatically 52 days after we receive them, 84 days at most counting our email provider's recovery period; a privacy request and our answer: 24 months at most; for a report, a sanction or an appeal, the case keeps our decision and its reasons, not your email, unless the law requires us to keep it |
+| Emails you send us: your address, the content, attachments | answer you | deleted 52 days after we receive them, 84 days at most counting our email provider's recovery period; a privacy request and our answer: 24 months at most; for a report, a sanction or an appeal, the case keeps our decision and its reasons, not your email, unless the law requires us to keep it |
 | Website visits | show the website | we keep no access logs; GitHub, our website host, processes your IP address to serve the page, under its own policy |
 | Copies of messages on our Discord that AutoMod blocked because they asked for photos, personal information, someone's age or a move to another app | review a possible danger | deleted the Monday after review, unless linked to an open incident |
 | Backups of the server (worlds, game data, sanctions and case excerpts, encrypted) | restore the server after a failure | 30 days; deleted data leaves the backups at most 30 days after its deletion |
@@ -136,6 +138,8 @@ the auction house and chest shops, and the cosmetics and title you display. Staf
 buyer, no purchase announcements in game or on Discord. Of your purchases, other players see only the "Supporter"
 title and its colour, shown in chat and in the player list; to hide it, write to `support@astrosky.gg` (subject:
 "Store").
+
+Other players may film or stream the game, and what you write in public chat may appear in their videos; we do not control them.
 
 ## 8. Purchases and Tebex
 

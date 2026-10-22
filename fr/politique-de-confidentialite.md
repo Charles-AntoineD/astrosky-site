@@ -8,6 +8,8 @@ permalink: /fr/confidentialite/
 
 **Version :** `2026-10-22`
 
+**État :** AstroSky n'est pas encore ouvert : le serveur est fermé aux joueurs (liste blanche) et la boutique n'a pas ouvert. Cette page décrit son fonctionnement dès le jour de l'ouverture ; la date de version change si quelque chose diffère.
+
 Cette politique couvre le serveur Minecraft AstroSky (`astrosky.gg`), sa boutique (`astrosky.gg/store`), son site
 (`astrosky.gg`) et son adresse de contact (`support@astrosky.gg`).
 
@@ -78,7 +80,7 @@ création.
 | Journal du serveur : arrivées, départs, pseudos et alertes de l'anti-triche | exploiter le serveur, corriger les problèmes, détecter la triche | 90 jours |
 | Journaux de l'équipe : qui a consulté quels enregistrements et pourquoi, actions de l'équipe, changements de permissions | rendre l'exploitant, et tout modérateur, responsables de leurs gestes | 24 mois |
 | Achats, tels que Tebex nous les transmet : identifiant de transaction, pseudo, UUID, article, prix, devise, date, statut (payé, remboursé, contesté), livraison | livrer votre achat, tenir votre historique d'achats, rembourser, prévenir la fraude au paiement, respecter les obligations comptables et fiscales | cosmétiques possédés : tant que votre compte existe ; pièces comptables : 6 ans (le délai légal) |
-| Courriels que vous nous envoyez : votre adresse, le contenu, les pièces jointes | vous répondre | supprimés automatiquement 52 jours après leur réception, 84 jours au plus en comptant le délai de récupération de notre fournisseur de courriel ; une demande sur vos données et notre réponse : 24 mois au plus ; pour un signalement, une sanction ou un appel, le dossier garde notre décision et ses motifs, pas votre courriel, sauf si la loi nous oblige à le garder |
+| Courriels que vous nous envoyez : votre adresse, le contenu, les pièces jointes | vous répondre | supprimés 52 jours après leur réception, 84 jours au plus en comptant le délai de récupération de notre fournisseur de courriel ; une demande sur vos données et notre réponse : 24 mois au plus ; pour un signalement, une sanction ou un appel, le dossier garde notre décision et ses motifs, pas votre courriel, sauf si la loi nous oblige à le garder |
 | Visites du site | afficher le site | nous ne gardons aucun journal d'accès ; GitHub, l'hébergeur de notre site, traite votre adresse IP pour servir la page, selon sa propre politique |
 | Copies de messages de notre Discord bloqués par l'AutoMod parce qu'ils demandaient des photos, des informations personnelles, l'âge de quelqu'un ou de passer sur une autre appli | examiner un danger possible | supprimées le lundi qui suit leur examen, sauf si elles sont liées à un incident ouvert |
 | Sauvegardes du serveur (mondes, données de jeu, sanctions et extraits des dossiers, chiffrées) | restaurer le serveur après une panne | 30 jours ; une donnée supprimée quitte les sauvegardes au plus 30 jours après sa suppression |
@@ -146,6 +148,8 @@ le titre que vous affichez. L'équipe voit l'historique de vos sanctions. Nous n
 achats, aucun meilleur acheteur, aucune annonce d'achat en jeu ni sur Discord. De vos achats, les autres joueurs ne voient
 que le titre « Supporter » et sa couleur, affichés dans le chat et dans la liste des joueurs ; pour le masquer,
 écrivez à `support@astrosky.gg` (objet : « Boutique »).
+
+D'autres joueurs peuvent filmer ou diffuser le jeu, et ce que vous écrivez dans le chat public peut apparaître dans leurs vidéos ; nous ne les contrôlons pas.
 
 ## 8. Achats et Tebex
 
