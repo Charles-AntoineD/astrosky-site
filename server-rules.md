@@ -82,6 +82,12 @@ permalink: /rules/
   removing them, is stealing.
 - A sanction against one member never makes the other members of the island lose their progress.
 
+### The Nether
+*Why: the Nether is one world shared by everyone, inside a border; a reset keeps it fair and light.*
+
+- The Nether is shared by all players and limited by a border. It is not protected: what you build or leave there can be broken or taken. Keep what matters on your island.
+- We may reset the Nether. We announce it in game and on our Discord at least 7 days before. What is still in the Nether at the reset is lost and is not replaced.
+
 ### Trading and economy
 
 *Why: trades should be honest, and trading for real money invites scams.*

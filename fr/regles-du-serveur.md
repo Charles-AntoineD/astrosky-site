@@ -89,6 +89,12 @@ permalink: /fr/regles/
   d'île), puis le retirer, c'est du vol.
 - Une sanction contre un membre ne fait jamais perdre leur progression aux autres membres de l'île.
 
+### Le Nether
+*Pourquoi : le Nether est un seul monde partagé par tous, dans une bordure ; une remise à zéro le garde équitable et léger.*
+
+- Le Nether est partagé par tous les joueurs et limité par une bordure. Il n'est pas protégé : ce que vous y construisez ou y laissez peut être cassé ou pris. Gardez sur votre île ce qui compte.
+- Nous pouvons remettre le Nether à zéro. Nous l'annonçons en jeu et sur notre Discord au moins 7 jours avant. Ce qui est encore dans le Nether à la remise à zéro est perdu et n'est pas remplacé.
+
 ### Échanges et économie
 
 *Pourquoi : les échanges doivent être honnêtes, et les échanges contre de l'argent réel attirent les arnaques.*
