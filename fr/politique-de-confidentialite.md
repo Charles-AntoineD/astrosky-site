@@ -174,7 +174,7 @@ l'explique sa politique.
 | Mojang et Microsoft | votre pseudo et une vérification de connexion quand vous arrivez (connexion standard de Minecraft) ; votre pseudo et votre UUID quand un menu du jeu affiche votre tête (skin) | confirmer que vous avez un compte Minecraft authentique ; afficher les skins dans les menus | services de Microsoft (Microsoft, États-Unis ; Mojang, Suède) |
 | Tebex Limited, si vous achetez | les informations de livraison de la section 8 | vendre, encaisser, livrer | Royaume-Uni |
 | Zoho (notre fournisseur de courriel) | les courriels que vous nous envoyez | vous répondre | Canada |
-| Anthropic (fournisseur de l'assistant d'IA qui aide à exploiter le serveur) | les commandes que l'assistant lance sur la machine du serveur et leur sortie (état du service, résultat des redémarrages et des sauvegardes), conçues pour ne contenir aucune donnée de joueur (si une apparaît, nous la traitons comme un incident, section 14) ; gardées selon la politique d'Anthropic | exploiter le serveur | États-Unis |
+| Anthropic (fournisseur de l'assistant d'IA qui aide à exploiter le serveur) | les conversations de l'assistant avec l'exploitant, dont les commandes lancées sur la machine du serveur et leur sortie (état du service, résultat des redémarrages et des sauvegardes), conçues pour ne contenir aucune donnée de joueur (si une apparaît, nous la traitons comme un incident, section 14) ; Anthropic les garde 5 ans et peut entraîner ses modèles dessus tant que le réglage « Aider à améliorer Claude » de l'exploitant est activé (30 jours sinon) ; il l'est maintenant, et nous mettons cette ligne à jour s'il change | exploiter le serveur | Anthropic est une entreprise des États-Unis ; ce forfait n'indique pas où les données sont stockées ou traitées, peut-être ailleurs |
 | GitHub Pages (hébergeur du site) | les données techniques de votre visite, dont votre adresse IP | afficher le site | États-Unis |
 | Discord (serveur communautaire) | les copies de messages bloqués par l'AutoMod (section 3), gardées sur Discord | examiner un danger possible | États-Unis |
 | Police, services d'urgence ou autres autorités | le minimum nécessaire | quand la loi l'exige, ou quand quelqu'un est en danger immédiat | Canada, ou là où se trouve la personne en danger |
@@ -202,7 +202,7 @@ du joueur au parent ou au tuteur et ne demandons jamais de pièce d'identité.
 
 Certains de ces services gardent ou traitent des renseignements hors du Québec (autres provinces canadiennes
 comprises) : OVHcloud, l'hébergeur de notre serveur (Virginie, États-Unis), TCPShield (Alberta, Canada ; son réseau
-passe aussi par les États-Unis), Backblaze (Ontario, Canada), Tebex (Royaume-Uni), Mojang et Microsoft, Zoho (Canada), Anthropic (États-Unis), pour les commandes de l'assistant d'IA qui aide à exploiter le serveur et leur sortie, GitHub (États-Unis), l'hébergeur de notre site, Discord (États-Unis), pour les copies d'alertes de
+passe aussi par les États-Unis), Backblaze (Ontario, Canada), Tebex (Royaume-Uni), Mojang et Microsoft, Zoho (Canada), Anthropic (entreprise des États-Unis ; lieu de traitement non précisé), pour les conversations de l'assistant d'IA avec l'exploitant, dont les commandes qu'il lance et leur sortie, GitHub (États-Unis), l'hébergeur de notre site, Discord (États-Unis), pour les copies d'alertes de
 l'AutoMod. La section 9 dit ce
 que chacun reçoit.
 
@@ -244,7 +244,7 @@ protection des données de votre pays.
 ## 13. Notre gouvernance de la confidentialité
 
 - **Responsabilité :** le responsable (section 1) approuve ces règles et en répond.
-- **Rôles :** l'exploitant a accès à la machine du serveur et à ses sauvegardes. Un assistant d'IA (Claude, d'Anthropic), dirigé par l'exploitant pour l'exploitation du serveur seulement, a aussi un accès restreint à cette machine. Ses droits d'administration sont limités à une courte liste fixe d'opérations (par exemple vérifier l'état du service, l'arrêter et le relancer, et lancer des sauvegardes). Il ne lit aucune donnée des joueurs. Chaque commande qu'il lance est consignée sur la machine, et l'exploitant peut retirer cet accès en tout temps. Pour un dossier donné, un
+- **Rôles :** l'exploitant a accès à la machine du serveur et à ses sauvegardes. Un assistant d'IA (Claude, d'Anthropic), dirigé par l'exploitant pour l'exploitation du serveur seulement, a aussi un accès restreint à cette machine. Ses droits d'administration sont limités à une courte liste fixe d'opérations (par exemple vérifier l'état du service, l'arrêter et le relancer, et lancer des sauvegardes). Il ne lit aucune donnée des joueurs. Chaque commande qu'il lance est consignée sur la machine, et l'exploitant peut retirer cet accès en tout temps. Ses conversations avec l'exploitant vont à son fournisseur, Anthropic (section 9). Pour un dossier donné, un
   modérateur désigné peut lire les enregistrements de ce dossier. L'exploitant examine les appels ; un adulte de
   confiance qui l'aide pour un appel peut lire le dossier en appel. Avant une suspension ou un bannissement qui suit
   un dossier où quelqu'un est peut-être en danger, l'exploitant demande, si possible, à un second adulte de confiance
@@ -259,6 +259,7 @@ protection des données de votre pays.
 - Le serveur tourne sur une machine louée chez notre hébergeur, séparée de nos ordinateurs.
 - L'accès suit les rôles ci-dessus, et nos outils de modération journalisent chaque consultation faite par leur intermédiaire (section 4).
 - Chaque commande de l'assistant d'exploitation, et son résultat (réussie ou non), est consignée sur la machine du serveur.
+- Nous ne pouvons pas garantir l'effacement chez Anthropic. Si une donnée de joueur apparaît un jour dans une conversation de l'assistant, nous désactivons le réglage « Aider à améliorer Claude » du compte de l'exploitant et supprimons la conversation.
 - Les sauvegardes sont chiffrées.
 
 Aucun système n'est parfait, et nous ne pouvons pas promettre qu'aucun incident n'arrivera. Nous tenons un registre des

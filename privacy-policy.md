@@ -163,7 +163,7 @@ pages use cookies, as its policy explains.
 | Mojang and Microsoft | your username and a login check when you join (standard Minecraft login); your username and UUID when a game menu shows your head (skin) | confirm that you own a genuine Minecraft account; show skins in menus | Microsoft's services (Microsoft, United States; Mojang, Sweden) |
 | Tebex Limited, if you buy | the delivery details in section 8 | sell, take payment, deliver | United Kingdom |
 | Zoho (our email provider) | the emails you send us | answer you | Canada |
-| Anthropic (provider of the AI assistant that helps operate the server) | the commands the assistant runs on the server machine and their output (service state, results of restarts and backups), which are designed to contain no player data (if some ever appears, we treat it as an incident, section 14); kept under Anthropic's own policy | operate the server | United States |
+| Anthropic (provider of the AI assistant that helps operate the server) | the assistant's conversations with the operator, including the commands it runs on the server machine and their output (service state, results of restarts and backups), designed to contain no player data (if some ever appears, we treat it as an incident, section 14); Anthropic keeps them 5 years and may train its models on them while the operator's "Help improve Claude" setting is on (30 days if it is off); it is on now, and we update this line if it changes | operate the server | Anthropic is a U.S. company; this plan does not say where data is stored or processed, so possibly elsewhere |
 | GitHub Pages (website host) | technical data of your visit, including your IP address | show the website | United States |
 | Discord (community server) | copies of messages blocked by AutoMod (section 3), kept on Discord | review a possible danger | United States |
 | Police, emergency services or other authorities | the minimum necessary | when the law requires it, or when someone is in immediate danger | Canada, or where the person in danger is |
@@ -190,7 +190,7 @@ document.
 
 Some of these services keep or process information outside Québec (other Canadian provinces included):
 OVHcloud, our server host (Virginia, United States), TCPShield (Alberta, Canada; its network also runs in the
-United States), Backblaze (Ontario, Canada), Tebex (United Kingdom), Mojang and Microsoft, Zoho (Canada), Anthropic (United States), for the commands of the AI assistant that helps operate the server and their output, GitHub (United States), our website host, Discord (United States), for the AutoMod alert copies. Section 9 says what each of them receives.
+United States), Backblaze (Ontario, Canada), Tebex (United Kingdom), Mojang and Microsoft, Zoho (Canada), Anthropic (a United States company; where it processes the data is not stated), for the AI assistant's conversations with the operator, including the commands it runs and their output, GitHub (United States), our website host, Discord (United States), for the AutoMod alert copies. Section 9 says what each of them receives.
 
 ## 12. Your rights
 
@@ -226,7 +226,7 @@ complaint with it. If you live elsewhere, you can also contact the data protecti
 ## 13. How we govern privacy
 
 - **Responsibility:** the person in charge (section 1) approves these rules and answers for them.
-- **Roles:** the operator can access the server machine and its backups. One AI assistant (Claude, made by Anthropic), directed by the operator for operating the server only, also has restricted access to that machine. Its administrator rights are limited to a short fixed list of operations (such as checking the state of the service, stopping and restarting it, and running backups). It reads no player data. Every command it runs is logged on the machine, and the operator can remove its access at any time. For a given case, a designated
+- **Roles:** the operator can access the server machine and its backups. One AI assistant (Claude, made by Anthropic), directed by the operator for operating the server only, also has restricted access to that machine. Its administrator rights are limited to a short fixed list of operations (such as checking the state of the service, stopping and restarting it, and running backups). It reads no player data. Every command it runs is logged on the machine, and the operator can remove its access at any time. Its conversations with the operator go to its provider, Anthropic (section 9). For a given case, a designated
   moderator can read the records of that case. The operator reviews appeals; a trusted adult who helps with an appeal
   can read the case under appeal. Before a suspension or a ban that follows a case where someone may be in danger,
   the operator asks, where possible, a second trusted adult to review it; that person can read the case concerned,
@@ -240,6 +240,7 @@ complaint with it. If you live elsewhere, you can also contact the data protecti
 - The server runs on a machine rented from our host, separate from our computers.
 - Access follows the roles above, and our moderation tools log every look made through them (section 4).
 - Every command of the operations assistant, and whether it succeeded, is logged on the server machine.
+- We cannot guarantee deletion at Anthropic. If player data ever appears in an assistant conversation, we turn off the "Help improve Claude" setting for the operator's account and delete the conversation.
 - Backups are encrypted.
 
 No system is perfect, and we cannot promise that an incident will never happen. We keep a register of confidentiality
