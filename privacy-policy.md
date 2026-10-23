@@ -226,7 +226,7 @@ complaint with it. If you live elsewhere, you can also contact the data protecti
 ## 13. How we govern privacy
 
 - **Responsibility:** the person in charge (section 1) approves these rules and answers for them.
-- **Roles:** the operator can access the server machine and its backups. One AI assistant (Claude, made by Anthropic), directed by the operator for operating the server only, also has restricted access to that machine. Its administrator rights are limited to a short fixed list of operations (such as checking the state of the service, stopping and restarting it, running backups, and reading the service's technical logs, which contain no player data). It reads no player data. Every command it runs is logged on the machine, and the operator can remove its access at any time. For a given case, a designated
+- **Roles:** the operator can access the server machine and its backups. One AI assistant (Claude, made by Anthropic), directed by the operator for operating the server only, also has restricted access to that machine. Its administrator rights are limited to a short fixed list of operations (such as checking the state of the service, stopping and restarting it, and running backups). It reads no player data. Every command it runs is logged on the machine, and the operator can remove its access at any time. For a given case, a designated
   moderator can read the records of that case. The operator reviews appeals; a trusted adult who helps with an appeal
   can read the case under appeal. Before a suspension or a ban that follows a case where someone may be in danger,
   the operator asks, where possible, a second trusted adult to review it; that person can read the case concerned,

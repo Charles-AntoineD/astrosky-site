@@ -244,7 +244,7 @@ protection des données de votre pays.
 ## 13. Notre gouvernance de la confidentialité
 
 - **Responsabilité :** le responsable (section 1) approuve ces règles et en répond.
-- **Rôles :** l'exploitant a accès à la machine du serveur et à ses sauvegardes. Un assistant d'IA (Claude, d'Anthropic), dirigé par l'exploitant pour l'exploitation du serveur seulement, a aussi un accès restreint à cette machine. Ses droits d'administration sont limités à une courte liste fixe d'opérations (par exemple vérifier l'état du service, l'arrêter et le relancer, lancer des sauvegardes, lire les journaux techniques du service, qui ne contiennent aucune donnée de joueur). Il ne lit aucune donnée des joueurs. Chaque commande qu'il lance est consignée sur la machine, et l'exploitant peut retirer cet accès en tout temps. Pour un dossier donné, un
+- **Rôles :** l'exploitant a accès à la machine du serveur et à ses sauvegardes. Un assistant d'IA (Claude, d'Anthropic), dirigé par l'exploitant pour l'exploitation du serveur seulement, a aussi un accès restreint à cette machine. Ses droits d'administration sont limités à une courte liste fixe d'opérations (par exemple vérifier l'état du service, l'arrêter et le relancer, et lancer des sauvegardes). Il ne lit aucune donnée des joueurs. Chaque commande qu'il lance est consignée sur la machine, et l'exploitant peut retirer cet accès en tout temps. Pour un dossier donné, un
   modérateur désigné peut lire les enregistrements de ce dossier. L'exploitant examine les appels ; un adulte de
   confiance qui l'aide pour un appel peut lire le dossier en appel. Avant une suspension ou un bannissement qui suit
   un dossier où quelqu'un est peut-être en danger, l'exploitant demande, si possible, à un second adulte de confiance
