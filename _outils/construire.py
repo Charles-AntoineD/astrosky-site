@@ -182,13 +182,15 @@ AstroSky is run by an independent operator, not by Mojang or Microsoft. Who we a
 <p class="mention" lang="fr">Ceci n'est pas un service officiel Minecraft. Non approuvé par Mojang ou Microsoft, ni associé à eux.<br>
 AstroSky est exploité par un exploitant indépendant, et non par Mojang ni Microsoft. Qui nous sommes et comment nous joindre : {fr}</p>
 <p><span lang="en">This site sets no cookies and uses no analytics.</span> · <span lang="fr">Ce site ne dépose aucun témoin et n'utilise aucune analytique.</span></p>
+<p class="credit"><span lang="en">The Heart Nebula (IC 1805) in our visuals was photographed by AstroSky’s founder.</span> · <span lang="fr">La nébuleuse du Cœur (IC 1805) de nos visuels a été photographiée par le fondateur d’AstroSky.</span></p>
 </div>
 </footer>"""
 
 
 def document(c: Contexte, lang: str, chemin: str, autre: str, courant: str | None, titre: str, description: str,
              corps: str, image: str | None = "constellation-1280.png", donnees: dict | None = None,
-             script: bool = False, refresh: str | None = None, image_alt: str | None = None) -> str:
+             script: bool = False, refresh: str | None = None, image_alt: str | None = None,
+             noindex: bool = False, canonique: str | None = None) -> str:
     alternes = ""
     if autre:
         en_ch, fr_ch = (chemin, autre) if lang == "en" else (autre, chemin)
@@ -217,7 +219,8 @@ def document(c: Contexte, lang: str, chemin: str, autre: str, courant: str | Non
 <meta name="referrer" content="no-referrer">
 {rafraichir}<title>{e(titre)}</title>
 <meta name="description" content="{e(description)}">
-<link rel="canonical" href="{SITE}{chemin}">
+<link rel="canonical" href="{SITE}{canonique or chemin}">
+{'<meta name="robots" content="noindex">' + chr(10) if noindex else ""}
 {alternes}<meta property="og:type" content="website">
 <meta property="og:site_name" content="AstroSky">
 <meta property="og:title" content="{e(titre)}">
@@ -761,6 +764,17 @@ def renvoi(c: Contexte, chemin: str, cible: str | None, titre: str, attente_en: 
     return document(c, "en", chemin, "", None, titre, titre, corps, image=None, refresh=cible)
 
 
+def entree(c: Contexte, chemin: str) -> str:
+    """Lien d'entrée propre à une plateforme (/yt) : renvoie à l'accueil, sans index, sans rien enregistrer."""
+    corps = """<section class="page"><div class="conteneur">
+<h1>AstroSky</h1>
+<p lang="en">Taking you to <a href="/">astrosky.gg</a>.</p>
+<p lang="fr">Redirection vers <a href="/fr/">astrosky.gg</a>.</p>
+</div></section>"""
+    return document(c, "en", chemin, "", None, "AstroSky — Co-op SkyBlock among the stars", "AstroSky", corps,
+                    image=None, refresh="/", noindex=True, canonique="/")
+
+
 def page_404(c: Contexte) -> str:
     corps = """<section class="page"><div class="conteneur">
 <h1>Page not found · Page introuvable</h1>
@@ -847,6 +861,7 @@ def construire(c: Contexte) -> dict[str, str]:
         c, "/discord/", c.discord or None, "AstroSky — Discord",
         "Our Discord isn’t open yet. When it opens, its invite will be posted only on this site.",
         "Notre Discord n’est pas encore ouvert. Quand il ouvrira, son invitation sera publiée seulement sur ce site.")
+    sorties["yt/index.html"] = entree(c, "/yt/")
     sorties["404.html"] = page_404(c)
     sorties["_layouts/legal.html"] = gabarit_legal(c)
     publiques += sorted(c.presentes)

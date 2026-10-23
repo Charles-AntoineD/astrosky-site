@@ -9,7 +9,11 @@ Ce dossier n'est pas publié : GitHub Pages ignore les dossiers qui commencent p
 - les pages en anglais et en français : accueil (`/`, `/fr/`), comment rejoindre (`/join/`, `/fr/rejoindre/`), FAQ
   (`/faq/`, `/fr/faq/`), liens officiels (`/links/`, `/fr/liens/`) et, quand le vote est ouvert, `/vote/` et `/fr/vote/` ;
 - `/store` et `/discord` : redirection quand la boutique ou l'invitation existe, sinon une page d'attente ;
-- `404.html`, `sitemap.xml` et le gabarit des pages légales `_layouts/legal.html` (même en-tête, style et pied).
+- `/yt` : lien d'entrée du profil YouTube (KV-Q1), qui renvoie à l'accueil ; page sans index, qui n'enregistre rien. Un
+  site statique ne compte pas les visites : le comptage par chemin et par jour, sans adresse IP, demande un relais qui
+  répond à `/yt` (voir la note de la session du site) ;
+- `404.html`, `sitemap.xml` et le gabarit des pages légales `_layouts/legal.html` (même en-tête, style et pied). Le pied
+  de page porte la ligne de crédit de la photo de la nébuleuse du Cœur (sans nom, décision de l'Owner du 2026-10-22).
 
 Il ne touche pas aux pages légales (`contact.md`, `not-affiliated.md`, `pack.md` et, plus tard, règles,
 confidentialité et conditions de la boutique) : on les publie comme le dit `PUBLIER.md` du dépôt du studio. Le site les

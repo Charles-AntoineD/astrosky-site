@@ -11,3 +11,4 @@ join/index.html
 links/index.html
 sitemap.xml
 store/index.html
+yt/index.html
