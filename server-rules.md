@@ -6,7 +6,7 @@ permalink: /rules/
 ---
 # AstroSky — Server Rules and Terms of Play
 
-**Version:** `2026-10-22`
+**Version:** `2026-10-23`
 
 **Status:** AstroSky is not open yet: the server is closed to players (whitelist) and the store has not opened. This page describes how it will work from opening day; the version date changes if anything differs.
 
@@ -52,7 +52,8 @@ permalink: /rules/
 
 - No spam or flooding, and no begging.
 - No advertising for other servers, services or social accounts.
-- No links to harmful or illegal sites.
+- Links are blocked in public chat (Discord invitations and short links included), except AstroSky's own: our site and our store. Sharing harmful or illegal links by any other means is still forbidden.
+- Messages with a word from our list (hate speech and slurs, explicit sexual words and sexual insults, and incitement directed at someone to harm themselves) are not sent in public chat either. These filters are only a first barrier and read public chat only: a message they let through, or written elsewhere (signs, books, names, commands), can still break these rules, and a message they stop is not a sanction. If one stops a harmless message, write to us.
 - Public chat is in English or French.
 
 ### Fair play
@@ -83,10 +84,13 @@ permalink: /rules/
 - A sanction against one member never makes the other members of the island lose their progress.
 
 ### The Nether
+
 *Why: the Nether is one world shared by everyone, inside a border; a reset keeps it fair and light.*
 
-- The Nether is shared by all players and limited by a border. It is not protected: what you build or leave there can be broken or taken. Keep what matters on your island.
-- We may reset the Nether. We announce it in game and on our Discord at least 7 days before. What is still in the Nether at the reset is lost and is not replaced.
+- The Nether is shared by all players and limited by a border. It is not protected: what you build or leave there
+  can be broken or taken. Keep what matters on your island.
+- We may reset the Nether. We announce it in game and on our Discord at least 7 days before. What is still in the
+  Nether at the reset is lost and is not replaced.
 
 ### Trading and economy
 
@@ -173,10 +177,9 @@ Every sanction is decided by a person and is proportionate to how serious the pr
 - **Repeat offences** count as long as the previous sanction is kept: while it applies and for 12 months after it
   ends.
 - **No automated sanctions:** no automated tool mutes, suspends or bans anyone, and the anti-cheat only alerts us.
-  If you send public chat messages too fast (more than 5 in 10 seconds), the extra ones are not sent and you see a
-  notice (in French for now). The server can also disconnect you automatically: after 30 minutes idle, or if your
+  If you send public chat messages too fast (more than 5 in 10 seconds), or a public message has a link or a word that section 2 (Chat) says is not sent, the message is not sent and you see a notice in English that never says which word or link. The server can also disconnect you automatically: after 30 minutes idle, or if your
   client floods the chat or sends too much data. You can rejoin right away; none of this is a sanction or counts as
-  a repeat offence. If we ever add an automated measure, it will be short (1 hour at most, or removal from the
+  a repeat offence. If we ever add an automated measure against an account (a stopped message is not one), it will be short (1 hour at most, or removal from the
   session), at most 3 per account in 24 hours, and we will update these rules before it applies.
 - **We don't announce or publish** sanctions or lists of sanctioned players.
 - **Bans** are always decided by a person and last 12 months at most. When a ban ends, it is reviewed: it is lifted,

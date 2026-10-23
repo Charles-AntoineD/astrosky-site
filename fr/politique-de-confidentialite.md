@@ -6,7 +6,7 @@ permalink: /fr/confidentialite/
 ---
 # AstroSky — Politique de confidentialité
 
-**Version :** `2026-10-22`
+**Version :** `2026-10-23`
 
 **État :** AstroSky n'est pas encore ouvert : le serveur est fermé aux joueurs (liste blanche) et la boutique n'a pas ouvert. Cette page décrit son fonctionnement dès le jour de l'ouverture ; la date de version change si quelque chose diffère.
 
@@ -29,7 +29,7 @@ Cette politique couvre le serveur Minecraft AstroSky (`astrosky.gg`), sa boutiqu
   la conversation le signale, si un incident ou une règle écrite vise l'une d'elles, ou si quelqu'un est peut-être en
   danger.
 - Personne ne suit le chat ni les messages privés en direct, et aucun outil automatique ne sanctionne qui que ce soit.
-  Une limite automatique ne diffuse pas les messages du chat public envoyés trop vite, sans les lire. Nous ne vendons jamais
+  Deux contrôles automatiques peuvent arrêter un message du chat public avant son envoi : une limite de vitesse, qui ne le lit pas, et un filtre des liens vers d'autres sites et d'une liste de mots, qui lit le texte pour décider. Nous ne vendons jamais
   vos données et ne nous en servons jamais pour la publicité, le marketing ou le profilage.
 - Le serveur et ses enregistrements sont hébergés par OVHcloud à Vint Hill, en Virginie (États-Unis) (section 9).
 - Si vous achetez, c'est Tebex qui vous vend l'article et s'occupe du paiement. Nous ne voyons jamais votre numéro de
@@ -103,13 +103,12 @@ numéro de carte ou votre voix. Nous ne nous servons pas de votre adresse IP pou
 
 - Ils ne sont lus **que** pour un signalement, un incident ou une règle de détection écrite, et seulement depuis la
   console du serveur, jamais depuis le jeu. Nos outils de modération ajoutent une entrée au journal des accès avant
-  chaque consultation (qui, quoi, quand, pourquoi) ; ils ne peuvent qu'y ajouter. L'exploitant, qui gère la machine, pourrait ouvrir les fichiers directement ; nos règles ne le
-  permettent que pour réparer le serveur.
+  chaque consultation (qui, quoi, quand, pourquoi) ; ils ne peuvent qu'y ajouter. L'exploitant, qui gère la machine, pourrait ouvrir les fichiers directement ; nos règles ne le permettent que pour réparer le serveur. L'assistant d'IA (section 13) n'a pas le droit de les ouvrir non plus, et ses droits d'administration ne les couvrent pas. Il peut lancer des sauvegardes et des essais de restauration, qui traitent les données par machine sans les afficher.
 - Un message privé n'est lu **que** si l'une des personnes de la conversation le signale, si un incident ou une règle
   de détection écrite vise l'une d'elles, ou si quelqu'un est peut-être en danger.
 - **Personne ne suit** le chat ni les messages privés en direct, et aucun rôle sur le serveur ne peut espionner les
-  messages privés. Une limite automatique ne diffuse pas les messages du chat public envoyés trop vite (plus
-  de 5 en 10 secondes) et vous en avise ; elle ne lit jamais leur contenu et ne s'applique pas aux messages privés.
+  messages privés. Deux contrôles automatiques s'appliquent au chat public, pas aux messages privés, et vous avisent quand ils arrêtent un message. Une limite de vitesse arrête les messages envoyés trop vite (plus de 5 en 10 secondes) ; elle ne lit jamais ce qu'ils disent. Un filtre lit le texte de chaque message public au moment de l'envoi, dans la mémoire du serveur, seulement pour y chercher un lien vers un autre site ou un mot de notre liste (section 6) ; il ne regarde rien d'autre.
+- Un message arrêté par la limite de vitesse ou par le filtre n'est pas envoyé et n'est pas gardé dans les enregistrements de sûreté. Le filtre ne garde aucun compte ; celui de la limite de vitesse vit en mémoire seulement et disparaît quand vous partez.
 - Ils ne servent jamais à l'analytique, au marketing, à la monétisation ni au profilage.
 - Un extrait nécessaire à un dossier est gardé avec ce dossier et suit sa durée (section 3).
 - Si la suppression automatique et sa relance dans l'heure échouent, le serveur **se ferme aux joueurs** jusqu'à ce
@@ -128,16 +127,14 @@ numéro de carte ou votre voix. Nous ne nous servons pas de votre adresse IP pou
 ## 6. Décisions automatisées
 
 **Aucun outil automatique ne vous sanctionne** : chaque sanction est décidée par une personne. L'anti-triche ne
-fait que nous alerter. Si vous envoyez des messages dans le chat public trop vite, les messages en trop ne sont pas
-envoyés et un avis s'affiche ; ce n'est pas une sanction. Le serveur peut aussi vous déconnecter automatiquement
+fait que nous alerter. Si vous envoyez des messages dans le chat public trop vite, les messages en trop ne sont pas envoyés et un avis s'affiche ; ce n'est pas une sanction. Le filtre du chat fonctionne de la même façon : un message public qui contient un lien vers un autre site (notre site et notre boutique exceptés) ou un mot de notre liste (propos haineux et insultes discriminatoires, mots sexuels explicites et insultes à caractère sexuel, et incitation dirigée à se faire du mal) n'est pas envoyé, et un avis s'affiche sans dire quel mot ni quel lien. Le serveur peut aussi vous déconnecter automatiquement
 après 30 minutes d'inactivité, ou si votre client inonde le chat ou envoie trop de données ; vous pouvez revenir
-aussitôt. Si nous ajoutons un jour une mesure automatique, elle sera courte (une heure au
+aussitôt. Si nous ajoutons un jour une mesure automatique contre un compte (un message arrêté n'en est pas une), elle sera courte (une heure au
 plus, ou une expulsion de la session en cours), limitée à 3 par compte sur 24 heures, avec l'examen d'une personne
 au-delà, et nous mettrons cette politique à jour avant qu'elle s'applique.
 
 Vous pouvez nous demander quels renseignements une mesure automatique a utilisés, pourquoi elle a été appliquée et
-quels facteurs ont compté, demander que ces renseignements soient corrigés, et présenter votre point de vue à une
-personne qui peut réviser la mesure : écrivez à `support@astrosky.gg`.
+quels facteurs ont compté, demander que ces renseignements soient corrigés, et présenter votre point de vue à une personne qui peut réviser la mesure : écrivez à `support@astrosky.gg`. Cela comprend un message arrêté par la limite de vitesse ou par le filtre : nous pouvons expliquer la règle et vérifier votre cas d'après ce que vous nous dites.
 
 ## 7. Ce que les autres joueurs voient
 
@@ -177,6 +174,7 @@ l'explique sa politique.
 | Mojang et Microsoft | votre pseudo et une vérification de connexion quand vous arrivez (connexion standard de Minecraft) ; votre pseudo et votre UUID quand un menu du jeu affiche votre tête (skin) | confirmer que vous avez un compte Minecraft authentique ; afficher les skins dans les menus | services de Microsoft (Microsoft, États-Unis ; Mojang, Suède) |
 | Tebex Limited, si vous achetez | les informations de livraison de la section 8 | vendre, encaisser, livrer | Royaume-Uni |
 | Zoho (notre fournisseur de courriel) | les courriels que vous nous envoyez | vous répondre | Canada |
+| Anthropic (fournisseur de l'assistant d'IA qui aide à exploiter le serveur) | les commandes que l'assistant lance sur la machine du serveur et leur sortie (état du service, résultat des redémarrages et des sauvegardes), conçues pour ne contenir aucune donnée de joueur (si une apparaît, nous la traitons comme un incident, section 14) ; gardées selon la politique d'Anthropic | exploiter le serveur | États-Unis |
 | GitHub Pages (hébergeur du site) | les données techniques de votre visite, dont votre adresse IP | afficher le site | États-Unis |
 | Discord (serveur communautaire) | les copies de messages bloqués par l'AutoMod (section 3), gardées sur Discord | examiner un danger possible | États-Unis |
 | Police, services d'urgence ou autres autorités | le minimum nécessaire | quand la loi l'exige, ou quand quelqu'un est en danger immédiat | Canada, ou là où se trouve la personne en danger |
@@ -204,8 +202,7 @@ du joueur au parent ou au tuteur et ne demandons jamais de pièce d'identité.
 
 Certains de ces services gardent ou traitent des renseignements hors du Québec (autres provinces canadiennes
 comprises) : OVHcloud, l'hébergeur de notre serveur (Virginie, États-Unis), TCPShield (Alberta, Canada ; son réseau
-passe aussi par les États-Unis), Backblaze (Ontario, Canada), Tebex (Royaume-Uni), Mojang et Microsoft, Zoho
-(Canada), GitHub (États-Unis), l'hébergeur de notre site, Discord (États-Unis), pour les copies d'alertes de
+passe aussi par les États-Unis), Backblaze (Ontario, Canada), Tebex (Royaume-Uni), Mojang et Microsoft, Zoho (Canada), Anthropic (États-Unis), pour les commandes de l'assistant d'IA qui aide à exploiter le serveur et leur sortie, GitHub (États-Unis), l'hébergeur de notre site, Discord (États-Unis), pour les copies d'alertes de
 l'AutoMod. La section 9 dit ce
 que chacun reçoit.
 
@@ -247,12 +244,12 @@ protection des données de votre pays.
 ## 13. Notre gouvernance de la confidentialité
 
 - **Responsabilité :** le responsable (section 1) approuve ces règles et en répond.
-- **Rôles :** seul l'exploitant a accès à la machine du serveur et à ses sauvegardes. Pour un dossier donné, un
+- **Rôles :** l'exploitant a accès à la machine du serveur et à ses sauvegardes. Un assistant d'IA (Claude, d'Anthropic), dirigé par l'exploitant pour l'exploitation du serveur seulement, a aussi un accès restreint à cette machine. Ses droits d'administration sont limités à une courte liste fixe d'opérations (par exemple vérifier l'état du service, l'arrêter et le relancer, lancer des sauvegardes, lire les journaux techniques du service, qui ne contiennent aucune donnée de joueur). Il ne lit aucune donnée des joueurs. Chaque commande qu'il lance est consignée sur la machine, et l'exploitant peut retirer cet accès en tout temps. Pour un dossier donné, un
   modérateur désigné peut lire les enregistrements de ce dossier. L'exploitant examine les appels ; un adulte de
   confiance qui l'aide pour un appel peut lire le dossier en appel. Avant une suspension ou un bannissement qui suit
   un dossier où quelqu'un est peut-être en danger, l'exploitant demande, si possible, à un second adulte de confiance
   de l'examiner ; cette personne peut lire le dossier concerné, aux mêmes conditions. Nos outils de modération
-  journalisent chaque consultation d'un enregistrement personnel, avec son motif, avant qu'elle ait lieu.
+  journalisent chaque consultation d'un enregistrement personnel, avec son motif, avant qu'elle ait lieu. Les autres assistants d'IA dont nous nous servons pour écrire du code et des documents n'ont pas le droit de se connecter au serveur et ne reçoivent jamais de données de joueurs.
 - **Conservation et destruction :** chaque type de donnée a une durée (section 3), appliquée chaque jour par une
   suppression automatique.
 - **Plaintes et demandes :** traitées par le responsable, par écrit, dans les 30 jours (section 12).
@@ -260,8 +257,8 @@ protection des données de votre pays.
 ## 14. Comment nous les protégeons, et les incidents
 
 - Le serveur tourne sur une machine louée chez notre hébergeur, séparée de nos ordinateurs.
-- L'accès suit les rôles ci-dessus, et nos outils de modération journalisent chaque consultation faite par leur
-  intermédiaire (section 4).
+- L'accès suit les rôles ci-dessus, et nos outils de modération journalisent chaque consultation faite par leur intermédiaire (section 4).
+- Chaque commande de l'assistant d'exploitation, et son résultat (réussie ou non), est consignée sur la machine du serveur.
 - Les sauvegardes sont chiffrées.
 
 Aucun système n'est parfait, et nous ne pouvons pas promettre qu'aucun incident n'arrivera. Nous tenons un registre des

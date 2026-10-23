@@ -6,7 +6,7 @@ permalink: /fr/regles/
 ---
 # AstroSky — Règles du serveur et conditions de jeu
 
-**Version :** `2026-10-22`
+**Version :** `2026-10-23`
 
 **État :** AstroSky n'est pas encore ouvert : le serveur est fermé aux joueurs (liste blanche) et la boutique n'a pas ouvert. Cette page décrit son fonctionnement dès le jour de l'ouverture ; la date de version change si quelque chose diffère.
 
@@ -58,7 +58,8 @@ permalink: /fr/regles/
 
 - Aucun pollupostage ni inondation du chat, et aucune mendicité.
 - Aucune publicité pour d'autres serveurs, services ou comptes de réseaux sociaux.
-- Aucun lien vers un site nuisible ou illégal.
+- Les liens sont bloqués dans le chat public (invitations Discord et liens raccourcis compris), sauf ceux d'AstroSky : notre site et notre boutique. Partager des liens nuisibles ou illégaux par tout autre moyen reste interdit.
+- Les messages contenant un mot de notre liste (propos haineux et insultes discriminatoires, mots sexuels explicites et insultes à caractère sexuel, et incitation dirigée à se faire du mal) ne sont pas non plus envoyés dans le chat public. Ces filtres ne sont qu'une première barrière et ne lisent que le chat public : un message qu'ils laissent passer, ou écrit ailleurs (panneaux, livres, noms, commandes), peut quand même enfreindre ces règles, et un message qu'ils arrêtent n'est pas une sanction. S'ils en arrêtent un anodin, écrivez-nous.
 - Le chat public se fait en anglais ou en français.
 
 ### Jeu loyal
@@ -90,10 +91,14 @@ permalink: /fr/regles/
 - Une sanction contre un membre ne fait jamais perdre leur progression aux autres membres de l'île.
 
 ### Le Nether
-*Pourquoi : le Nether est un seul monde partagé par tous, dans une bordure ; une remise à zéro le garde équitable et léger.*
 
-- Le Nether est partagé par tous les joueurs et limité par une bordure. Il n'est pas protégé : ce que vous y construisez ou y laissez peut être cassé ou pris. Gardez sur votre île ce qui compte.
-- Nous pouvons remettre le Nether à zéro. Nous l'annonçons en jeu et sur notre Discord au moins 7 jours avant. Ce qui est encore dans le Nether à la remise à zéro est perdu et n'est pas remplacé.
+*Pourquoi : le Nether est un seul monde partagé par tous, dans une bordure ; une remise à zéro le garde équitable et
+léger.*
+
+- Le Nether est partagé par tous les joueurs et limité par une bordure. Il n'est pas protégé : ce que vous y
+  construisez ou y laissez peut être cassé ou pris. Gardez sur votre île ce qui compte.
+- Nous pouvons remettre le Nether à zéro. Nous l'annonçons en jeu et sur notre Discord au moins 7 jours avant. Ce qui
+  est encore dans le Nether à la remise à zéro est perdu et n'est pas remplacé.
 
 ### Échanges et économie
 
@@ -184,11 +189,9 @@ Chaque sanction est décidée par une personne et proportionnée à la gravité 
 - **La récidive** compte tant que la sanction précédente est conservée : pendant qu'elle s'applique, puis 12 mois après
   sa fin.
 - **Aucune sanction automatique :** aucun outil automatique ne met en sourdine, ne suspend ni ne bannit qui que ce
-  soit, et l'anti-triche ne fait que nous alerter. Si vous envoyez des messages dans le chat public trop vite (plus
-  de 5 en 10 secondes), les messages en trop ne sont pas envoyés et un avis s'affiche. Le serveur peut aussi vous
+  soit, et l'anti-triche ne fait que nous alerter. Si vous envoyez des messages dans le chat public trop vite (plus de 5 en 10 secondes), ou si un message public contient un lien ou un mot que la section 2 (Chat) dit ne pas être envoyé, le message n'est pas envoyé et un avis s'affiche, en anglais, sans dire quel mot ni quel lien. Le serveur peut aussi vous
   déconnecter automatiquement : après 30 minutes d'inactivité, ou si votre client inonde le chat ou envoie trop de
-  données. Vous pouvez revenir aussitôt ; rien de cela n'est une sanction ni ne compte comme récidive. Si nous
-  ajoutons un jour une mesure automatique, elle sera courte (une heure au plus, ou une expulsion de la session), 3 au
+  données. Vous pouvez revenir aussitôt ; rien de cela n'est une sanction ni ne compte comme récidive. Si nous ajoutons un jour une mesure automatique contre un compte (un message arrêté n'en est pas une), elle sera courte (une heure au plus, ou une expulsion de la session), 3 au
   plus par compte sur 24 heures, et nous mettrons ces règles à jour avant qu'elle s'applique.
 - **Nous n'annonçons ni ne publions** les sanctions ni de liste des joueurs sanctionnés.
 - **Un bannissement** est toujours décidé par une personne et dure 12 mois au plus. À son échéance, il est réexaminé :

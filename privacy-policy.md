@@ -6,7 +6,7 @@ permalink: /privacy/
 ---
 # AstroSky — Privacy Policy
 
-**Version:** `2026-10-22`
+**Version:** `2026-10-23`
 
 **Status:** AstroSky is not open yet: the server is closed to players (whitelist) and the store has not opened. This page describes how it will work from opening day; the version date changes if anything differs.
 
@@ -26,8 +26,7 @@ This policy covers the AstroSky Minecraft server (`astrosky.gg`), its store (`as
 - **Nobody reads them unless there is a report, an incident or a written detection rule**, and our moderation tools
   log the reason before each look. Private messages are read only if one of the people in the conversation reports
   them, if an incident or a written rule concerns one of them, or if someone may be in danger.
-- No person watches chat or private messages live, and no automated tool sanctions anyone. An automatic limit stops
-  public chat messages sent too fast, without reading them. We never sell your data and never use it for
+- No person watches chat or private messages live, and no automated tool sanctions anyone. Two automatic checks can stop a public chat message before it is sent: a speed limit, which does not read it, and a filter for links to other websites and for a list of words, which reads the text to decide. We never sell your data and never use it for
   advertising, marketing or profiling.
 - The server and its records are hosted by OVHcloud in Vint Hill, Virginia, United States (section 9).
 - If you buy something, Tebex sells it to you and handles the payment. We never see your card number.
@@ -98,13 +97,11 @@ or voice. We do not use your IP address to find where you are.
 
 - They are read **only** for a report, an incident or a written detection rule, and only from the server console,
   never from inside the game. Our moderation tools add an entry to an access log before each look (who, what, when,
-  why); they can only add to it. The operator, who runs the machine, could open the files directly; our rules allow
-  this only to repair the server.
+  why); they can only add to it. The operator, who runs the machine, could open the files directly; our rules allow this only to repair the server. The AI assistant (section 13) is not allowed to open them either, and its administrator rights do not cover them. It can start backups and restore tests, which handle data by machine without showing it.
 - A private message is read **only** if one of the people in the conversation reports it, if an incident or a written
   detection rule concerns one of them, or if someone may be in danger.
-- **No person watches** chat or private messages live, and no role on the server can spy on private messages. An
-  automatic limit stops public chat messages sent too fast (more than 5 in 10 seconds) and tells you; it never
-  reads what they say, and it does not apply to private messages.
+- **No person watches** chat or private messages live, and no role on the server can spy on private messages. Two automatic checks apply to public chat, not to private messages, and tell you when they stop a message. A speed limit stops messages sent too fast (more than 5 in 10 seconds); it never reads what they say. A filter reads the text of each public message as it is sent, in the server's memory, only to look for a link to another website or a word on our list (section 6); it looks at nothing else.
+- A message stopped by the speed limit or the filter is not sent and is not kept in the safety records. The filter keeps no count at all; the speed limit's count lives in memory only and is dropped when you leave.
 - They are never used for analytics, marketing, monetization or profiling.
 - An excerpt needed for a case is kept with the case and follows its duration (section 3).
 - If the automatic deletion and its retry within the hour both fail, the server **closes to players** until a
@@ -122,13 +119,13 @@ or voice. We do not use your IP address to find where you are.
 ## 6. Automated decisions
 
 **No automated tool sanctions you**: every sanction is decided by a person. The anti-cheat only alerts us. If you
-send public chat messages too fast, the extra messages are not sent and you see a notice; this is not a sanction.
+send public chat messages too fast, the extra messages are not sent and you see a notice; this is not a sanction. The chat filter works the same way: a public message with a link to another website (our own site and our store excepted) or a word on our list (hate speech and slurs, explicit sexual words and sexual insults, and incitement directed at someone to harm themselves) is not sent, and you see a notice that does not say which word or link.
 The server can also disconnect you automatically after 30 minutes idle, or if your client floods the chat or sends
-too much data; you can rejoin right away. If we ever add an automated measure, it will be short (1 hour at most, or removal from the current session), limited to 3 per account
+too much data; you can rejoin right away. If we ever add an automated measure against an account (a stopped message is not one), it will be short (1 hour at most, or removal from the current session), limited to 3 per account
 in 24 hours, with a person reviewing beyond that, and we will update this policy before it applies.
 
 You can ask us what information an automated measure used, why it was applied and which factors mattered, ask for that
-information to be corrected, and give your side to a person who can review the measure: write to `support@astrosky.gg`.
+information to be corrected, and give your side to a person who can review the measure: write to `support@astrosky.gg`. This includes a message stopped by the speed limit or the filter: we can explain the rule and check your case from what you tell us.
 
 ## 7. What other players can see
 
@@ -166,6 +163,7 @@ pages use cookies, as its policy explains.
 | Mojang and Microsoft | your username and a login check when you join (standard Minecraft login); your username and UUID when a game menu shows your head (skin) | confirm that you own a genuine Minecraft account; show skins in menus | Microsoft's services (Microsoft, United States; Mojang, Sweden) |
 | Tebex Limited, if you buy | the delivery details in section 8 | sell, take payment, deliver | United Kingdom |
 | Zoho (our email provider) | the emails you send us | answer you | Canada |
+| Anthropic (provider of the AI assistant that helps operate the server) | the commands the assistant runs on the server machine and their output (service state, results of restarts and backups), which are designed to contain no player data (if some ever appears, we treat it as an incident, section 14); kept under Anthropic's own policy | operate the server | United States |
 | GitHub Pages (website host) | technical data of your visit, including your IP address | show the website | United States |
 | Discord (community server) | copies of messages blocked by AutoMod (section 3), kept on Discord | review a possible danger | United States |
 | Police, emergency services or other authorities | the minimum necessary | when the law requires it, or when someone is in immediate danger | Canada, or where the person in danger is |
@@ -192,8 +190,7 @@ document.
 
 Some of these services keep or process information outside Québec (other Canadian provinces included):
 OVHcloud, our server host (Virginia, United States), TCPShield (Alberta, Canada; its network also runs in the
-United States), Backblaze (Ontario, Canada), Tebex (United Kingdom), Mojang and Microsoft, Zoho (Canada), GitHub
-(United States), our website host, Discord (United States), for the AutoMod alert copies. Section 9 says what each of them receives.
+United States), Backblaze (Ontario, Canada), Tebex (United Kingdom), Mojang and Microsoft, Zoho (Canada), Anthropic (United States), for the commands of the AI assistant that helps operate the server and their output, GitHub (United States), our website host, Discord (United States), for the AutoMod alert copies. Section 9 says what each of them receives.
 
 ## 12. Your rights
 
@@ -229,11 +226,11 @@ complaint with it. If you live elsewhere, you can also contact the data protecti
 ## 13. How we govern privacy
 
 - **Responsibility:** the person in charge (section 1) approves these rules and answers for them.
-- **Roles:** only the operator can access the server machine and its backups. For a given case, a designated
+- **Roles:** the operator can access the server machine and its backups. One AI assistant (Claude, made by Anthropic), directed by the operator for operating the server only, also has restricted access to that machine. Its administrator rights are limited to a short fixed list of operations (such as checking the state of the service, stopping and restarting it, running backups, and reading the service's technical logs, which contain no player data). It reads no player data. Every command it runs is logged on the machine, and the operator can remove its access at any time. For a given case, a designated
   moderator can read the records of that case. The operator reviews appeals; a trusted adult who helps with an appeal
   can read the case under appeal. Before a suspension or a ban that follows a case where someone may be in danger,
   the operator asks, where possible, a second trusted adult to review it; that person can read the case concerned,
-  on the same terms. Our moderation tools log each look at personal records, with its reason, before it happens.
+  on the same terms. Our moderation tools log each look at personal records, with its reason, before it happens. The other AI assistants we use to write code and documents are not allowed to connect to the server and are never given player data.
 - **Retention and destruction:** each kind of data has a duration (section 3), applied by automatic deletion every
   day.
 - **Complaints and requests:** handled by the person in charge, in writing, within 30 days (section 12).
@@ -242,6 +239,7 @@ complaint with it. If you live elsewhere, you can also contact the data protecti
 
 - The server runs on a machine rented from our host, separate from our computers.
 - Access follows the roles above, and our moderation tools log every look made through them (section 4).
+- Every command of the operations assistant, and whether it succeeded, is logged on the server machine.
 - Backups are encrypted.
 
 No system is perfect, and we cannot promise that an incident will never happen. We keep a register of confidentiality
