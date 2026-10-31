@@ -42,7 +42,12 @@ CHEMINS = {
     "faq": ("/faq/", "/fr/faq/"),
     "liens": ("/links/", "/fr/liens/"),
     "vote": ("/vote/", "/fr/vote/"),
+    "discord": ("/discord/", "/fr/discord/"),
 }
+
+# Invitation Discord publique : l'adresse officielle d'une invitation, rien d'autre (pas de repère laissé en place,
+# pas d'adresse approchante).
+INVITATION = re.compile(r"https://discord\.gg/[A-Za-z0-9-]{2,32}")
 
 IMAGES = RACINE / "assets" / "img"
 
@@ -111,7 +116,13 @@ class Contexte:
         self.boutique_demandee = bool(etat["boutique"]["ouverte"])
         self.boutique = self.boutique_demandee and prive and conditions
         self.boutique_url = etat["boutique"]["adresse"]
-        self.discord = etat["discord"]["invitation"].strip()
+        # Le Discord ne s'affiche ouvert qu'avec son invitation, les règles, le contact et la politique de
+        # confidentialité en ligne (conditions D1 : règles publiées, contact qui fonctionne).
+        self.discord_demande = bool(etat["discord"]["invitation"].strip())
+        self.discord = (etat["discord"]["invitation"].strip()
+                        if self.discord_demande and all(all(p in legales_presentes for p in LEGALES[k])
+                                                        for k in ("regles", "contact", "confidentialite"))
+                        else "")
         sites = [v for v in etat["vote"]["sites"] if v["adresse"].strip()]
         # Le vote ne s'ouvre qu'avec ses trois adresses et la politique de confidentialité en ligne avec sa ligne
         # « vote » (« Vote journal » / « journal des votes », ajoutée par la PR du vote).
@@ -355,7 +366,7 @@ def accueil(c: Contexte, lang: str) -> str:
     j = c.jeu
     rejoindre = c.page("rejoindre", lang)
     if c.discord:
-        second = f'<a class="bouton secondaire" href="/discord">{t(lang, "Join the Discord", "Rejoindre le Discord")}</a>'
+        second = f'<a class="bouton secondaire" href="{c.page("discord", lang)}">{t(lang, "Join the Discord", "Rejoindre le Discord")}</a>'
     else:
         second = f'<a class="bouton secondaire" href="{c.page("faq", lang)}">FAQ</a>'
     cartes = []
@@ -602,8 +613,8 @@ def questions(c: Contexte, lang: str) -> list[tuple[str, str]]:
         q.append((t(lang, "How do I report a player or a problem?", "Comment signaler un joueur ou un problème ?"), signaler))
     if c.discord:
         q.append((t(lang, "Is there a Discord?", "Y a-t-il un Discord ?"),
-                  t(lang, 'Yes: <a href="/discord">astrosky.gg/discord</a>. Only this address leads to our Discord.',
-                    'Oui : <a href="/discord">astrosky.gg/discord</a>. Seule cette adresse mène à notre Discord.')))
+                  t(lang, f'Yes: <a href="{c.page("discord", lang)}">astrosky.gg/discord</a>. That page is the official way to join; any other link claiming to be our Discord is not ours.',
+                    f'Oui : <a href="{c.page("discord", lang)}">astrosky.gg/discord</a>. Cette page est la façon officielle de nous rejoindre ; tout autre lien qui se dit notre Discord n’est pas à nous.')))
     else:
         q.append((t(lang, "Is there a Discord?", "Y a-t-il un Discord ?"),
                   t(lang, "Not yet. When it opens, its invite will be posted only on this site.",
@@ -664,7 +675,7 @@ def liens(c: Contexte, lang: str) -> str:
                        t(lang, "not open yet; when it opens, it will be reachable only from this page",
                          "pas encore ouverte ; quand elle ouvrira, on n’y accédera que par cette page")))
     if c.discord:
-        lignes.append(("Discord", '<a href="/discord">astrosky.gg/discord</a>'))
+        lignes.append(("Discord", f'<a href="{c.page("discord", lang)}">astrosky.gg/discord</a>'))
     else:
         lignes.append(("Discord", t(lang, "not open yet; its invite will appear only on this page",
                                     "pas encore ouvert ; son invitation sera publiée seulement sur cette page")))
@@ -744,6 +755,33 @@ def vote(c: Contexte, lang: str) -> str:
     desc = t(lang, "Vote for AstroSky on three server lists. Optional; vote points buy cosmetics only.",
              "Vote pour AstroSky sur trois listes de serveurs. Facultatif ; les points de vote n’achètent que des cosmétiques.")
     return document(c, lang, c.page("vote", lang), CHEMINS["vote"][1 if lang == "en" else 0], None, titre, desc, corps)
+
+
+# Discord (seulement quand l'invitation est publique) ─────────────────────────────────────
+
+def discord(c: Contexte, lang: str) -> str:
+    """Page d'arrivée du Discord : l'âge, les règles et la non-affiliation se lisent avant de quitter le site."""
+    regles = c.legale("regles", lang)
+    contact = c.legale("contact", lang)
+    confidentialite = c.legale("confidentialite", lang)
+    corps = f"""<section class="page">
+<div class="conteneur">
+<h1>{t(lang, "Join the AstroSky Discord", "Rejoindre le Discord d’AstroSky")}</h1>
+<p class="chapeau">{t(lang, "Our community space, in English and French: announcements, help with the game and the other players.", "Notre espace communautaire, en français et en anglais : annonces, entraide sur le jeu et autres joueurs.")}</p>
+<p>{t(lang, "AstroSky is for players 18 and over. We never ask for your age or an ID. If you’re under 18, please don’t join the game; if we learn a member is under 18, we remove access kindly, not as a punishment.", "AstroSky est réservé aux 18 ans et plus. On ne demande jamais ton âge ni une pièce d’identité. Si tu as moins de 18 ans, ne rejoins pas le jeu ; si on apprend qu’un membre a moins de 18 ans, on retire son accès avec bienveillance, sans sanction.")}</p>
+<div class="actions"><a class="bouton" href="{e(c.discord)}" rel="noopener">{t(lang, "Join the Discord", "Rejoindre le Discord")}</a></div>
+<div class="avis">
+<p>{t(lang, f'Read the rules in <code>#rules-règles</code> when you arrive, and the <a href="{regles}">server rules</a> for the game. Staff never ask for your password, codes or a payment.', f'Lis les règles dans <code>#rules-règles</code> en arrivant, et les <a href="{regles}">règles du serveur</a> pour le jeu. L’équipe ne demande jamais ton mot de passe, tes codes ni un paiement.')}</p>
+<p>{t(lang, "The official way to join is this page. Any other link claiming to be AstroSky’s Discord is not ours.", "La façon officielle de nous rejoindre est cette page. Tout autre lien qui se dit le Discord d’AstroSky n’est pas à nous.")}</p>
+<p>{t(lang, f'To report a member, write to us: see the <a href="{contact}">contact page</a> (subject “Report”), never in a public channel. Reports are reviewed within 48 hours, not live; if someone is in danger, call emergency services first. Discord’s Report button goes to Discord, not to us.', f'Pour signaler un membre, écris-nous : voir la <a href="{contact}">page de contact</a> (objet « Signalement »), jamais dans un salon public. Les signalements sont examinés sous 48 heures, pas en direct ; si quelqu’un est en danger, appelle d’abord les secours. Le bouton Signaler de Discord va à Discord, pas à nous.')}</p>
+<p>{t(lang, f'Discord is a separate service with its own terms and privacy policy. The few things we keep from our Discord (copies of some messages that AutoMod blocks) are described in our <a href="{confidentialite}">privacy policy</a>.', f'Discord est un service distinct, avec ses propres conditions et sa propre politique de confidentialité. Le peu que nous gardons de notre Discord (des copies de certains messages que l’AutoMod bloque) est décrit dans notre <a href="{confidentialite}">politique de confidentialité</a>.')}</p>
+</div>
+</div>
+</section>"""
+    titre = t(lang, "AstroSky — Discord", "AstroSky — Discord")
+    desc = t(lang, "Join the AstroSky community Discord: announcements, help with the game and the other players. For players 18 and over.",
+             "Rejoins le Discord communautaire d’AstroSky : annonces, entraide sur le jeu et autres joueurs. Réservé aux 18 ans et plus.")
+    return document(c, lang, c.page("discord", lang), CHEMINS["discord"][1 if lang == "en" else 0], None, titre, desc, corps)
 
 
 # Redirections et 404 ─────────────────────────────────────────────────────────────────────
@@ -853,14 +891,19 @@ def construire(c: Contexte) -> dict[str, str]:
             chemin = c.page("vote", lang)
             sorties[chemin.lstrip("/") + "index.html"] = vote(c, lang)
             publiques.append(chemin)
+        if c.discord:
+            chemin = c.page("discord", lang)
+            sorties[chemin.lstrip("/") + "index.html"] = discord(c, lang)
+            publiques.append(chemin)
     sorties["store/index.html"] = renvoi(
         c, "/store/", c.boutique_url if c.boutique else None, "AstroSky — Store",
         "The AstroSky store isn’t open yet. When it opens, this address will lead to it.",
         "La boutique d’AstroSky n’est pas encore ouverte. Quand elle ouvrira, cette adresse y mènera.")
-    sorties["discord/index.html"] = renvoi(
-        c, "/discord/", c.discord or None, "AstroSky — Discord",
-        "Our Discord isn’t open yet. When it opens, its invite will be posted only on this site.",
-        "Notre Discord n’est pas encore ouvert. Quand il ouvrira, son invitation sera publiée seulement sur ce site.")
+    if not c.discord:
+        sorties["discord/index.html"] = renvoi(
+            c, "/discord/", None, "AstroSky — Discord",
+            "Our Discord isn’t open yet. When it opens, its invite will be posted only on this site.",
+            "Notre Discord n’est pas encore ouvert. Quand il ouvrira, son invitation sera publiée seulement sur ce site.")
     sorties["yt/index.html"] = entree(c, "/yt/")
     sorties["404.html"] = page_404(c)
     sorties["_layouts/legal.html"] = gabarit_legal(c)
@@ -927,6 +970,34 @@ def verifier(sorties: dict[str, str], c: Contexte) -> list[str]:
                 erreurs.append(f"{nom} : lien interne cassé {chemin}")
         if not nom.startswith("_layouts/") and "NOT AN OFFICIAL MINECRAFT SERVICE" not in page:
             erreurs.append(f"{nom} : mention de non-affiliation absente")
+    return erreurs + verifier_discord(sorties, c)
+
+
+def verifier_discord(sorties: dict[str, str], c: Contexte) -> list[str]:
+    """L'invitation n'existe que sur la page du Discord, une seule fois, avec la règle d'âge sous les yeux."""
+    erreurs = []
+    pages = {nom: page for nom, page in sorties.items() if nom.endswith(".html")}
+    if c.discord:
+        for nom, age in (("discord/index.html", "18 and over"), ("fr/discord/index.html", "18 ans et plus")):
+            page = sorties.get(nom, "")
+            if page.count(f'href="{c.discord}"') != 1:
+                erreurs.append(f"{nom} : l'invitation doit apparaître une fois, sur le bouton")
+            if age not in page:
+                erreurs.append(f"{nom} : règle d'âge absente")
+            for url in re.findall(r'<a\b[^>]*\bhref="(https?://[^"]+)"', page):
+                if url != c.discord:
+                    erreurs.append(f"{nom} : lien externe inattendu {url}")
+        for nom, page in pages.items():
+            if "its invite will" in page or "son invitation sera" in page:
+                erreurs.append(f"{nom} : dit que le Discord n'est pas ouvert alors qu'il l'est")
+            if not nom.startswith(("discord/", "fr/discord/")) and c.discord in page:
+                erreurs.append(f"{nom} : l'invitation ne doit pas figurer hors de la page du Discord")
+    else:
+        if "fr/discord/index.html" in sorties:
+            erreurs.append("fr/discord/index.html : page du Discord construite sans invitation")
+        for nom, page in pages.items():
+            if re.search(r"discord\.gg|discord\.com/invite", page):
+                erreurs.append(f"{nom} : adresse d'invitation Discord alors que le Discord n'est pas ouvert")
     return erreurs
 
 
@@ -947,7 +1018,8 @@ def combinaisons(etat: dict):
     """Toutes les combinaisons des interrupteurs qui changent le texte."""
     cles = [("serveur", "ouvert"), ("boutique", "ouverte"), ("vote", "ouvert"), ("jeu", "metiers"),
             ("jeu", "equipes_agrandies"), ("jeu", "hotel_des_ventes"), ("jeu", "banque_ile"),
-            ("jeu", "coffres_boutiques"), ("jeu", "defis"), ("jeu", "classement_iles"), ("jeu", "commande_report")]
+            ("jeu", "coffres_boutiques"), ("jeu", "defis"), ("jeu", "classement_iles"), ("jeu", "commande_report"),
+            ("discord", "invitation")]
     for valeurs in itertools.product((False, True), repeat=len(cles)):
         variante = json.loads(json.dumps(etat, default=str))
         for (bloc, cle), valeur in zip(cles, valeurs):
@@ -957,7 +1029,7 @@ def combinaisons(etat: dict):
         if variante["vote"]["ouvert"]:
             for i, site in enumerate(variante["vote"]["sites"]):
                 site["adresse"] = site["adresse"] or f"https://example.org/vote/{i}"
-        variante["discord"]["invitation"] = "https://discord.gg/exemple" if valeurs[0] else ""
+        variante["discord"]["invitation"] = "https://discord.gg/exemple" if variante["discord"]["invitation"] else ""
         variante["serveur"]["taille_equipe"] = 4 if valeurs[3] else 0
         yield variante
 
@@ -978,11 +1050,31 @@ def ecrire(sorties: dict[str, str]) -> None:
         f.write("\n".join(sorted(sorties)) + "\n")
 
 
+def ecrire_invitation(invitation: str, chemin: Path = OUTILS / "etat.toml") -> None:
+    """Met l'invitation (déjà vérifiée) sur l'unique ligne `invitation = "..."` de etat.toml."""
+    texte = chemin.read_text(encoding="utf-8")
+    nouveau, n = re.subn(r'(?m)^invitation\s*=\s*"[^"\n]*"[ \t]*$', f'invitation = "{invitation}"', texte)
+    if n != 1:
+        raise SystemExit('etat.toml : une seule ligne `invitation = "..."` est attendue')
+    with chemin.open("w", encoding="utf-8", newline="\n") as f:
+        f.write(nouveau)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Construit les pages d'astrosky.gg.")
     parser.add_argument("--verifier", action="store_true", help="vérifier seulement, sans écrire")
+    parser.add_argument("--invitation", metavar="URL",
+                        help="ouvrir la page du Discord avec cette invitation (https://discord.gg/<code>) : "
+                             "écrite dans etat.toml seulement si tout est vérifié")
     args = parser.parse_args(argv)
     etat = charger_etat()
+    if args.invitation is not None:
+        etat["discord"]["invitation"] = args.invitation.strip()
+    invitation = etat["discord"]["invitation"].strip()
+    if invitation and not INVITATION.fullmatch(invitation):
+        print(f"discord.invitation n'est pas une invitation Discord (https://discord.gg/<code>) : {invitation!r}. "
+              "Rien n'est écrit.", file=sys.stderr)
+        return 1
     presentes = pages_markdown()
     erreurs = []
     nombre = 0
@@ -1009,8 +1101,13 @@ def main(argv: list[str] | None = None) -> int:
     if c.vote_demande and not c.vote:
         print("Attention : vote.ouvert est vrai, mais une adresse de vote, la politique de confidentialité (EN et "
               "FR) ou sa ligne « vote » manque : la page de vote n'est pas construite.")
+    if c.discord_demande and not c.discord:
+        print("Attention : discord.invitation est renseignée, mais les règles, la page de contact ou la politique de "
+              "confidentialité (EN et FR) ne sont pas dans le dépôt : le Discord reste affiché fermé.")
     print(f"Vérifié : {nombre} combinaisons d'interrupteurs et de pages légales, {len(sorties)} fichiers.")
     if not args.verifier:
+        if args.invitation is not None:
+            ecrire_invitation(invitation)
         ecrire(sorties)
         print(f"Écrit : {len(sorties)} fichiers (liste dans _outils/genere.txt).")
     return 0

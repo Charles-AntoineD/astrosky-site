@@ -8,7 +8,10 @@ Ce dossier n'est pas publié : GitHub Pages ignore les dossiers qui commencent p
 
 - les pages en anglais et en français : accueil (`/`, `/fr/`), comment rejoindre (`/join/`, `/fr/rejoindre/`), FAQ
   (`/faq/`, `/fr/faq/`), liens officiels (`/links/`, `/fr/liens/`) et, quand le vote est ouvert, `/vote/` et `/fr/vote/` ;
-- `/store` et `/discord` : redirection quand la boutique ou l'invitation existe, sinon une page d'attente ;
+- `/store` : redirection quand la boutique existe, sinon une page d'attente ;
+- `/discord` et `/fr/discord/` : la page d'arrivée du Discord (âge, règles, contact, lien d'invitation sur le bouton)
+  quand `discord.invitation` est renseignée et que les règles, le contact et la confidentialité sont en ligne ; sinon
+  une page d'attente ;
 - `/yt` : lien d'entrée du profil YouTube (KV-Q1), qui renvoie à l'accueil ; page sans index, qui n'enregistre rien. Un
   site statique ne compte pas les visites : le comptage par chemin et par jour, sans adresse IP, demande un relais qui
   répond à `/yt` (voir la note de la session du site) ;
@@ -42,7 +45,7 @@ Il ne touche pas non plus aux redirections des réseaux (`tiktok/`, `youtube/`, 
 |---|---|
 | Ouverture, 2026-11-16 à 18 h | `serveur.ouvert = true` ; `boutique.ouverte = true` si la boutique ouvre en même temps |
 | Bascule du 2026-11-06 | `serveur.taille_equipe` ; `jeu.metiers` et `jeu.equipes_agrandies` si on les garde au lancement |
-| Invitation Discord publique | `discord.invitation = "https://discord.gg/..."` |
+| Invitation Discord publique (permanente) | `py _outils/construire.py --invitation https://discord.gg/<code>` (ou `discord.invitation` dans `etat.toml`) |
 | Votifier actif, ligne « vote » de la confidentialité publiée, fiches en ligne | les trois `vote.sites.adresse`, puis `vote.ouvert = true` |
 | `/report` livré sous ce nom | `jeu.commande_report = true` |
 | Premier ping du serveur public | `serveur.versions` |

@@ -36,7 +36,14 @@ ouverte = false
 adresse = "https://astrosky.tebex.store"
 
 [discord]
-# Lien d'invitation public (https://discord.gg/...), seulement quand les conditions D1 sont remplies.
+# Lien d'invitation public (https://discord.gg/...), seulement quand les conditions D1 sont remplies (décision de
+# l'Owner du 2026-10-31 : ouvrir le Discord au public). Vide : /discord reste « pas encore ouvert ». Rempli : /discord
+# et /fr/discord deviennent la page d'arrivée (âge, règles, contact), avec ce lien sur le bouton, et l'accueil, la FAQ
+# et les liens officiels y renvoient.
+#
+# >>>>>>>>>>  ICI : coller l'invitation PERMANENTE du Discord (pas une invitation qui expire)  <<<<<<<<<<
+# ou, plus sûr, lancer  py _outils/construire.py --invitation https://discord.gg/<code>
+# (la commande refuse tout ce qui n'est pas une adresse d'invitation, et n'écrit rien en cas d'erreur).
 invitation = ""
 
 [vote]
