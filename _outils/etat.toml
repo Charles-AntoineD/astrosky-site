@@ -44,7 +44,7 @@ adresse = "https://astrosky.tebex.store"
 # >>>>>>>>>>  ICI : coller l'invitation PERMANENTE du Discord (pas une invitation qui expire)  <<<<<<<<<<
 # ou, plus sûr, lancer  py _outils/construire.py --invitation https://discord.gg/<code>
 # (la commande refuse tout ce qui n'est pas une adresse d'invitation, et n'écrit rien en cas d'erreur).
-invitation = ""
+invitation = "https://discord.gg/v59zjh6hJr"
 
 [vote]
 # true quand l'écouteur de votes est actif sur le serveur public, le test V3 passé sur le serveur public (aucune
