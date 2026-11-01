@@ -52,11 +52,11 @@ adresse = "https://astrosky.tebex.store"
 # (la commande refuse tout ce qui n'est pas une adresse d'invitation, et n'écrit rien en cas d'erreur).
 invitation = "https://discord.gg/v59zjh6hJr"
 
-# Nom du salon des suggestions, tel qu'il s'écrit dans Discord (par exemple #suggestions). Vide : la page des idées
-# (/ideas, /fr/idees, vers laquelle le jeu renvoie depuis le menu pause) n'est pas construite. Rempli, et le Discord
-# ouvert : elle l'est. Lancer  py _outils/construire.py --salon-idees #<salon>  (refuse tout ce qui n'est pas un nom de
-# salon, et n'écrit rien en cas d'erreur).
-salon_idees = ""
+# Nom du salon des suggestions, tel qu'il s'écrit dans Discord, émoji compris (par exemple #💡suggestions-idées). Vide :
+# la page des idées (/ideas, /fr/idees, vers laquelle le jeu renvoie depuis le menu pause) n'est pas construite.
+# Rempli, et le Discord ouvert : elle l'est. Lancer  py _outils/construire.py --salon-idees #<salon>  (refuse tout ce
+# qui n'est pas un nom de salon, et n'écrit rien en cas d'erreur).
+salon_idees = "#💡suggestions-idées"
 
 [vote]
 # true quand l'écouteur de votes est actif sur le serveur public, le test V3 passé sur le serveur public (aucune

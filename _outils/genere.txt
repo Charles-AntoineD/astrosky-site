@@ -4,9 +4,11 @@ discord/index.html
 faq/index.html
 fr/discord/index.html
 fr/faq/index.html
+fr/idees/index.html
 fr/index.html
 fr/liens/index.html
 fr/rejoindre/index.html
+ideas/index.html
 index.html
 join/index.html
 links/index.html
