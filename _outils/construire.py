@@ -19,6 +19,7 @@ import re
 import struct
 import sys
 import tomllib
+import unicodedata
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parent.parent
@@ -50,9 +51,15 @@ CHEMINS = {
 # pas d'adresse approchante).
 INVITATION = re.compile(r"https://discord\.gg/[A-Za-z0-9-]{2,32}")
 
-# Nom du salon des suggestions : un nom de salon Discord (minuscules, chiffres, tirets, accents permis), précédé de #.
-# Aucun repère à remplacer ne passe ce filtre.
-SALON = re.compile(r"#[^\W_][\w-]{0,99}")
+def salon_valide(salon: str) -> bool:
+    """Nom d'un salon Discord, précédé de # : minuscules (accents permis), chiffres, tirets, soulignés et émojis, avec
+    au moins une lettre. Aucun repère à remplacer (espaces, crochets, chevrons, majuscules) ne passe ce filtre."""
+    if not salon.startswith("#") or not 2 <= len(salon) <= 101:
+        return False
+    nom = salon[1:]
+    if nom != nom.lower() or not any(ch.isalpha() for ch in nom):
+        return False
+    return all(ch.isalnum() or ch in "-_" or unicodedata.category(ch) in ("So", "Sk", "Mn", "Cf") for ch in nom)
 
 IMAGES = RACINE / "assets" / "img"
 
@@ -772,7 +779,8 @@ def idees(c: Contexte, lang: str) -> str:
 <p class="chapeau">{t(lang, f"Join the Discord and post it in the suggestions channel, <code>{salon}</code>: one idea per thread. Vote on other players’ ideas.", f"Rejoins le Discord et poste-la dans le salon des suggestions, <code>{salon}</code> : une idée par fil. Vote pour celles des autres.")}</p>
 <div class="actions"><a class="bouton" href="{discord_page}">{t(lang, "Join the Discord", "Rejoindre le Discord")}</a></div>
 <div class="avis">
-<p>{t(lang, f'Found a bug? Ask in <code>#help-aide</code>. To report cheating or a player, {"use <code>/report</code> in game or " if report else ""}write to us from the <a href="{contact}">contact page</a> (subject “Report”), never in a public channel.', f'Un bogue ? Pose la question dans <code>#help-aide</code>. Pour signaler de la triche ou un joueur, {"utilise <code>/report</code> en jeu ou " if report else ""}écris-nous depuis la <a href="{contact}">page de contact</a> (objet « Signalement »), jamais dans un salon public.')}</p>
+<p>{t(lang, "Questions about the game: <code>#help-aide</code>. Bugs: <code>#bug-reports-bogues</code>.", "Questions sur le jeu : <code>#help-aide</code>. Bogues : <code>#bug-reports-bogues</code>.")}</p>
+<p>{t(lang, "In game, use <code>/report</code>. ", "En jeu, utilise <code>/report</code>. ") if report else ""}{t(lang, f'To report cheating or a player, or to appeal a sanction, write to us from the <a href="{contact}">contact page</a> (subject “Report” or “Appeal”), never in a public channel.', f'Pour signaler de la triche ou un joueur, ou faire appel d’une sanction, écris-nous depuis la <a href="{contact}">page de contact</a> (objet « Signalement » ou « Appel »), jamais dans un salon public.')}</p>
 </div>
 </div>
 </section>"""
@@ -980,6 +988,10 @@ def verifier(sorties: dict[str, str], c: Contexte) -> list[str]:
 
 ACHAT = re.compile(r"(?i)\b(store|shop|buy|purchase|prices?|ranks?|donations?|cosmetics?|boutique|achat|acheter|prix|"
                    r"grades?|dons?|cosmétiques?)\b")
+# La page des idées ne promet ni lecture, ni réponse, ni explication de chaque refus (choix de l'Owner : « Non, sans
+# engagement »).
+PROMESSE = re.compile(r"(?i)\b(explain\w*|expliqu\w*|every|chaque|each|reasons?|raisons?|why|pourquoi|always|toujours|"
+                      r"guarantee\w*|garanti\w*|promis\w*|promise\w*|we read|on lit|nous lisons|we answer|on répond)\b")
 
 
 def verifier_idees(sorties: dict[str, str], c: Contexte) -> list[str]:
@@ -1001,12 +1013,18 @@ def verifier_idees(sorties: dict[str, str], c: Contexte) -> list[str]:
         visible = html.unescape(re.sub(r"<[^>]+>", " ", corps))
         if corps.count(f"<code>{e(c.salon_idees)}</code>") != 1:
             erreurs.append(f"{nom} : le nom du salon doit apparaître une fois")
-        if SALON.fullmatch(c.salon_idees) is None:
+        if not salon_valide(c.salon_idees):
             erreurs.append(f"{nom} : nom de salon invalide {c.salon_idees!r}")
         if corps.count(f'href="{c.page("discord", lang)}"') != 1:
             erreurs.append(f"{nom} : le bouton doit mener à la page du Discord, une fois")
-        if corps.count("<code>#help-aide</code>") != 1:
-            erreurs.append(f"{nom} : #help-aide doit apparaître une fois")
+        for renvoi_salon in ("#help-aide", "#bug-reports-bogues"):
+            if corps.count(f"<code>{renvoi_salon}</code>") != 1:
+                erreurs.append(f"{nom} : {renvoi_salon} doit apparaître une fois")
+        if "@" in visible:
+            erreurs.append(f"{nom} : l'adresse de courriel reste sur la page de contact")
+        m = PROMESSE.search(visible)
+        if m:
+            erreurs.append(f"{nom} : promesse sur les idées ou leur traitement ({m.group(0)!r})")
         contact = c.legale("contact", lang)
         if not contact or f'href="{contact}"' not in corps:
             erreurs.append(f"{nom} : lien vers la page de contact absent")
@@ -1088,7 +1106,7 @@ def combinaisons(etat: dict):
             sans_salon = json.loads(json.dumps(variante))
             sans_salon["discord"]["salon_idees"] = ""
             yield sans_salon
-        variante["discord"]["salon_idees"] = "#suggestions"
+        variante["discord"]["salon_idees"] = "#💡suggestions-idées"
         yield variante
 
 
@@ -1129,6 +1147,8 @@ def main(argv: list[str] | None = None) -> int:
                              "tel qu'il s'écrit dans Discord (par exemple #suggestions) : écrit dans etat.toml "
                              "seulement si tout est vérifié")
     args = parser.parse_args(argv)
+    for flux in (sys.stdout, sys.stderr):
+        flux.reconfigure(errors="backslashreplace")  # un nom de salon avec un émoji ne doit pas faire planter l'affichage
     etat = charger_etat()
     if args.invitation is not None:
         etat["discord"]["invitation"] = args.invitation.strip()
@@ -1140,8 +1160,8 @@ def main(argv: list[str] | None = None) -> int:
               "Rien n'est écrit.", file=sys.stderr)
         return 1
     salon = str(etat["discord"].get("salon_idees", "")).strip()
-    if salon and (not SALON.fullmatch(salon) or salon != salon.lower()):
-        print(f"discord.salon_idees n'est pas un nom de salon Discord (# puis minuscules, chiffres, tirets) : "
+    if salon and not salon_valide(salon):
+        print(f"discord.salon_idees n'est pas un nom de salon Discord (# puis minuscules, chiffres, tirets, émojis) : "
               f"{salon!r}. Rien n'est écrit.", file=sys.stderr)
         return 1
     s = etat["serveur"]
