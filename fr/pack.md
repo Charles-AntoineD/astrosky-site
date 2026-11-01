@@ -1,21 +1,44 @@
 ---
 layout: legal
 lang: fr
-title: AstroSky — Pack de ressources conseillé
+title: AstroSky — Pack de ressources
 permalink: /fr/pack/
 ---
-# AstroSky — Pack de ressources conseillé
+# AstroSky — Le pack de ressources AstroSky
 
-**Facultatif.** AstroSky fonctionne avec les textures de base de Minecraft. Un pack de ressources ne change que ce que
-tu vois sur ton ordinateur : le serveur ne t'envoie rien, et nous n'hébergeons pas ces packs. Chaque lien
-ci-dessous mène à la page officielle du pack.
+**Facultatif.** AstroSky fonctionne avec les textures de base de Minecraft. Le serveur te propose le pack AstroSky à la
+connexion : réponds **Non** et tu joues normalement, réponds **Oui** et Minecraft le télécharge (environ un demi-mégaoctet).
+Tape `/pack` en jeu pour qu'on te le propose de nouveau plus tard.
+
+Le pack AstroSky est gratuit pour tous et n'est jamais lié à un rang ni à un achat.
 
 [English version](/pack/)
 
-## Notre choix : Vanilla Tweaks, sélection « Constellation »
+## Ce qu'il contient
 
 Il garde l'allure du jeu et soigne le ciel de nuit : étoiles qui scintillent, halo plus fin autour du soleil et de la
-lune, verre net. Aucun mod nécessaire, assez léger pour tous les ordinateurs.
+lune, verre net. Aucun mod nécessaire, assez léger pour tous les ordinateurs. C'est la sélection « Constellation » de
+Vanilla Tweaks (11 packs), avec des ajouts d'AstroSky : la barre de phase aux couleurs d'AstroSky, l'icône du pack et les
+lignes de l'écran-titre.
+
+## Le télécharger toi-même
+
+Lien direct : [astrosky-pack.zip](/pack/astrosky-pack.zip) (`https://astrosky.gg/pack/astrosky-pack.zip`). Dépose le
+fichier zip, sans l'ouvrir, dans ton dossier `resourcepacks`, puis active-le dans Options → Packs de ressources.
+
+## Crédits
+
+Le crédit est en anglais, tel que l'exigent les conditions de Vanilla Tweaks :
+
+Credits:  
+Vanilla Tweaks: <https://vanillatweaks.net/>
+
+## Autres options (facultatif)
+
+Tu peux aussi construire toi-même la même sélection, ou essayer d'autres packs. Nous n'hébergeons pas ces autres packs, et
+chaque lien mène à la page officielle du pack.
+
+### La même sélection, chez Vanilla Tweaks
 
 1. Ouvre le sélecteur officiel : [vanillatweaks.net/picker/resource-packs](https://vanillatweaks.net/picker/resource-packs/).
 2. Choisis la version de Minecraft avec laquelle tu joues.
@@ -29,26 +52,20 @@ lune, verre net. Aucun mod nécessaire, assez léger pour tous les ordinateurs.
 
 Twinkling Stars ne fonctionne pas avec les packs de shaders.
 
-## Des textures plus nettes : Faithful 32x
+### Des textures plus nettes : Faithful 32x
 
 Les textures du jeu redessinées en deux fois plus de détail, dans le même style. Un peu plus lourd que les textures de
 base. Page officielle : [faithfulpack.net](https://faithfulpack.net/), aussi sur
 [Modrinth](https://modrinth.com/resourcepack/faithful-32x).
 
-## Pour les ordinateurs puissants : les shaders Complementary
+### Pour les ordinateurs puissants : les shaders Complementary
 
 Lumière, ciel et reflets. Ils demandent le mod Iris et une bonne carte graphique, et ils changent l'éclairage de tout
 le jeu. Pages officielles : [Complementary Reimagined](https://modrinth.com/shader/complementary-reimagined) et
 [Iris](https://www.irisshaders.dev/).
 
-## Interdit
-
-Les règles du serveur interdisent le x-ray, packs de ressources compris (voir les minerais ou les grottes à travers
-les blocs). Un doute sur un pack ? Demande-nous d'abord :
-[astrosky.gg/fr/contact](/fr/contact/).
-
-Ces packs sont faits par leurs propres auteurs, pas par AstroSky. Lis leurs pages avant de télécharger quoi que ce
-soit.
+Ces autres packs sont faits par leurs propres auteurs, pas par AstroSky. Lis leurs pages avant de télécharger quoi que
+ce soit. Une question sur un pack ? Écris-nous depuis la [page de contact](/fr/contact/).
 
 NOT AN OFFICIAL MINECRAFT SERVICE. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.
 
