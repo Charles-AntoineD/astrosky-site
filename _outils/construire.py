@@ -108,6 +108,8 @@ class Contexte:
         self.versions = s["versions"]
         self.ouvert = bool(s["ouvert"])
         self.equipe = int(s.get("taille_equipe", 0))
+        # Date d'ouverture annoncée, telle qu'elle s'affiche (EN, FR) ; vide = « date à annoncer ».
+        self.ouverture = (str(s.get("ouverture_en", "")).strip(), str(s.get("ouverture_fr", "")).strip())
         self.jeu = etat["jeu"]
         prive = all(p in legales_presentes for p in LEGALES["confidentialite"])
         conditions = all(p in legales_presentes for p in LEGALES["conditions"])
@@ -199,7 +201,7 @@ AstroSky est exploité par un exploitant indépendant, et non par Mojang ni Micr
 
 
 def document(c: Contexte, lang: str, chemin: str, autre: str, courant: str | None, titre: str, description: str,
-             corps: str, image: str | None = "constellation-1280.png", donnees: dict | None = None,
+             corps: str, image: str | None = None, donnees: dict | None = None,
              script: bool = False, refresh: str | None = None, image_alt: str | None = None,
              noindex: bool = False, canonique: str | None = None) -> str:
     alternes = ""
@@ -213,7 +215,7 @@ def document(c: Contexte, lang: str, chemin: str, autre: str, courant: str | Non
         w, h = taille_png(IMAGES / image)
         og = (f'<meta property="og:image" content="{SITE}/assets/img/{image}">\n'
               f'<meta property="og:image:width" content="{w}">\n<meta property="og:image:height" content="{h}">\n'
-              f'<meta property="og:image:alt" content="{e(image_alt or t(lang, ALT_CONSTELLATION_EN, ALT_CONSTELLATION_FR))}">\n'
+              f'<meta property="og:image:alt" content="{e(image_alt or "")}">\n'
               '<meta name="twitter:card" content="summary_large_image">\n')
     ld = ""
     if donnees:
@@ -258,18 +260,6 @@ def document(c: Contexte, lang: str, chemin: str, autre: str, courant: str | Non
 
 # Morceaux réutilisés ─────────────────────────────────────────────────────────────────────
 
-ALT_CONSTELLATION_EN = ("Render of the AstroSky spawn at night: round floating islands linked by bridges, "
-                        "under a glowing eight-point pole star.")
-ALT_CONSTELLATION_FR = ("Rendu du spawn d’AstroSky la nuit : des îles rondes et flottantes reliées par des passerelles, "
-                        "sous une étoile polaire lumineuse à huit branches.")
-
-
-ALT_ARRIVEE = {
-    "en": "Render of the arrival island at night: a brass path leads toward the glowing eight-point pole star.",
-    "fr": "Rendu de l’île d’arrivée la nuit : un chemin de laiton mène vers l’étoile polaire lumineuse à huit branches.",
-}
-
-
 def bouton_copier(c: Contexte, lang: str, ident: str) -> str:
     return (f'<button type="button" class="bouton" hidden data-copier="{e(c.adresse)}" data-statut="{ident}" '
             f'data-libelle="{t(lang, "Copy address", "Copier l’adresse")}" '
@@ -292,25 +282,10 @@ def statut(c: Contexte, lang: str) -> str:
     if c.ouvert:
         return t(lang, "AstroSky is open. Copy the address, then in Minecraft: Multiplayer → Add Server.",
                  "AstroSky est ouvert. Copie l’adresse, puis dans Minecraft : Multijoueur → Ajouter un serveur.")
-    return t(lang, "Opens Monday, November 16, 2026, at 6 p.m. Eastern Time (Québec time).",
-             "Ouverture le lundi 16 novembre 2026, à 18 h, heure du Québec.")
-
-
-def image(nom: str, alt: str, legende: str, prioritaire: bool = False, tailles: str = "(max-width: 68rem) 100vw, 66rem") -> str:
-    base = nom.rsplit("-", 1)[0]
-    variantes = sorted(IMAGES.glob(f"{base}-*.png"), key=lambda p: taille_png(p)[0])
-    grand = IMAGES / nom
-    w, h = taille_png(grand)
-    srcset = ", ".join(f"/assets/img/{p.name} {taille_png(p)[0]}w" for p in variantes)
-    charge = 'fetchpriority="high"' if prioritaire else 'loading="lazy"'
-    return (f'<figure class="rendu"><img src="/assets/img/{nom}" srcset="{srcset}" sizes="{tailles}" width="{w}" '
-            f'height="{h}" alt="{e(alt)}" {charge} decoding="async">'
-            f'<figcaption>{legende}</figcaption></figure>')
-
-
-def legende_rendu(lang: str) -> str:
-    return t(lang, "Render made by code from the spawn’s build files: plain block colours, no game textures.",
-             "Rendu fait par code à partir des fichiers de construction du spawn : couleurs de blocs unies, sans les textures du jeu.")
+    quand = c.ouverture[0 if lang == "en" else 1]
+    if quand:
+        return t(lang, f"Opens {quand}.", f"Ouverture {quand}.")
+    return t(lang, "Opening date to be announced.", "Date d’ouverture à annoncer.")
 
 
 def equipe(c: Contexte, lang: str) -> str:
@@ -425,18 +400,6 @@ def accueil(c: Contexte, lang: str) -> str:
 {carte_adresse(c, lang, "copie-haut")}
 <p class="statut">{statut(c, lang)}</p>
 <div class="actions"><a class="bouton" href="{rejoindre}">{t(lang, "How to join", "Comment rejoindre")}</a>{second}</div>
-{image("constellation-1280.png", t(lang, ALT_CONSTELLATION_EN, ALT_CONSTELLATION_FR), legende_rendu(lang), prioritaire=True)}
-</div>
-</section>
-
-<section class="bloc" aria-labelledby="t-constellation">
-<div class="conteneur deux">
-<div>
-<h2 id="t-constellation">{t(lang, "Arrive in the Constellation", "Arrive dans la Constellation")}</h2>
-<p>{t(lang, "The spawn is called the Constellation: seven floating islands linked by bridges, like stars joined into a constellation, under an eight-point pole star.", "Le spawn s’appelle la Constellation : sept îles flottantes reliées par des passerelles, comme des étoiles qui dessinent une constellation, sous une étoile polaire à huit branches.")}</p>
-<p>{t(lang, "At its edge floats a monument: a dog astronaut swimming in zero gravity, looking toward the pole star.", "À son bord flotte un monument : un chien astronaute qui nage en apesanteur, le regard tourné vers l’étoile polaire.")}</p>
-</div>
-{image("carte-768.png", t(lang, "Top view of the spawn: seven round islands linked by bridges, the pole star above, and the monument at the lower left.", "Vue de dessus du spawn : sept îles rondes reliées par des passerelles, l’étoile polaire en haut et le monument en bas à gauche."), legende_rendu(lang), tailles="(max-width: 52rem) 100vw, 28rem")}
 </div>
 </section>
 
@@ -496,8 +459,12 @@ def rejoindre(c: Contexte, lang: str) -> str:
         liste_blanche = t(lang, f'<li><strong>A message saying you are banned or suspended</strong>: you can appeal within 14 days from the <a href="{contact}">contact page</a> (subject "Appeal").</li>',
                           f'<li><strong>Un message qui dit que tu es banni ou suspendu</strong> : tu peux faire appel dans les 14 jours depuis la <a href="{contact}">page de contact</a> (objet « Appel »).</li>')
     if not c.ouvert:
-        liste_blanche = t(lang, "<li><strong>A message saying you are not on the whitelist</strong>: the server isn’t open yet. Come back on November 16, 2026, at 6 p.m. Eastern Time.</li>",
-                          "<li><strong>Un message qui dit que tu n’es pas sur la liste blanche</strong> : le serveur n’est pas encore ouvert. Reviens le 16 novembre 2026, à 18 h, heure du Québec.</li>")
+        quand = c.ouverture[0 if lang == "en" else 1]
+        revenir = (t(lang, f"Come back on {quand}.", f"Reviens {quand}.") if quand
+                   else t(lang, "Come back when it opens: the date is announced on this site.",
+                          "Reviens à l’ouverture : la date est annoncée sur ce site."))
+        liste_blanche = t(lang, f"<li><strong>A message saying you are not on the whitelist</strong>: the server isn’t open yet. {revenir}</li>",
+                          f"<li><strong>Un message qui dit que tu n’es pas sur la liste blanche</strong> : le serveur n’est pas encore ouvert. {revenir}</li>")
     corps = f"""<section class="page">
 <div class="conteneur">
 <h1>{t(lang, "How to join AstroSky", "Comment rejoindre AstroSky")}</h1>
@@ -516,7 +483,6 @@ def rejoindre(c: Contexte, lang: str) -> str:
 <li><p>{t(lang, f"In the game: <strong>Multiplayer → Add Server</strong>. Server Name: <code>AstroSky</code>. Server Address: <code>{e(c.adresse)}</code>. Click <strong>Done</strong>.", f"Dans le jeu : <strong>Multijoueur → Ajouter un serveur</strong>. Nom du serveur : <code>AstroSky</code>. Adresse du serveur : <code>{e(c.adresse)}</code>. Clique sur <strong>Terminé</strong>.")}</p></li>
 <li><p>{t(lang, "Select AstroSky in the list and click <strong>Join Server</strong>. In game, type <code>/ob</code> to reach your island and <code>/help</code> for help.", "Choisis AstroSky dans la liste et clique sur <strong>Rejoindre le serveur</strong>. En jeu, tape <code>/ob</code> pour aller sur ton île et <code>/help</code> pour l’aide.")}</p></li>
 </ol>
-{image("arrivee-1280.png", ALT_ARRIVEE[lang], t(lang, "Your first view: the arrival island, facing the pole star. ", "Ta première vue : l’île d’arrivée, face à l’étoile polaire. ") + legende_rendu(lang))}
 {pack_html}
 <h2>{t(lang, "If it doesn’t work", "Si ça ne marche pas")}</h2>
 <ul>
@@ -532,7 +498,7 @@ def rejoindre(c: Contexte, lang: str) -> str:
     desc = t(lang, f"Join AstroSky in four steps: Minecraft: Java Edition {c.versions}, server address {c.adresse}.",
              f"Rejoindre AstroSky en quatre étapes : Minecraft: Java Edition {c.versions}, adresse du serveur {c.adresse}.")
     return document(c, lang, c.page("rejoindre", lang), CHEMINS["rejoindre"][1 if lang == "en" else 0], "rejoindre",
-                    titre, desc, corps, image="arrivee-1280.png", script=True, image_alt=ALT_ARRIVEE[lang])
+                    titre, desc, corps, script=True)
 
 
 # FAQ ─────────────────────────────────────────────────────────────────────────────────────
@@ -924,6 +890,9 @@ INTERDITS = [
     (r"(?i)\bastro\b(?!sky)", "nom « Astro » (exception 8.1)"),
     (r"(?i)\b(best|ultimate|number one|meilleur)\b|#1\b", "superlatif (charte, ton)"),
     (r"18\+", "« 18+ » (charte : « 18 and over »)"),
+    (r"(?i)floating islands|dog astronaut|chien astronaute|\bconstellation\b|render made by code|rendu fait par code",
+     "ancien spawn (acheté : aucun texte ne laisse entendre qu'AstroSky l'a construit)"),
+    (r"(?i)November 16|16 novembre", "ancienne date d'ouverture (annoncée le 4 novembre pour le 6)"),
     (r"(?i)forever|pour toujours|never expire|n.expirent jamais", "promesse de durée"),
     (r"(?i)official minecraft(?! service)|minecraft official", "« Official » à côté de Minecraft"),
     (r"(?i)\b(stardust|wish|poussière d’étoiles|vœu)\b", "vocabulaire réservé (charte, O8)"),
@@ -1031,6 +1000,8 @@ def combinaisons(etat: dict):
                 site["adresse"] = site["adresse"] or f"https://example.org/vote/{i}"
         variante["discord"]["invitation"] = "https://discord.gg/exemple" if variante["discord"]["invitation"] else ""
         variante["serveur"]["taille_equipe"] = 4 if valeurs[3] else 0
+        variante["serveur"]["ouverture_en"] = "Friday, November 6, 2026, at 6 p.m. Eastern Time (Québec time)" if valeurs[4] else ""
+        variante["serveur"]["ouverture_fr"] = "le vendredi 6 novembre 2026, à 18 h, heure du Québec" if valeurs[4] else ""
         yield variante
 
 
@@ -1074,6 +1045,11 @@ def main(argv: list[str] | None = None) -> int:
     if invitation and not INVITATION.fullmatch(invitation):
         print(f"discord.invitation n'est pas une invitation Discord (https://discord.gg/<code>) : {invitation!r}. "
               "Rien n'est écrit.", file=sys.stderr)
+        return 1
+    s = etat["serveur"]
+    if bool(str(s.get("ouverture_en", "")).strip()) != bool(str(s.get("ouverture_fr", "")).strip()):
+        print("serveur.ouverture_en et serveur.ouverture_fr vont ensemble : les deux, ou aucune. Rien n'est écrit.",
+              file=sys.stderr)
         return 1
     presentes = pages_markdown()
     erreurs = []

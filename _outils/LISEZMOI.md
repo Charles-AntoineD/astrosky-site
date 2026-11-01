@@ -23,7 +23,8 @@ confidentialité et conditions de la boutique) : on les publie comme le dit `PUB
 relie tout seul dès que leur fichier `.md` est là : relancer `construire.py` après en avoir ajouté une.
 
 Il ne touche pas non plus aux redirections des réseaux (`tiktok/`, `youtube/`, `instagram/`, `x/`), aux icônes, à
-`CNAME`, ni à `assets/` (style, polices Jost sous licence SIL OFL 1.1, images du spawn rendues par code).
+`CNAME`, ni à `assets/` (style, polices Jost sous licence SIL OFL 1.1, logotype). Le site ne montre aucune image du spawn
+(il a été acheté : aucun texte ne laisse entendre qu'AstroSky l'a construit).
 
 ## Changer un interrupteur
 
@@ -43,7 +44,8 @@ Il ne touche pas non plus aux redirections des réseaux (`tiktok/`, `youtube/`, 
 
 | Quand | Interrupteur |
 |---|---|
-| Ouverture, 2026-11-16 à 18 h | `serveur.ouvert = true` ; `boutique.ouverte = true` si la boutique ouvre en même temps |
+| Annonce de la date (jamais avant l'essai fermé) | `serveur.ouverture_en` et `serveur.ouverture_fr` (vides : « date à annoncer »), et un bloc `[[nouvelles]]` si on veut la nouvelle datée |
+| Ouverture | `serveur.ouvert = true` ; `boutique.ouverte = true` si la boutique ouvre en même temps |
 | Bascule du 2026-11-06 | `serveur.taille_equipe` ; `jeu.metiers` et `jeu.equipes_agrandies` si on les garde au lancement |
 | Invitation Discord publique (permanente) | `py _outils/construire.py --invitation https://discord.gg/<code>` (ou `discord.invitation` dans `etat.toml`) |
 | Votifier actif, ligne « vote » de la confidentialité publiée, fiches en ligne | les trois `vote.sites.adresse`, puis `vote.ouvert = true` |

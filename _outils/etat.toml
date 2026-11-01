@@ -13,8 +13,14 @@ adresse = "astrosky.gg"
 # Versions de Minecraft: Java Edition acceptées, relevées au premier ping du serveur public.
 # Écrire "26.2–26.3" seulement si un client 26.3 a pu se connecter le jour même.
 versions = "26.2"
-# true seulement quand le serveur est ouvert à tous (ouverture prévue : lundi 2026-11-16, 18 h, heure du Québec).
+# true seulement quand le serveur est ouvert à tous.
 ouvert = false
+# Date d'ouverture annoncée, telle qu'elle s'affiche (accueil, page « Rejoindre »). Vide : « date à annoncer ». À remplir
+# le jour de l'annonce (jamais avant : aucune date à l'écran avant l'essai fermé) ; les deux ou aucune. Exemple :
+#   ouverture_en = "Friday, November 6, 2026, at 6 p.m. Eastern Time (Québec time)"
+#   ouverture_fr = "le vendredi 6 novembre 2026, à 18 h, heure du Québec"
+ouverture_en = ""
+ouverture_fr = ""
 # Nombre de joueurs par île à afficher. 0 = ne donner aucun nombre (taille fixée à la bascule du 2026-11-06).
 taille_equipe = 0
 
@@ -86,8 +92,5 @@ reseau = "X"
 nom = "@astroskygg"
 adresse = "https://x.com/astroskygg"
 
-# Nouvelles datées, la plus récente en premier ; l'accueil montre les trois premières.
-[[nouvelles]]
-date = 2026-10-18
-en = "AstroSky opens on Monday, November 16, 2026, at 6 p.m. Eastern Time (Québec time)."
-fr = "AstroSky ouvre le lundi 16 novembre 2026, à 18 h, heure du Québec."
+# Nouvelles datées, la plus récente en premier ; l'accueil montre les trois premières. Aucune pour l'instant : un bloc
+# [[nouvelles]] (date, en, fr) en ajoute une. Pas de date d'ouverture ici tant qu'elle n'est pas annoncée.

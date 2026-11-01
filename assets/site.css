@@ -97,10 +97,6 @@ code { font-family: inherit; font-weight: 600; color: var(--clair); }
 .bouton.secondaire:hover { border-color: var(--clair); background: rgba(243, 236, 216, 0.08); color: var(--clair); }
 .bouton[hidden] { display: none; }
 
-.rendu { margin: 1rem 0 0; }
-.rendu img { border-radius: var(--rayon); border: 1px solid var(--ligne); width: 100%; }
-.rendu figcaption { color: var(--second); font-size: 0.9rem; margin-top: 0.5rem; }
-
 .bloc { padding: clamp(2rem, 5vw, 3.5rem) 0; border-top: 1px solid var(--ligne); }
 .intro { color: var(--second); max-width: 44rem; }
 
