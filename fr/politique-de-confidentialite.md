@@ -6,7 +6,7 @@ permalink: /fr/confidentialite/
 ---
 # AstroSky — Politique de confidentialité
 
-**Version :** `2026-10-23`
+**Version :** `2026-10-31`
 
 **État :** AstroSky n'est pas encore ouvert : le serveur est fermé aux joueurs (liste blanche) et la boutique n'a pas ouvert. Cette page décrit son fonctionnement dès le jour de l'ouverture ; la date de version change si quelque chose diffère.
 
@@ -32,8 +32,7 @@ Cette politique couvre le serveur Minecraft AstroSky (`astrosky.gg`), sa boutiqu
   Deux contrôles automatiques peuvent arrêter un message du chat public avant son envoi : une limite de vitesse, qui ne le lit pas, et un filtre des liens vers d'autres sites et d'une liste de mots, qui lit le texte pour décider. Nous ne vendons jamais
   vos données et ne nous en servons jamais pour la publicité, le marketing ou le profilage.
 - Le serveur et ses enregistrements sont hébergés par OVHcloud à Vint Hill, en Virginie (États-Unis) (section 9).
-- Si vous achetez, c'est Tebex qui vous vend l'article et s'occupe du paiement. Nous ne voyons jamais votre numéro de
-  carte.
+- Si vous achetez, c'est Tebex qui vous vend l'article et s'occupe du paiement. Nous ne voyons jamais votre numéro de carte.
 - Vous pouvez demander à consulter, corriger ou supprimer vos données, gratuitement : écrivez à `support@astrosky.gg`.
 - Un parent ou un tuteur peut nous écrire pour faire retirer l'accès d'un joueur et supprimer ses données ; nous ne
   lui envoyons jamais les données du joueur (section 10).
@@ -68,10 +67,11 @@ création.
 | Quoi | Pourquoi | Combien de temps |
 |---|---|---|
 | Votre pseudo Minecraft et l'identifiant de votre compte (UUID), reçus quand vous vous connectez | faire fonctionner le jeu et reconnaître votre compte | tant que votre compte existe ; supprimés sur demande |
-| Vos données de jeu : île et ses membres, niveau d'île, solde, boutiques, défis, cosmétiques possédés, rang et permissions | faire fonctionner le jeu | tant que votre compte existe ; supprimées sur demande |
+| Vos données de jeu : île et ses membres, niveau d'île, solde, boutiques, défis, cosmétiques possédés, points de vote, rang et permissions | faire fonctionner le jeu | tant que votre compte existe ; supprimées sur demande |
 | **Enregistrements de sûreté** (pour tous les joueurs, dès la première connexion) : chat public ; messages privés (`/msg`, `/tell`) ; texte des commandes tapées ; blocs posés ou cassés ; objets mis dans un contenant ou retirés ; arrivées et départs | sûreté et intégrité des joueurs et du serveur, sécurité, sanctions et appels | **90 jours au plus**, puis suppression automatique |
 | La dernière adresse IP d'où vous vous êtes connecté (un de nos plugins la garde et n'a aucun réglage pour l'en empêcher ; les adresses précédentes ne sont pas gardées) | sûreté et sécurité des joueurs et du serveur, comme les enregistrements de sûreté ; personne ne la lit en jeu, et nous ne sanctionnons, ne relions ni ne situons jamais un compte par son adresse IP | supprimée 88 jours après la connexion qui l'a écrite (90 jours au plus) |
 | Historique du marché (hôtel des ventes) : vendeur, acheteur, objet, prix ; les ventes des coffres-boutiques n'apparaissent que dans les enregistrements de sûreté | faire fonctionner le marché, expliquer une vente contestée, détecter une fraude économique | 90 jours au plus |
+| Journal des votes : votre compte, la liste de serveurs, la date, vos achats en points de vote et toute correction (la liste nous envoie aussi votre adresse IP : elle n'est jamais gardée) | corriger une fraude au vote, répondre à un crédit contesté | 90 jours au plus |
 | Événements de détection de l'anti-triche | détecter la triche | 88 jours, supprimés avec le journal du serveur ; seul un extrait gardé pour un dossier suit ce dossier |
 | Signalements restés sans suite | traiter les signalements | 90 jours au plus |
 | Sanctions : la mesure, la règle, la raison, qui a décidé, l'appel (jamais une adresse IP) | appliquer et expliquer une sanction, traiter un appel, reconnaître une récidive | tant que la sanction s'applique, puis 12 mois après sa fin |
@@ -146,7 +146,10 @@ achats, aucun meilleur acheteur, aucune annonce d'achat en jeu ni sur Discord. D
 que le titre « Supporter » et sa couleur, affichés dans le chat et dans la liste des joueurs ; pour le masquer,
 écrivez à `support@astrosky.gg` (objet : « Boutique »).
 
-D'autres joueurs peuvent filmer ou diffuser le jeu, et ce que vous écrivez dans le chat public peut apparaître dans leurs vidéos ; nous ne les contrôlons pas.
+Des créateurs peuvent filmer ou diffuser en direct les zones publiques. Ce que vous écrivez dans le chat public,
+ou envoyez à un créateur, peut apparaître dans sa vidéo. Pour demander un floutage ou un retrait, écrivez à
+`support@astrosky.gg` (objet : « Vidéo ») avec le lien ; nous transmettons votre demande sans dire qui l'a faite, et
+ne partageons rien de plus que nécessaire.
 
 ## 8. Achats et Tebex
 
@@ -158,11 +161,9 @@ l'explique sa politique.
 
 - Tebex nous transmet les détails d'achat listés à la section 3, pour que nous puissions livrer votre achat.
 - Dans son tableau de bord, Tebex nous montre aussi le nom et l'adresse courriel que vous avez donnés au paiement, et
-  l'adresse IP utilisée. Nous ne les consultons que pour répondre à votre demande, vous rembourser ou examiner une contestation de
-  paiement ; chaque consultation est notée dans notre journal des accès, et nous ne les copions pas dans nos propres
+  l'adresse IP utilisée. Nous ne les consultons que pour répondre à votre demande ou examiner une contestation de paiement ; chaque consultation est notée dans notre journal des accès, et nous ne les copions pas dans nos propres
   registres.
-- Pour une demande sur ce que Tebex détient, vous pouvez écrire directement à Tebex, ou à nous : nous la transmettons
-  à Tebex dans les 3 jours.
+- Pour une demande sur ce que Tebex détient, y compris une demande d'effacement, vous pouvez écrire directement à Tebex ([contact de Tebex](https://www.tebex.io/contact)), ou à nous : nous la transmettons à Tebex dans les 3 jours.
 
 ## 9. Avec qui nous les partageons
 
@@ -177,6 +178,7 @@ l'explique sa politique.
 | Anthropic (fournisseur de l'assistant d'IA qui aide à exploiter le serveur) | les conversations de l'assistant avec l'exploitant, dont les commandes lancées sur la machine du serveur et leur sortie (état du service, résultat des redémarrages et des sauvegardes), conçues pour ne contenir aucune donnée de joueur (si une apparaît, nous la traitons comme un incident, section 14) ; Anthropic les garde 30 jours et n'entraîne pas ses modèles dessus tant que le réglage « Aider à améliorer Claude » de l'exploitant est désactivé ; nous mettons cette ligne à jour s'il change | exploiter le serveur | Anthropic est une entreprise des États-Unis ; ce forfait n'indique pas où les données sont stockées ou traitées, peut-être ailleurs |
 | GitHub Pages (hébergeur du site) | les données techniques de votre visite, dont votre adresse IP | afficher le site | États-Unis |
 | Discord (serveur communautaire) | les copies de messages bloqués par l'AutoMod (section 3), gardées sur Discord | examiner un danger possible | États-Unis |
+| Un créateur, seulement si vous nous demandez de flouter ou de retirer sa vidéo | le lien et ce qu'il faut flouter ou retirer, jamais qui l'a demandé | flouter ou retirer la vidéo | là où se trouve le créateur |
 | Police, services d'urgence ou autres autorités | le minimum nécessaire | quand la loi l'exige, ou quand quelqu'un est en danger immédiat | Canada, ou là où se trouve la personne en danger |
 
 Nous ne partageons rien d'autre. Nous ne vendons ni ne louons de renseignements personnels, nous n'utilisons aucun
@@ -190,7 +192,7 @@ crédible le montre ; une personne en décide), nous **retirons son accès, sans
 une sanction et ne compte jamais comme une infraction. Nous l'expliquons en termes simples, et il peut être contesté en
 écrivant à `support@astrosky.gg`. Une fois une éventuelle contestation réglée, nous supprimons les données dont nous n'avons
 plus besoin, sauf celles liées à un risque pour la sûreté de quelqu'un, gardées le temps qu'exige la procédure de
-sûreté. Les achats et les dons d'un joueur de moins de 18 ans sont remboursés sur demande. Le retrait est réexaminé
+sûreté. Nous ne remboursons pas les achats nous-mêmes ; pour un paiement fait par un joueur de moins de 18 ans, nous transmettons la demande à Tebex, qui décide selon ses propres conditions. Le retrait est réexaminé
 après 12 mois.
 
 Un parent ou un tuteur peut écrire à `support@astrosky.gg` (objet : « Confidentialité ») en donnant le pseudo du joueur,
@@ -203,7 +205,7 @@ du joueur au parent ou au tuteur et ne demandons jamais de pièce d'identité.
 Certains de ces services gardent ou traitent des renseignements hors du Québec (autres provinces canadiennes
 comprises) : OVHcloud, l'hébergeur de notre serveur (Virginie, États-Unis), TCPShield (Alberta, Canada ; son réseau
 passe aussi par les États-Unis), Backblaze (Ontario, Canada), Tebex (Royaume-Uni), Mojang et Microsoft, Zoho (Canada), Anthropic (entreprise des États-Unis ; lieu de traitement non précisé), pour les conversations de l'assistant d'IA avec l'exploitant, dont les commandes qu'il lance et leur sortie, GitHub (États-Unis), l'hébergeur de notre site, Discord (États-Unis), pour les copies d'alertes de
-l'AutoMod. La section 9 dit ce
+l'AutoMod, et un créateur, si vous nous demandez de lui transmettre une demande sur sa vidéo. La section 9 dit ce
 que chacun reçoit.
 
 ## 12. Vos droits

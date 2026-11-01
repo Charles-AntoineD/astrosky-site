@@ -6,7 +6,7 @@ permalink: /rules/
 ---
 # AstroSky — Server Rules and Terms of Play
 
-**Version:** `2026-10-23`
+**Version:** `2026-10-31`
 
 **Status:** AstroSky is not open yet: the server is closed to players (whitelist) and the store has not opened. This page describes how it will work from opening day; the version date changes if anything differs.
 
@@ -117,8 +117,7 @@ permalink: /rules/
 - Only buy on the official store, `astrosky.gg/store` (our Tebex store, `astrosky.tebex.store`).
 - Payment fraud is against the rules. A payment dispute alone is not: we only act after a person has reviewed it and
   confirmed fraud (see the Store Terms, published when the store opens).
-- If a player under 18 paid without permission, we refund and remove access without penalty (section 8); this is
-  never treated as fraud.
+- If a player under 18 paid without permission, we remove access without penalty (section 8) and never treat it as fraud; refunds are covered in the Store Terms.
 - If anyone offers to buy you a store item, or asks for something in return for a gift, please report it. You are
   never sanctioned for being offered a gift or for reporting it.
 
@@ -136,6 +135,11 @@ permalink: /rules/
 - **Report by email:** write to `support@astrosky.gg` with the subject "Report". Use email for any report, and above all for anything serious or private. Don't attach sexual images, especially if someone may be a minor: describe what you saw.
 - **If someone is in immediate danger,** call your local emergency number (911 in Canada and the United States) first,
   then email us with the subject "Report" to say what happened.
+- **Videos and live streams:** creators may film or stream live in public areas. What you write in public chat, or
+  send to a creator, may appear in their video. To ask for a blur or removal, write to `support@astrosky.gg` (subject:
+  "Video") with the link; we pass your request on without saying who asked, and share nothing more than needed.
+  The creators we work with must be 18 or older and must say clearly, in each post, that they have a commercial
+  link with AstroSky.
 
 What happens next: a person reviews each report, within 48 hours (24 hours for serious harassment). We never name the
 person who reported, although the facts can sometimes make it clear.
@@ -217,7 +221,7 @@ applies to something done before it was published.
 
 If we learn that a player is under 18 (a person decides), we remove their access **without any penalty**. It is not a
 sanction and does not count as an offence. We explain it simply, and it can be contested by writing to
-`support@astrosky.gg`. After 12 months, the removal is reviewed. Purchases and donations are refunded on request. A parent
+`support@astrosky.gg`. After 12 months, the removal is reviewed. We do not refund purchases ourselves: for a payment, we pass the request to Tebex, which decides under its own terms. A parent
 or guardian can write to `support@astrosky.gg` (subject: "Privacy") with the player's username to ask us to remove the
 player's access and delete their data. A person decides, as above; the player is told and can contest before their
 data is deleted. We never send the parent or guardian the player's data and never ask for an identity document. Details are in the

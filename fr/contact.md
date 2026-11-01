@@ -6,7 +6,7 @@ permalink: /fr/contact/
 ---
 # AstroSky — Contact
 
-**Version :** `2026-10-22`
+**Version :** `2026-10-31`
 
 ## Qui exploite AstroSky
 
@@ -25,7 +25,7 @@ Nous répondons en français ou en anglais ; les objets en anglais sont aussi ac
 | Signalement (Report) | un joueur qui enfreint les règles ; tout ce qui est grave ou privé | examiné sous 48 heures (24 heures pour un harcèlement grave) |
 | Question sur une sanction (Sanction question) | comprendre une sanction (vous pouvez toujours faire appel dans les 14 jours) | sous 7 jours |
 | Appel (Appeal) | contester une sanction (dans les 14 jours suivant son avis) | sous 7 jours |
-| Boutique (Store) | un achat, une livraison ou un remboursement (joignez l'identifiant de transaction Tebex) | sous 72 heures |
+| Boutique (Store) | un achat, une livraison ou un problème de paiement (joignez l'identifiant de transaction Tebex) | sous 72 heures |
 | Confidentialité (Privacy) | consulter, corriger ou supprimer vos données, ou toute question de confidentialité | sous 30 jours |
 | Affaires (Business) | créateurs, presse, partenaires | quand nous le pouvons |
 

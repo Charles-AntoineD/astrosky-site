@@ -6,7 +6,7 @@ permalink: /contact/
 ---
 # AstroSky — Contact
 
-**Version:** `2026-10-22`
+**Version:** `2026-10-31`
 
 ## Who runs AstroSky
 
@@ -25,7 +25,7 @@ subjects in French are welcome too.
 | Report | a player who breaks the rules; anything serious or private | reviewed within 48 hours (24 hours for serious harassment) |
 | Sanction question | understanding a sanction (you can still appeal within the 14 days) | within 7 days |
 | Appeal | contesting a sanction (within 14 days of being told about it) | within 7 days |
-| Store | a purchase, a delivery or a refund (add your Tebex transaction ID) | within 72 hours |
+| Store | a purchase, a delivery or a payment problem (add your Tebex transaction ID) | within 72 hours |
 | Privacy | seeing, correcting or deleting your data, or any privacy question | within 30 days |
 | Business | creators, press, partners | when we can |
 

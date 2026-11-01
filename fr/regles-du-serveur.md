@@ -6,7 +6,7 @@ permalink: /fr/regles/
 ---
 # AstroSky — Règles du serveur et conditions de jeu
 
-**Version :** `2026-10-23`
+**Version :** `2026-10-31`
 
 **État :** AstroSky n'est pas encore ouvert : le serveur est fermé aux joueurs (liste blanche) et la boutique n'a pas ouvert. Cette page décrit son fonctionnement dès le jour de l'ouverture ; la date de version change si quelque chose diffère.
 
@@ -127,8 +127,7 @@ léger.*
 - N'achetez que sur la boutique officielle, `astrosky.gg/store` (notre boutique Tebex, `astrosky.tebex.store`).
 - La fraude au paiement est interdite. Une contestation de paiement seule ne l'est pas : nous n'agissons qu'après
   l'examen d'une personne qui confirme la fraude (voir les conditions de la boutique, publiées à l'ouverture de la boutique).
-- Si un joueur de moins de 18 ans a payé sans permission, nous remboursons et retirons son accès sans sanction
-  (section 8) ; ce n'est jamais traité comme une fraude.
+- Si un joueur de moins de 18 ans a payé sans permission, nous retirons son accès sans sanction (section 8) et ne le traitons jamais comme une fraude ; les remboursements sont traités dans les conditions de la boutique.
 - Si quelqu'un propose de vous acheter un article de la boutique, ou demande quelque chose en échange d'un cadeau,
   signalez-le. Vous n'êtes jamais sanctionné parce qu'on vous a offert un cadeau ou parce que vous l'avez signalé.
 
@@ -147,6 +146,12 @@ léger.*
   peut être mineure : décrivez ce que vous avez vu.
 - **Si quelqu'un est en danger immédiat,** appelez d'abord le numéro d'urgence local (le 911 au Canada et aux
   États-Unis), puis écrivez-nous avec l'objet « Signalement » pour dire ce qui se passe.
+- **Vidéos et diffusions en direct :** des créateurs peuvent filmer ou diffuser en direct les zones publiques. Ce
+  que vous écrivez dans le chat public, ou envoyez à un créateur, peut apparaître dans sa vidéo. Pour demander un
+  floutage ou un retrait, écrivez à `support@astrosky.gg` (objet : « Vidéo ») avec le lien ; nous transmettons votre
+  demande sans dire qui l'a faite, et ne partageons rien de plus que nécessaire. Les créateurs avec qui nous
+  travaillons doivent avoir 18 ans ou plus et dire clairement, dans chaque publication, qu'ils ont un lien
+  commercial avec AstroSky.
 
 Ensuite : une personne examine chaque signalement, sous 48 heures (24 heures pour un harcèlement grave). Nous ne
 nommons jamais la personne qui a fait le signalement, même si les faits peuvent parfois le laisser deviner.
@@ -232,8 +237,7 @@ s'appliquent. Une nouvelle règle ne s'applique jamais à un geste fait avant sa
 
 Si nous apprenons qu'un joueur a moins de 18 ans (une personne en décide), nous retirons son accès **sans aucune
 sanction**. Ce n'est pas une sanction et cela ne compte pas comme une infraction. Nous l'expliquons simplement, et ce
-retrait peut être contesté en écrivant à `support@astrosky.gg`. Après 12 mois, le retrait est réexaminé. Les achats et les
-dons sont remboursés sur demande. Un parent ou un tuteur peut écrire à `support@astrosky.gg` (objet : « Confidentialité »)
+retrait peut être contesté en écrivant à `support@astrosky.gg`. Après 12 mois, le retrait est réexaminé. Nous ne remboursons pas les achats nous-mêmes : pour un paiement, nous transmettons la demande à Tebex, qui décide selon ses propres conditions. Un parent ou un tuteur peut écrire à `support@astrosky.gg` (objet : « Confidentialité »)
 en donnant le pseudo du joueur, pour nous demander de retirer son accès et de supprimer ses données. Une personne
 en décide, comme ci-dessus ; le joueur en est informé et peut contester avant que ses données soient supprimées.
 Nous n'envoyons jamais les données du joueur au parent ou au tuteur et ne demandons jamais de pièce d'identité. Les détails sont dans la

@@ -324,9 +324,9 @@ def a_venir(c: Contexte, lang: str) -> str | None:
 
 
 def boutique_phrase(c: Contexte, lang: str) -> str:
-    phrase = t(lang, "The store sells cosmetics and donations only, such as titles and name colours. Nothing sold "
+    phrase = t(lang, "The store sells cosmetics only, such as titles and name colours. Nothing sold "
                      "changes how the game plays, coins are never sold, and no purchase is random.",
-               "La boutique ne vend que des cosmétiques et des dons, par exemple des titres et des couleurs de pseudo. "
+               "La boutique ne vend que des cosmétiques, par exemple des titres et des couleurs de pseudo. "
                "Rien de ce qui est vendu ne change le jeu, les coins ne se vendent jamais, et aucun achat n’est au "
                "hasard.")
     if c.boutique:
@@ -634,8 +634,8 @@ def liens(c: Contexte, lang: str) -> str:
                        + " · ".join(f'<a href="{e(v["adresse"])}" rel="noopener">{e(v["nom"])}</a>' for v in c.votes)))
     if c.boutique:
         lignes.append((t(lang, "Store", "Boutique"),
-                       t(lang, '<a href="/store">astrosky.gg/store</a> (cosmetics and donations only, prices visible without an account)',
-                         '<a href="/store">astrosky.gg/store</a> (cosmétiques et dons seulement, prix visibles sans compte)')))
+                       t(lang, '<a href="/store">astrosky.gg/store</a> (cosmetics only, prices visible without an account)',
+                         '<a href="/store">astrosky.gg/store</a> (cosmétiques seulement, prix visibles sans compte)')))
     else:
         lignes.append((t(lang, "Store", "Boutique"),
                        t(lang, "not open yet; when it opens, it will be reachable only from this page",

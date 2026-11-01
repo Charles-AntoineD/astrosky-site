@@ -6,7 +6,7 @@ permalink: /privacy/
 ---
 # AstroSky — Privacy Policy
 
-**Version:** `2026-10-23`
+**Version:** `2026-10-31`
 
 **Status:** AstroSky is not open yet: the server is closed to players (whitelist) and the store has not opened. This page describes how it will work from opening day; the version date changes if anything differs.
 
@@ -63,10 +63,11 @@ section 10 if a player turns out to be under 18.
 | What | Why | How long |
 |---|---|---|
 | Your Minecraft username and account ID (UUID), received when you join | run the game and recognise your account | as long as your account exists; deleted on request |
-| Your game data: island and its members, island level, balance, shops, challenges, cosmetics you own, rank and permissions | run the game | as long as your account exists; deleted on request |
+| Your game data: island and its members, island level, balance, shops, challenges, cosmetics you own, vote points, rank and permissions | run the game | as long as your account exists; deleted on request |
 | **Safety records** (for every player, from the first connection): public chat; private messages (`/msg`, `/tell`); the text of the commands you type; blocks placed or broken; items put in or taken out of containers; joins and leaves | safety and integrity of players and of the server, security, sanctions and appeals | **90 days at most**, then deleted automatically |
 | The last IP address you joined from (one of our plugins keeps it and has no setting to turn this off; earlier addresses are not kept) | safety and security of players and of the server, like the safety records; nobody reads it in game, and we never sanction, link or locate accounts by IP address | deleted 88 days after the connection that wrote it (90 days at most) |
 | Market history (auction house): seller, buyer, item, price; chest shop sales appear only in the safety records | run the market, explain a disputed sale, detect economic fraud | 90 days at most |
+| Vote journal: your account, the server list, the date, what you bought with vote points and any correction (the list also sends us your IP address: it is never kept) | correct vote fraud, answer a disputed credit | 90 days at most |
 | Anti-cheat detection events | detect cheating | 88 days, deleted with the server log; only an excerpt kept for a case follows that case |
 | Reports that lead to no action | handle reports | 90 days at most |
 | Sanctions: the measure, the rule, the reason, who decided, the appeal (never an IP address) | apply and explain a sanction, handle an appeal, recognise repeat offences | while the sanction applies, then 12 months after it ends |
@@ -136,7 +137,9 @@ buyer, no purchase announcements in game or on Discord. Of your purchases, other
 title and its colour, shown in chat and in the player list; to hide it, write to `support@astrosky.gg` (subject:
 "Store").
 
-Other players may film or stream the game, and what you write in public chat may appear in their videos; we do not control them.
+Creators may film or stream live in public areas. What you write in public chat, or send to a creator, may
+appear in their video. To ask for a blur or removal, write to `support@astrosky.gg` (subject: "Video") with the
+link; we pass your request on without saying who asked, and share nothing more than needed.
 
 ## 8. Purchases and Tebex
 
@@ -148,10 +151,9 @@ pages use cookies, as its policy explains.
 - Tebex tells us the purchase details listed in section 3, so that we can deliver your purchase.
 - In its dashboard, Tebex also shows us the name and email address you gave at checkout, and the IP address you
   used. We look at them
-  only to answer your request, refund you or check a payment dispute; each look is noted in our access log, and we do
+  only to answer your request or check a payment dispute; each look is noted in our access log, and we do
   not copy them into our own records.
-- For a request about what Tebex holds, you can write to Tebex directly, or to us: we pass it on to Tebex within 3
-  days.
+- For a request about what Tebex holds, including a request to erase it, you can write to Tebex directly ([Tebex contact](https://www.tebex.io/contact)), or to us: we pass it on to Tebex within 3 days.
 
 ## 9. Who we share it with
 
@@ -166,6 +168,7 @@ pages use cookies, as its policy explains.
 | Anthropic (provider of the AI assistant that helps operate the server) | the assistant's conversations with the operator, including the commands it runs on the server machine and their output (service state, results of restarts and backups), designed to contain no player data (if some ever appears, we treat it as an incident, section 14); Anthropic keeps them 30 days and does not train its models on them while the operator's "Help improve Claude" setting is off; we update this line if it changes | operate the server | Anthropic is a U.S. company; this plan does not say where data is stored or processed, so possibly elsewhere |
 | GitHub Pages (website host) | technical data of your visit, including your IP address | show the website | United States |
 | Discord (community server) | copies of messages blocked by AutoMod (section 3), kept on Discord | review a possible danger | United States |
+| A creator, only if you ask us to blur or remove their video | the link and what to blur or remove, never who asked | blur or remove the video | where the creator is |
 | Police, emergency services or other authorities | the minimum necessary | when the law requires it, or when someone is in immediate danger | Canada, or where the person in danger is |
 
 We share nothing else. We do not sell or rent personal information, we do not use advertising networks, and our
@@ -178,7 +181,7 @@ AstroSky is for adults. If we learn that a player is under 18 (they tell us, or 
 decides), we **remove their access, without any penalty**. This removal is not a sanction and never counts as an
 offence. We explain it in simple words, and it can be contested by writing to `support@astrosky.gg`. Once any contest is
 settled, we delete the data we no longer need, except data linked to a safety concern, which is kept as long as the
-safety procedure requires. Purchases and donations made by a player under 18 are refunded on request. The removal is
+safety procedure requires. We do not refund purchases ourselves; for a payment made by a player under 18, we pass the request to Tebex, which decides under its own terms. The removal is
 reviewed after 12 months.
 
 A parent or guardian can write to `support@astrosky.gg` (subject: "Privacy") with the player's username to ask us to
@@ -190,7 +193,8 @@ document.
 
 Some of these services keep or process information outside Québec (other Canadian provinces included):
 OVHcloud, our server host (Virginia, United States), TCPShield (Alberta, Canada; its network also runs in the
-United States), Backblaze (Ontario, Canada), Tebex (United Kingdom), Mojang and Microsoft, Zoho (Canada), Anthropic (a United States company; where it processes the data is not stated), for the AI assistant's conversations with the operator, including the commands it runs and their output, GitHub (United States), our website host, Discord (United States), for the AutoMod alert copies. Section 9 says what each of them receives.
+United States), Backblaze (Ontario, Canada), Tebex (United Kingdom), Mojang and Microsoft, Zoho (Canada), Anthropic (a United States company; where it processes the data is not stated), for the AI assistant's conversations with the operator, including the commands it runs and their output, GitHub (United States), our website host, Discord (United States), for the AutoMod alert copies, and a creator, if
+you ask us to pass on a request about their video. Section 9 says what each of them receives.
 
 ## 12. Your rights
 
