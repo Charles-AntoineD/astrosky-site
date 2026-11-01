@@ -12,6 +12,10 @@ Ce dossier n'est pas publié : GitHub Pages ignore les dossiers qui commencent p
 - `/discord` et `/fr/discord/` : la page d'arrivée du Discord (âge, règles, contact, lien d'invitation sur le bouton)
   quand `discord.invitation` est renseignée et que les règles, le contact et la confidentialité sont en ligne ; sinon
   une page d'attente ;
+- `/ideas` et `/fr/idees` : la page « Idées » (poster une idée dans le salon des suggestions du Discord), vers laquelle
+  le jeu renvoie depuis le menu pause. Construite seulement quand le Discord est ouvert et que `discord.salon_idees`
+  porte le nom du salon ; le bouton mène à `/discord/` (âge, règles), jamais directement à l'invitation ; rien sur
+  l'achat ; `/report` n'y est cité que si `jeu.commande_report` est vrai ;
 - `/yt` : lien d'entrée du profil YouTube (KV-Q1), qui renvoie à l'accueil ; page sans index, qui n'enregistre rien. Un
   site statique ne compte pas les visites : le comptage par chemin et par jour, sans adresse IP, demande un relais qui
   répond à `/yt` (voir la note de la session du site) ;
@@ -48,6 +52,7 @@ Il ne touche pas non plus aux redirections des réseaux (`tiktok/`, `youtube/`, 
 | Ouverture | `serveur.ouvert = true` ; `boutique.ouverte = true` si la boutique ouvre en même temps |
 | Bascule du 2026-11-06 | `serveur.taille_equipe` ; `jeu.metiers` et `jeu.equipes_agrandies` si on les garde au lancement |
 | Invitation Discord publique (permanente) | `py _outils/construire.py --invitation https://discord.gg/<code>` (ou `discord.invitation` dans `etat.toml`) |
+| Nom du salon des suggestions connu (ouvre `/ideas` et `/fr/idees`) | `py _outils/construire.py --salon-idees #<salon>` (ou `discord.salon_idees` dans `etat.toml`) |
 | Votifier actif, ligne « vote » de la confidentialité publiée, fiches en ligne | les trois `vote.sites.adresse`, puis `vote.ouvert = true` |
 | `/report` livré sous ce nom | `jeu.commande_report = true` |
 | Premier ping du serveur public | `serveur.versions` |

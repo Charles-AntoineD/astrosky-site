@@ -43,11 +43,16 @@ CHEMINS = {
     "liens": ("/links/", "/fr/liens/"),
     "vote": ("/vote/", "/fr/vote/"),
     "discord": ("/discord/", "/fr/discord/"),
+    "idees": ("/ideas/", "/fr/idees/"),
 }
 
 # Invitation Discord publique : l'adresse officielle d'une invitation, rien d'autre (pas de repère laissé en place,
 # pas d'adresse approchante).
 INVITATION = re.compile(r"https://discord\.gg/[A-Za-z0-9-]{2,32}")
+
+# Nom du salon des suggestions : un nom de salon Discord (minuscules, chiffres, tirets, accents permis), précédé de #.
+# Aucun repère à remplacer ne passe ce filtre.
+SALON = re.compile(r"#[^\W_][\w-]{0,99}")
 
 IMAGES = RACINE / "assets" / "img"
 
@@ -125,6 +130,8 @@ class Contexte:
                         if self.discord_demande and all(all(p in legales_presentes for p in LEGALES[k])
                                                         for k in ("regles", "contact", "confidentialite"))
                         else "")
+        # La page « Idées » n'existe qu'avec le Discord ouvert et le nom du salon des suggestions : elle y renvoie.
+        self.salon_idees = str(etat["discord"].get("salon_idees", "")).strip() if self.discord else ""
         sites = [v for v in etat["vote"]["sites"] if v["adresse"].strip()]
         # Le vote ne s'ouvre qu'avec ses trois adresses et la politique de confidentialité en ligne avec sa ligne
         # « vote » (« Vote journal » / « journal des votes », ajoutée par la PR du vote).
@@ -750,6 +757,31 @@ def discord(c: Contexte, lang: str) -> str:
     return document(c, lang, c.page("discord", lang), CHEMINS["discord"][1 if lang == "en" else 0], None, titre, desc, corps)
 
 
+# Idées (le jeu y renvoie depuis le menu pause ; seulement quand le Discord est ouvert et le salon connu) ─────────────
+
+def idees(c: Contexte, lang: str) -> str:
+    """Page courte : poster une idée dans le salon des suggestions du Discord. Le bouton mène à la page du Discord
+    (âge, règles, avis officiel), pas directement à l'invitation. Rien sur l'achat."""
+    salon = e(c.salon_idees)
+    discord_page = c.page("discord", lang)
+    contact = c.legale("contact", lang)
+    report = c.jeu["commande_report"]
+    corps = f"""<section class="page">
+<div class="conteneur">
+<h1>{t(lang, "Got an idea for AstroSky?", "Tu as une idée pour AstroSky ?")}</h1>
+<p class="chapeau">{t(lang, f"Join the Discord and post it in the suggestions channel, <code>{salon}</code>: one idea per thread. Vote on other players’ ideas.", f"Rejoins le Discord et poste-la dans le salon des suggestions, <code>{salon}</code> : une idée par fil. Vote pour celles des autres.")}</p>
+<div class="actions"><a class="bouton" href="{discord_page}">{t(lang, "Join the Discord", "Rejoindre le Discord")}</a></div>
+<div class="avis">
+<p>{t(lang, f'Found a bug? Ask in <code>#help-aide</code>. To report cheating or a player, {"use <code>/report</code> in game or " if report else ""}write to us from the <a href="{contact}">contact page</a> (subject “Report”), never in a public channel.', f'Un bogue ? Pose la question dans <code>#help-aide</code>. Pour signaler de la triche ou un joueur, {"utilise <code>/report</code> en jeu ou " if report else ""}écris-nous depuis la <a href="{contact}">page de contact</a> (objet « Signalement »), jamais dans un salon public.')}</p>
+</div>
+</div>
+</section>"""
+    titre = t(lang, "AstroSky — Ideas", "AstroSky — Idées")
+    desc = t(lang, "Got an idea for AstroSky? Post it in the suggestions channel of our Discord and vote on other players’ ideas.",
+             "Une idée pour AstroSky ? Poste-la dans le salon des suggestions de notre Discord et vote pour celles des autres joueurs.")
+    return document(c, lang, c.page("idees", lang), CHEMINS["idees"][1 if lang == "en" else 0], None, titre, desc, corps)
+
+
 # Redirections et 404 ─────────────────────────────────────────────────────────────────────
 
 def renvoi(c: Contexte, chemin: str, cible: str | None, titre: str, attente_en: str, attente_fr: str) -> str:
@@ -861,6 +893,10 @@ def construire(c: Contexte) -> dict[str, str]:
             chemin = c.page("discord", lang)
             sorties[chemin.lstrip("/") + "index.html"] = discord(c, lang)
             publiques.append(chemin)
+        if c.salon_idees:
+            chemin = c.page("idees", lang)
+            sorties[chemin.lstrip("/") + "index.html"] = idees(c, lang)
+            publiques.append(chemin)
     sorties["store/index.html"] = renvoi(
         c, "/store/", c.boutique_url if c.boutique else None, "AstroSky — Store",
         "The AstroSky store isn’t open yet. When it opens, this address will lead to it.",
@@ -939,7 +975,51 @@ def verifier(sorties: dict[str, str], c: Contexte) -> list[str]:
                 erreurs.append(f"{nom} : lien interne cassé {chemin}")
         if not nom.startswith("_layouts/") and "NOT AN OFFICIAL MINECRAFT SERVICE" not in page:
             erreurs.append(f"{nom} : mention de non-affiliation absente")
-    return erreurs + verifier_discord(sorties, c)
+    return erreurs + verifier_discord(sorties, c) + verifier_idees(sorties, c)
+
+
+ACHAT = re.compile(r"(?i)\b(store|shop|buy|purchase|prices?|ranks?|donations?|cosmetics?|boutique|achat|acheter|prix|"
+                   r"grades?|dons?|cosmétiques?)\b")
+
+
+def verifier_idees(sorties: dict[str, str], c: Contexte) -> list[str]:
+    """La page « Idées » n'existe qu'avec le Discord ouvert et le nom du salon ; elle renvoie à la page du Discord,
+    ne porte aucun lien externe, ne dit rien de l'achat et ne parle de /report que s'il existe."""
+    erreurs = []
+    noms = {"ideas/index.html": "en", "fr/idees/index.html": "fr"}
+    if not (c.discord and c.salon_idees):
+        for nom in noms:
+            if nom in sorties:
+                erreurs.append(f"{nom} : page des idées construite sans le Discord ouvert ou sans le nom du salon")
+        return erreurs
+    for nom, lang in noms.items():
+        page = sorties.get(nom, "")
+        if not page:
+            erreurs.append(f"{nom} : page des idées absente")
+            continue
+        corps = page.split('<main id="contenu">')[1].split("</main>")[0]
+        visible = html.unescape(re.sub(r"<[^>]+>", " ", corps))
+        if corps.count(f"<code>{e(c.salon_idees)}</code>") != 1:
+            erreurs.append(f"{nom} : le nom du salon doit apparaître une fois")
+        if SALON.fullmatch(c.salon_idees) is None:
+            erreurs.append(f"{nom} : nom de salon invalide {c.salon_idees!r}")
+        if corps.count(f'href="{c.page("discord", lang)}"') != 1:
+            erreurs.append(f"{nom} : le bouton doit mener à la page du Discord, une fois")
+        if corps.count("<code>#help-aide</code>") != 1:
+            erreurs.append(f"{nom} : #help-aide doit apparaître une fois")
+        contact = c.legale("contact", lang)
+        if not contact or f'href="{contact}"' not in corps:
+            erreurs.append(f"{nom} : lien vers la page de contact absent")
+        if re.search(r'href="(?:https?:)?//', corps) or "discord.gg" in corps:
+            erreurs.append(f"{nom} : lien externe ou invitation sur la page des idées")
+        if "/store" in corps:
+            erreurs.append(f"{nom} : lien vers la boutique sur la page des idées")
+        m = ACHAT.search(visible)
+        if m:
+            erreurs.append(f"{nom} : propos d'achat sur la page des idées ({m.group(0)!r})")
+        if ("/report" in corps) != bool(c.jeu["commande_report"]):
+            erreurs.append(f"{nom} : /report cité alors qu'il n'existe pas, ou absent alors qu'il existe")
+    return erreurs
 
 
 def verifier_discord(sorties: dict[str, str], c: Contexte) -> list[str]:
@@ -1002,6 +1082,13 @@ def combinaisons(etat: dict):
         variante["serveur"]["taille_equipe"] = 4 if valeurs[3] else 0
         variante["serveur"]["ouverture_en"] = "Friday, November 6, 2026, at 6 p.m. Eastern Time (Québec time)" if valeurs[4] else ""
         variante["serveur"]["ouverture_fr"] = "le vendredi 6 novembre 2026, à 18 h, heure du Québec" if valeurs[4] else ""
+        # Le salon des suggestions : avec l'invitation, la page des idées existe ou non selon le salon ; sans
+        # invitation, un salon renseigné ne doit rien construire.
+        if variante["discord"]["invitation"]:
+            sans_salon = json.loads(json.dumps(variante))
+            sans_salon["discord"]["salon_idees"] = ""
+            yield sans_salon
+        variante["discord"]["salon_idees"] = "#suggestions"
         yield variante
 
 
@@ -1021,12 +1108,12 @@ def ecrire(sorties: dict[str, str]) -> None:
         f.write("\n".join(sorted(sorties)) + "\n")
 
 
-def ecrire_invitation(invitation: str, chemin: Path = OUTILS / "etat.toml") -> None:
-    """Met l'invitation (déjà vérifiée) sur l'unique ligne `invitation = "..."` de etat.toml."""
+def ecrire_reglage(cle: str, valeur: str, chemin: Path = OUTILS / "etat.toml") -> None:
+    """Met la valeur (déjà vérifiée) sur l'unique ligne `<cle> = "..."` de etat.toml."""
     texte = chemin.read_text(encoding="utf-8")
-    nouveau, n = re.subn(r'(?m)^invitation\s*=\s*"[^"\n]*"[ \t]*$', f'invitation = "{invitation}"', texte)
+    nouveau, n = re.subn(rf'(?m)^{cle}\s*=\s*"[^"\n]*"[ \t]*$', lambda _: f'{cle} = "{valeur}"', texte)
     if n != 1:
-        raise SystemExit('etat.toml : une seule ligne `invitation = "..."` est attendue')
+        raise SystemExit(f'etat.toml : une seule ligne `{cle} = "..."` est attendue')
     with chemin.open("w", encoding="utf-8", newline="\n") as f:
         f.write(nouveau)
 
@@ -1037,14 +1124,25 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--invitation", metavar="URL",
                         help="ouvrir la page du Discord avec cette invitation (https://discord.gg/<code>) : "
                              "écrite dans etat.toml seulement si tout est vérifié")
+    parser.add_argument("--salon-idees", metavar="#SALON",
+                        help="ouvrir la page des idées (/ideas, /fr/idees) avec le nom du salon des suggestions, "
+                             "tel qu'il s'écrit dans Discord (par exemple #suggestions) : écrit dans etat.toml "
+                             "seulement si tout est vérifié")
     args = parser.parse_args(argv)
     etat = charger_etat()
     if args.invitation is not None:
         etat["discord"]["invitation"] = args.invitation.strip()
+    if args.salon_idees is not None:
+        etat["discord"]["salon_idees"] = args.salon_idees.strip()
     invitation = etat["discord"]["invitation"].strip()
     if invitation and not INVITATION.fullmatch(invitation):
         print(f"discord.invitation n'est pas une invitation Discord (https://discord.gg/<code>) : {invitation!r}. "
               "Rien n'est écrit.", file=sys.stderr)
+        return 1
+    salon = str(etat["discord"].get("salon_idees", "")).strip()
+    if salon and (not SALON.fullmatch(salon) or salon != salon.lower()):
+        print(f"discord.salon_idees n'est pas un nom de salon Discord (# puis minuscules, chiffres, tirets) : "
+              f"{salon!r}. Rien n'est écrit.", file=sys.stderr)
         return 1
     s = etat["serveur"]
     if bool(str(s.get("ouverture_en", "")).strip()) != bool(str(s.get("ouverture_fr", "")).strip()):
@@ -1080,10 +1178,17 @@ def main(argv: list[str] | None = None) -> int:
     if c.discord_demande and not c.discord:
         print("Attention : discord.invitation est renseignée, mais les règles, la page de contact ou la politique de "
               "confidentialité (EN et FR) ne sont pas dans le dépôt : le Discord reste affiché fermé.")
+    if salon and not c.discord:
+        print("Attention : discord.salon_idees est renseigné, mais le Discord n'est pas ouvert : la page des idées "
+              "n'est pas construite.")
+    if c.discord and not salon:
+        print("Information : discord.salon_idees est vide : la page des idées (/ideas, /fr/idees) n'est pas construite.")
     print(f"Vérifié : {nombre} combinaisons d'interrupteurs et de pages légales, {len(sorties)} fichiers.")
     if not args.verifier:
         if args.invitation is not None:
-            ecrire_invitation(invitation)
+            ecrire_reglage("invitation", invitation)
+        if args.salon_idees is not None:
+            ecrire_reglage("salon_idees", salon)
         ecrire(sorties)
         print(f"Écrit : {len(sorties)} fichiers (liste dans _outils/genere.txt).")
     return 0
