@@ -9,6 +9,7 @@ fr/index.html
 fr/liens/index.html
 fr/rejoindre/index.html
 fr/wiki/index.html
+fr/wiki/metiers/index.html
 fr/wiki/phases/cherry-grove/index.html
 fr/wiki/phases/deep-dark/index.html
 fr/wiki/phases/desert/index.html
@@ -36,6 +37,7 @@ links/index.html
 sitemap.xml
 store/index.html
 wiki/index.html
+wiki/jobs/index.html
 wiki/phases/cherry-grove/index.html
 wiki/phases/deep-dark/index.html
 wiki/phases/desert/index.html

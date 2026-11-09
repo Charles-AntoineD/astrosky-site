@@ -31,7 +31,7 @@ coffres_boutiques = true     # coffres-boutiques des joueurs
 banque_ile = true            # compte commun de l'île
 defis = true                 # défis importés
 classement_iles = true       # classement du niveau d'île
-metiers = false              # métiers en jeu (Mise à jour 1, ou bascule du 2026-11-06)
+metiers = true               # métiers en jeu (sur le serveur public ; Owner, 2026-11-09)
 equipes_agrandies = false    # équipes d'île agrandies en jeu (Mise à jour 1)
 commande_report = false      # /report livré sous ce nom (P-022)
 

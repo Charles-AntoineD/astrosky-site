@@ -345,6 +345,12 @@ def economie(c: Contexte, lang: str) -> str | None:
     return phrase[0].upper() + phrase[1:] + "."
 
 
+def page_wiki_metiers(c: Contexte, lang: str) -> str | None:
+    """Chemin de la page des métiers du wiki, si elle est construite ce jour-là (jeu.metiers et wiki présent)."""
+    chemin = t(lang, "/wiki/jobs/", "/fr/wiki/metiers/")
+    return chemin if c.jeu["metiers"] and any(p["chemin"] == chemin for p in pages_wiki(c)) else None
+
+
 def a_venir(c: Contexte, lang: str) -> str | None:
     j = c.jeu
     prevu = []
@@ -400,9 +406,13 @@ def accueil(c: Contexte, lang: str) -> str:
     if buts:
         cartes.append((t(lang, "Goals for every session", "Un but à chaque séance"), " ".join(buts)))
     if j["metiers"]:
-        cartes.append((t(lang, "Jobs", "Métiers"),
-                       t(lang, "Pick a job and earn coins for the work you already do on your island.",
-                         "Choisis un métier et gagne des coins pour le travail que tu fais déjà sur ton île.")))
+        metiers = t(lang, "Pick a job and earn coins for the work you already do on your island.",
+                    "Choisis un métier et gagne des coins pour le travail que tu fais déjà sur ton île.")
+        lien = page_wiki_metiers(c, lang)
+        if lien:
+            metiers += t(lang, f' <a href="{lien}">What each job gives you, level by level</a>.',
+                         f' <a href="{lien}">Ce que chaque métier donne, niveau par niveau</a>.')
+        cartes.append((t(lang, "Jobs", "Métiers"), metiers))
     cartes.append((t(lang, "A store for looks only", "Une boutique pour le style seulement"), boutique_phrase(c, lang)))
     grille = "\n".join(f'<div class="carte"><h3>{titre}</h3><p>{texte}</p></div>' for titre, texte in cartes)
     prevu = a_venir(c, lang)
@@ -600,6 +610,25 @@ def questions(c: Contexte, lang: str) -> list[tuple[str, str]]:
     amis += (t(lang, "; your team shares ", " ; ton équipe partage ") + t(lang, " and ", " et ").join(partage) + "."
              if partage else ".")
     q.append((t(lang, "Can I play with friends?", "Puis-je jouer avec mes amis ?"), amis))
+    if j["metiers"]:
+        reponse = t(lang, "Type <code>/skills</code> and pick up to 2 jobs: Miner, Lumberjack, Farmer, Fisher or "
+                          "Hunter. A job pays coins for the actions it lists, and each level adds stats such as max "
+                          "health. After each choice, including the first, you wait 24 hours before the next one.",
+                    "Tape <code>/skills</code> et choisis jusqu’à 2 métiers : Mineur, Bûcheron, Fermier, Pêcheur ou "
+                    "Chasseur. Un métier paie des coins pour les actions qu’il liste, et chaque niveau ajoute des "
+                    "statistiques, comme les PV max. Après chaque choix, le premier compris, tu attends 24 heures "
+                    "avant le suivant.")
+        lien = page_wiki_metiers(c, lang)
+        if lien:
+            reponse += t(lang, f' Details: <a href="{lien}">jobs in the wiki</a>.',
+                         f' Le détail : <a href="{lien}">les métiers dans le wiki</a>.')
+        q.append((t(lang, "How do jobs work?", "Comment marchent les métiers ?"), reponse))
+    if c.wiki:
+        q.append((t(lang, "What can come out of the magic block?", "Que peut donner le bloc magique ?"),
+                  t(lang, 'The <a href="/wiki/">wiki</a> lists every phase with the chance of each block, animal, '
+                          'monster and chest, computed from the server files.',
+                    'Le <a href="/fr/wiki/">wiki</a> donne chaque phase avec la chance de chaque bloc, animal, '
+                    'monstre et coffre, calculée depuis les fichiers du serveur.')))
     if c.vote:
         q.append((t(lang, "How do I vote for AstroSky?", "Comment voter pour AstroSky ?"),
                   t(lang, f'Voting is optional: <a href="{c.page("vote", lang)}">the vote page</a> lists the three sites and how vote points work.',
