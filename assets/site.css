@@ -148,6 +148,17 @@ td:first-child { color: var(--second); white-space: nowrap; }
 .prose code { font-weight: 500; }
 .prose td:first-child { white-space: normal; }
 
+/* Wiki (pages générées depuis les fichiers du serveur) */
+.fil { color: var(--second); font-size: 0.95rem; margin: 0 0 0.5rem; }
+.tampon { color: var(--second); font-size: 0.92rem; }
+.discret { color: var(--second); font-weight: 400; font-size: 0.8em; }
+.wiki th.n, .wiki td.n { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.wiki td:first-child { white-space: normal; }
+.wiki h4 { font-size: 1.02rem; font-weight: 500; margin: 1.2rem 0 0.4rem; }
+.wiki .grille { margin: 1rem 0 1.5rem; }
+.wiki details ul { margin: 0; padding-left: 1.2rem; }
+.suite { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+
 /* Pied de page */
 .pied { border-top: 1px solid var(--ligne); margin-top: 2rem; padding: 1.75rem 0 2.5rem; color: var(--second);
   font-size: 0.92rem; }

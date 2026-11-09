@@ -45,7 +45,24 @@ CHEMINS = {
     "vote": ("/vote/", "/fr/vote/"),
     "discord": ("/discord/", "/fr/discord/"),
     "idees": ("/ideas/", "/fr/idees/"),
+    "wiki": ("/wiki/", "/fr/wiki/"),
 }
+
+# Wiki : pages générées par le dépôt du studio (tools/wiki_serveur.py) à partir des fichiers du serveur, copiées ici
+# dans _outils/wiki.json. Le studio fournit le corps de chaque page ; ce générateur l'habille et le vérifie. Un passage
+# « <!-- si:metiers --> … <!-- /si:metiers --> » (et une page marquée "si": "metiers") ne s'affiche que si
+# l'interrupteur jeu.metiers est vrai.
+WIKI = Path(__file__).resolve().parent / "wiki.json"
+SI = re.compile(r"<!-- si:(\w+) -->(.*?)<!-- /si:\1 -->", re.S)
+
+
+def charger_wiki(chemin: Path = WIKI) -> list[dict]:
+    if not chemin.is_file():
+        return []
+    donnees = json.loads(chemin.read_text(encoding="utf-8"))
+    if donnees.get("format") != 1:
+        raise SystemExit("_outils/wiki.json : format inconnu ; regénérer avec tools/wiki_serveur.py du studio")
+    return donnees["pages"]
 
 # Invitation Discord publique : l'adresse officielle d'une invitation, rien d'autre (pas de repère laissé en place,
 # pas d'adresse approchante).
@@ -112,8 +129,10 @@ def ligne_vote_publiee(racine: Path = RACINE) -> bool:
 
 
 class Contexte:
-    def __init__(self, etat: dict, legales_presentes: set[str], ligne_vote: bool = False):
+    def __init__(self, etat: dict, legales_presentes: set[str], ligne_vote: bool = False,
+                 wiki: list[dict] | None = None):
         self.etat = etat
+        self.wiki = wiki or []
         self.presentes = legales_presentes
         s = etat["serveur"]
         self.adresse = s["adresse"]
@@ -162,7 +181,7 @@ class Contexte:
 
 def entete(c: Contexte, lang: str, courant: str | None, autre: str) -> str:
     items = [("accueil", t(lang, "Home", "Accueil")), ("rejoindre", t(lang, "How to join", "Rejoindre")),
-             ("faq", "FAQ"), ("liens", t(lang, "Links", "Liens"))]
+             ("faq", "FAQ")] + ([("wiki", "Wiki")] if c.wiki else []) + [("liens", t(lang, "Links", "Liens"))]
     lis = []
     for cle, libelle in items:
         cur = ' aria-current="page"' if cle == courant else ""
@@ -845,7 +864,7 @@ def gabarit_legal(c: Contexte) -> str:
     """_layouts/legal.html : mêmes en-tête, style et pied que les pages construites ; Jekyll y verse le Markdown."""
     def nav(lang: str) -> str:
         items = [("accueil", t(lang, "Home", "Accueil")), ("rejoindre", t(lang, "How to join", "Rejoindre")),
-                 ("faq", "FAQ"), ("liens", t(lang, "Links", "Liens"))]
+                 ("faq", "FAQ")] + ([("wiki", "Wiki")] if c.wiki else []) + [("liens", t(lang, "Links", "Liens"))]
         lis = "".join(f'<li><a href="{c.page(k, lang)}">{v}</a></li>' for k, v in items)
         return f"""<a class="saut" href="#contenu">{t(lang, "Skip to content", "Aller au contenu")}</a>
 <header class="entete">
@@ -885,6 +904,17 @@ def gabarit_legal(c: Contexte) -> str:
 """
 
 
+def pages_wiki(c: Contexte) -> list[dict]:
+    """Pages du wiki affichables ce jour-là : les passages et pages marqués « si » suivent les interrupteurs jeu.*."""
+    pages = []
+    for p in c.wiki:
+        if p.get("si") and not c.jeu.get(p["si"]):
+            continue
+        corps = SI.sub(lambda m: m.group(2) if c.jeu.get(m.group(1)) else "", p["corps"])
+        pages.append({**p, "corps": corps})
+    return pages
+
+
 def plan_du_site(chemins: list[str]) -> str:
     urls = "\n".join(f"  <url><loc>{SITE}{p}</loc></url>" for p in sorted(chemins))
     return f"""<?xml version="1.0" encoding="UTF-8"?>
@@ -916,6 +946,10 @@ def construire(c: Contexte) -> dict[str, str]:
             chemin = c.page("idees", lang)
             sorties[chemin.lstrip("/") + "index.html"] = idees(c, lang)
             publiques.append(chemin)
+    for p in pages_wiki(c):
+        sorties[p["chemin"].lstrip("/") + "index.html"] = document(
+            c, p["lang"], p["chemin"], p["autre"], "wiki", p["titre"], p["description"], p["corps"])
+        publiques.append(p["chemin"])
     sorties["store/index.html"] = renvoi(
         c, "/store/", c.boutique_url if c.boutique else None, "AstroSky — Store",
         "The AstroSky store isn’t open yet. When it opens, this address will lead to it.",
@@ -1224,7 +1258,21 @@ def main(argv: list[str] | None = None) -> int:
             for err in verifier(construire(c), c):
                 if err not in erreurs:
                     erreurs.append(err)
-    c = Contexte(etat, presentes, ligne_vote=ligne_vote_publiee())
+    # Le wiki ne dépend que de jeu.metiers et des pages légales (pied) : vérifié pour ces deux variantes seulement,
+    # pour garder la vérification des combinaisons rapide.
+    wiki = charger_wiki()
+    if wiki:
+        for metiers in (False, True):
+            variante = json.loads(json.dumps(etat, default=str))
+            variante["jeu"]["metiers"] = metiers
+            for n, original in zip(variante.get("nouvelles", []), etat.get("nouvelles", [])):
+                n["date"] = original["date"]
+            nombre += 1
+            cw = Contexte(variante, presentes, ligne_vote=ligne_vote_publiee(), wiki=wiki)
+            for err in verifier(construire(cw), cw):
+                if err not in erreurs:
+                    erreurs.append(err)
+    c = Contexte(etat, presentes, ligne_vote=ligne_vote_publiee(), wiki=wiki)
     sorties = construire(c)
     for err in verifier(sorties, c):
         if err not in erreurs:

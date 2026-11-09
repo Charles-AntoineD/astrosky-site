@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>AstroSky — Wiki</title>
+<meta name="description" content="AstroSky wiki: OneBlock phases with the chance of every block, mob and chest, and job rewards by level, computed from the server files.">
+<link rel="canonical" href="https://astrosky.gg/wiki/">
+
+<link rel="alternate" hreflang="en" href="https://astrosky.gg/wiki/">
+<link rel="alternate" hreflang="fr" href="https://astrosky.gg/fr/wiki/">
+<link rel="alternate" hreflang="x-default" href="https://astrosky.gg/wiki/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AstroSky">
+<meta property="og:title" content="AstroSky — Wiki">
+<meta property="og:description" content="AstroSky wiki: OneBlock phases with the chance of every block, mob and chest, and job rewards by level, computed from the server files.">
+<meta property="og:url" content="https://astrosky.gg/wiki/">
+<meta property="og:locale" content="en_US">
+<meta name="theme-color" content="#0A0F1F">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/jost-400.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<a class="saut" href="#contenu">Skip to content</a>
+<header class="entete">
+<div class="conteneur">
+<a class="marque" href="/"><img src="/assets/img/logotype.svg" width="180" height="58" alt="AstroSky"></a>
+<nav class="menu" aria-label="Main"><ul><li><a href="/">Home</a></li><li><a href="/join/">How to join</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/wiki/" aria-current="page">Wiki</a></li><li><a href="/links/">Links</a></li><li class="langue"><a href="/fr/wiki/" lang="fr" hreflang="fr">Français</a></li></ul></nav>
+</div>
+</header>
+<main id="contenu">
+<section class="page wiki"><div class="conteneur">
+<h1>AstroSky wiki</h1>
+<p class="chapeau">Every number here is computed from the files the server loads: the phases of the magic block and the chance of each block, animal, monster and chest.</p>
+<p class="tampon">Computed from the server files: Minecraft: Java Edition 26.2, AOneBlock 1.28.0, AuraSkills 2.4.0 · data fingerprint <code>abcef935db14</code></p>
+<h2 id="bloc-magique">How the magic block works</h2>
+<ul>
+<li>Each time you break the magic block, the server draws what comes next from one pool: blocks, animals and monsters together. The percentages below are the chance per break.</li>
+<li>When an animal or a monster comes out, the block stays where it is and the mob appears on top of it. That break does not count toward your block total.</li>
+<li>When a chest comes out, a second draw picks its rarity: Common 62%, Uncommon 25%, Rare 9%, Epic 4%. If the phase has no chest of that rarity, you get a Common one.</li>
+<li>A phase lasts a set number of blocks. Some blocks are placed on purpose at the start of a phase; the phase pages list them.</li>
+</ul>
+<h2 id="phases">The phases</h2>
+<table>
+<thead><tr><th class="n">#</th><th>Phase</th><th class="n">Blocks</th><th>Biome</th><th class="n">Mob per break</th><th class="n">Chest per break</th></tr></thead>
+<tbody>
+<tr><td class="n">1</td><td><a href="/wiki/phases/plains/">Plains</a></td><td class="n">0–699</td><td>Plains</td><td class="n">5.49%</td><td class="n">1.65%</td></tr>
+<tr><td class="n">2</td><td><a href="/wiki/phases/underground/">Underground</a></td><td class="n">700–1,999</td><td>Taiga</td><td class="n">11.7%</td><td class="n">1.88%</td></tr>
+<tr><td class="n">3</td><td><a href="/wiki/phases/winter/">Winter</a></td><td class="n">2,000–2,999</td><td>Snowy Taiga</td><td class="n">13.8%</td><td class="n">2.69%</td></tr>
+<tr><td class="n">4</td><td><a href="/wiki/phases/ocean/">Ocean</a></td><td class="n">3,000–3,999</td><td>Ocean</td><td class="n">15.6%</td><td class="n">3.02%</td></tr>
+<tr><td class="n">5</td><td><a href="/wiki/phases/jungle/">Jungle</a></td><td class="n">4,000–4,999</td><td>Jungle</td><td class="n">13.4%</td><td class="n">3.04%</td></tr>
+<tr><td class="n">6</td><td><a href="/wiki/phases/swamp/">Swamp</a></td><td class="n">5,000–5,999</td><td>Swamp</td><td class="n">38.4%</td><td class="n">4.07%</td></tr>
+<tr><td class="n">7</td><td><a href="/wiki/phases/dungeon/">Dungeon</a></td><td class="n">6,000–6,999</td><td>Dark Forest</td><td class="n">30.9%</td><td class="n">2.94%</td></tr>
+<tr><td class="n">8</td><td><a href="/wiki/phases/desert/">Desert</a></td><td class="n">7,000–7,499</td><td>Desert</td><td class="n">12.9%</td><td class="n">4.31%</td></tr>
+<tr><td class="n">9</td><td><a href="/wiki/phases/the-nether/">The Nether</a></td><td class="n">7,500–8,499</td><td>Nether Wastes</td><td class="n">24.8%</td><td class="n">2.20%</td></tr>
+<tr><td class="n">10</td><td><a href="/wiki/phases/plenty/">Plenty</a></td><td class="n">8,500–9,499</td><td>Plains</td><td class="n">23.7%</td><td class="n">3.39%</td></tr>
+<tr><td class="n">11</td><td><a href="/wiki/phases/desolation/">Desolation</a></td><td class="n">9,500–10,499</td><td>Badlands</td><td class="n">39.2%</td><td class="n">1.61%</td></tr>
+<tr><td class="n">12</td><td><a href="/wiki/phases/deep-dark/">Deep Dark</a></td><td class="n">10,500–11,499</td><td>Deep Dark</td><td class="n">0.030%</td><td class="n">3.32%</td></tr>
+<tr><td class="n">13</td><td><a href="/wiki/phases/the-end/">The End</a></td><td class="n">11,500–11,999</td><td>The End</td><td class="n">20.1%</td><td class="n">6.94%</td></tr>
+<tr><td class="n">14</td><td><a href="/wiki/phases/lush-caves/">Lush Caves</a></td><td class="n">12,000–12,499</td><td>Lush Caves</td><td class="n">20.9%</td><td class="n">2.68%</td></tr>
+<tr><td class="n">15</td><td><a href="/wiki/phases/dripstone-caves/">Dripstone Caves</a></td><td class="n">12,500–12,999</td><td>Dripstone Caves</td><td class="n">23.0%</td><td class="n">2.67%</td></tr>
+<tr><td class="n">16</td><td><a href="/wiki/phases/mangrove-swamp/">Mangrove Swamp</a></td><td class="n">13,000–13,499</td><td>Mangrove Swamp</td><td class="n">29.5%</td><td class="n">2.30%</td></tr>
+<tr><td class="n">17</td><td><a href="/wiki/phases/meadow/">Meadow</a></td><td class="n">13,500–13,999</td><td>Meadow</td><td class="n">21.7%</td><td class="n">1.63%</td></tr>
+<tr><td class="n">18</td><td><a href="/wiki/phases/cherry-grove/">Cherry Grove</a></td><td class="n">14,000–14,499</td><td>Cherry Grove</td><td class="n">41.9%</td><td class="n">3.69%</td></tr>
+<tr><td class="n">19</td><td><a href="/wiki/phases/jagged-peaks/">Jagged Peaks</a></td><td class="n">14,500–14,999</td><td>Jagged Peaks</td><td class="n">21.8%</td><td class="n">2.31%</td></tr>
+<tr><td class="n">20</td><td><a href="/wiki/phases/sulfur-caves/">Sulfur Caves</a></td><td class="n">15,000–15,499</td><td>Sulfur Caves</td><td class="n">15.6%</td><td class="n">1.92%</td></tr>
+</tbody>
+</table>
+<p>After Sulfur Caves (block 15,500), the magic block starts again at Plains. Your lifetime count keeps going.</p>
+<ul><li>Dappled Forest needs Minecraft 26.3: it is not on AstroSky (the server runs 26.2).</li></ul>
+
+<h2 id="autres">Also on this site</h2>
+<ul>
+<li><a href="/join/">How to join</a></li>
+<li><a href="/faq/">FAQ</a></li>
+</ul>
+</div></section>
+</main>
+<footer class="pied">
+<div class="conteneur">
+<p class="mention" lang="en">NOT AN OFFICIAL MINECRAFT SERVICE. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.<br>
+AstroSky is run by an independent operator, not by Mojang or Microsoft. Who we are and how to reach us: <a href="/contact/">astrosky.gg/contact</a> · <a href="/rules/">Rules</a> · <a href="/privacy/">Privacy</a> · <a href="/not-affiliated/">Not affiliated</a> · <a href="/links/">Official links</a></p>
+<p class="mention" lang="fr">Ceci n'est pas un service officiel Minecraft. Non approuvé par Mojang ou Microsoft, ni associé à eux.<br>
+AstroSky est exploité par un exploitant indépendant, et non par Mojang ni Microsoft. Qui nous sommes et comment nous joindre : <a href="/fr/contact/">astrosky.gg/fr/contact</a> · <a href="/fr/regles/">Règles</a> · <a href="/fr/confidentialite/">Confidentialité</a> · <a href="/fr/non-affiliation/">Non-affiliation</a> · <a href="/fr/liens/">Liens officiels</a></p>
+<p><span lang="en">This site sets no cookies and uses no analytics.</span> · <span lang="fr">Ce site ne dépose aucun témoin et n'utilise aucune analytique.</span></p>
+<p class="credit"><span lang="en">The Heart Nebula (IC 1805) in our visuals was photographed by AstroSky’s founder.</span> · <span lang="fr">La nébuleuse du Cœur (IC 1805) de nos visuels a été photographiée par le fondateur d’AstroSky.</span></p>
+</div>
+</footer>
+</body>
+</html>
