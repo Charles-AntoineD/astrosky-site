@@ -581,8 +581,6 @@ def questions(c: Contexte, lang: str) -> list[tuple[str, str]]:
     amis += (t(lang, "; your team shares ", " ; ton équipe partage ") + t(lang, " and ", " et ").join(partage) + "."
              if partage else ".")
     q.append((t(lang, "Can I play with friends?", "Puis-je jouer avec mes amis ?"), amis))
-    q.append((t(lang, "Can you buy an advantage?", "Peut-on acheter un avantage ?"),
-              t(lang, "No. ", "Non. ") + boutique_phrase(c, lang)))
     if c.vote:
         q.append((t(lang, "How do I vote for AstroSky?", "Comment voter pour AstroSky ?"),
                   t(lang, f'Voting is optional: <a href="{c.page("vote", lang)}">the vote page</a> lists the three sites and how vote points work.',

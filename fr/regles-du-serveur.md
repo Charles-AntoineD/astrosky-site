@@ -20,7 +20,7 @@ permalink: /fr/regles/
 - Chaque sanction est décidée par une personne. Vous avez 14 jours pour faire appel.
 - Aucun bannissement n'est permanent : un bannissement dure 12 mois au plus, et n'est renouvelé que par une nouvelle
   décision fondée sur un risque actuel.
-- AstroSky est exploité par Charles-Antoine Daneau, et non par Mojang ni Microsoft.
+- AstroSky est exploité par Chuck, et non par Mojang ni Microsoft.
 
 ## 1. Qui peut jouer
 
@@ -30,7 +30,7 @@ permalink: /fr/regles/
   celui de quelqu'un d'autre.
 - Vous devez respecter le [contrat de licence de Minecraft (CLUF)](https://www.minecraft.net/fr-ca/eula) et ces
   règles.
-- AstroSky est exploité par Charles-Antoine Daneau, qui est responsable du serveur. Mojang et Microsoft ne le sont pas.
+- AstroSky est exploité par Chuck, qui est responsable du serveur. Mojang et Microsoft ne le sont pas.
 - En rejoignant le serveur ou en achetant dans la boutique, vous vous engagez à respecter ces règles. Notre
   [politique de confidentialité](/fr/confidentialite/) explique ce que nous enregistrons et pourquoi.
 
@@ -245,7 +245,7 @@ Nous n'envoyons jamais les données du joueur au parent ou au tuteur et ne deman
 
 ## 9. Contact
 
-Charles-Antoine Daneau, Québec, Canada — `support@astrosky.gg`. Nous répondons en français ou en anglais. Ces règles existent en
+Chuck, Québec, Canada — `support@astrosky.gg`. Nous répondons en français ou en anglais. Ces règles existent en
 anglais et en français ; les deux versions disent la même chose et, si elles devaient différer, la plus favorable pour
 vous s'applique.
 

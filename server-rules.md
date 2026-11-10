@@ -20,7 +20,7 @@ permalink: /rules/
 - Every sanction is decided by a person. You can appeal within 14 days.
 - There are no permanent bans: a ban lasts 12 months at most, and is renewed only by a new decision based on a
   current risk.
-- AstroSky is run by Charles-Antoine Daneau, not by Mojang or Microsoft.
+- AstroSky is run by Chuck, not by Mojang or Microsoft.
 
 ## 1. Who can play
 
@@ -28,7 +28,7 @@ permalink: /rules/
   join (see section 8).
 - You need your own genuine Minecraft Java Edition account. Do not share your account or use someone else's.
 - You must follow the [Minecraft End User License Agreement](https://www.minecraft.net/en-us/eula) and these rules.
-- AstroSky is operated by Charles-Antoine Daneau, who is responsible for the server. Mojang and Microsoft are not.
+- AstroSky is operated by Chuck, who is responsible for the server. Mojang and Microsoft are not.
 - By joining the server or buying in the store, you agree to follow these rules. Our
   [Privacy Policy](/privacy/) explains what we record and why.
 
@@ -229,7 +229,7 @@ data is deleted. We never send the parent or guardian the player's data and neve
 
 ## 9. Contact
 
-Charles-Antoine Daneau, Québec, Canada — `support@astrosky.gg`. We answer in English or French. These rules exist in English and
+Chuck, Québec, Canada — `support@astrosky.gg`. We answer in English or French. These rules exist in English and
 in French; both versions say the same thing, and if they ever differ, the one more favourable to you applies.
 
 NOT AN OFFICIAL MINECRAFT SERVICE. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.

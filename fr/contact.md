@@ -10,7 +10,7 @@ permalink: /fr/contact/
 
 ## Qui exploite AstroSky
 
-AstroSky est exploité par **Charles-Antoine Daneau**, Québec, Canada. C'est nous, et non Mojang ni Microsoft, qui sommes
+AstroSky est exploité par **Chuck**, Québec, Canada. C'est nous, et non Mojang ni Microsoft, qui sommes
 responsables du serveur, de sa boutique et de son site. Les achats sont vendus par Tebex Limited, qui s'occupe des
 paiements (nos conditions de la boutique sont publiées à son ouverture).
 
