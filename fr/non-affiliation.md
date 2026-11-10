@@ -10,7 +10,7 @@ permalink: /fr/non-affiliation/
 
 **Ceci n'est pas un service officiel Minecraft. Non approuvé par Mojang ou Microsoft, ni associé à eux.**
 
-AstroSky est un serveur Minecraft indépendant exploité par Charles-Antoine Daneau, Québec, Canada. C'est nous, et non
+AstroSky est un serveur Minecraft indépendant exploité par Chuck, Québec, Canada. C'est nous, et non
 Mojang ni Microsoft, qui sommes responsables du serveur, de sa boutique, de son site et des renseignements personnels
 qu'ils traitent. Les achats de la boutique sont vendus par Tebex Limited, revendeur et vendeur en titre (« merchant of record »).
 

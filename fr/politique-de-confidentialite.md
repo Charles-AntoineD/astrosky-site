@@ -15,7 +15,7 @@ Cette politique couvre le serveur Minecraft AstroSky (`astrosky.gg`), sa boutiqu
 
 ## En bref
 
-- AstroSky est un serveur Minecraft pour adultes, 18 ans et plus. Il est exploité par Charles-Antoine Daneau au Québec
+- AstroSky est un serveur Minecraft pour adultes, 18 ans et plus. Il est exploité par Chuck au Québec
   (Canada), et non par Mojang ni Microsoft. C'est nous qui sommes responsables de protéger les renseignements
   personnels que traite le serveur.
 - Pour protéger les joueurs, le serveur enregistre ce qui s'y passe : le chat public, les messages privés, les
@@ -39,7 +39,7 @@ Cette politique couvre le serveur Minecraft AstroSky (`astrosky.gg`), sa boutiqu
 
 ## 1. Qui nous sommes
 
-AstroSky est exploité par Charles-Antoine Daneau (« nous »), au Québec, Canada. C'est nous, et non Mojang ni Microsoft, qui
+AstroSky est exploité par Chuck (« nous »), au Québec, Canada. C'est nous, et non Mojang ni Microsoft, qui
 sommes responsables d'AstroSky et des renseignements personnels que traitent le serveur, le site et notre boîte de
 courriel. Tebex est responsable des renseignements que vous lui donnez quand vous payez (section 8).
 
@@ -287,7 +287,7 @@ différer, la plus favorable pour vous s'applique.
 
 ## 17. Contact
 
-Charles-Antoine Daneau, Québec, Canada — `support@astrosky.gg` (objet : « Confidentialité »).
+Chuck, Québec, Canada — `support@astrosky.gg` (objet : « Confidentialité »).
 
 NOT AN OFFICIAL MINECRAFT SERVICE. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.
 
