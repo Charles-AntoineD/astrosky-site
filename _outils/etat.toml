@@ -58,6 +58,13 @@ invitation = "https://discord.gg/v59zjh6hJr"
 # qui n'est pas un nom de salon, et n'écrit rien en cas d'erreur).
 salon_idees = "#💡suggestions-idées"
 
+[explorateur]
+# Code Explorer affiché sur l'accueil, EN et FR (spec 051, Q6 : « Code sur l'accueil »). Le défi « Mission Control » du
+# jeu dit d'ouvrir /website, de trouver le code sur la page d'accueil d'astrosky.gg, puis de taper /website <code>. Même
+# valeur que "website_code" dans progression.json du dépôt du studio. Vide : aucune ligne. À remplir seulement quand la
+# mise à jour 051 est en ligne sur le serveur public (la ligne dit de taper /website).
+code = "LIFTOFF"
+
 [vote]
 # true quand l'écouteur de votes est actif sur le serveur public, le test V3 passé sur le serveur public (aucune
 # adresse IP enregistrée), la ligne « vote » de la politique de confidentialité publiée, et chaque fiche ci-dessous en

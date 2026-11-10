@@ -55,5 +55,6 @@ Il ne touche pas non plus aux redirections des réseaux (`tiktok/`, `youtube/`, 
 | Nom du salon des suggestions connu (ouvre `/ideas` et `/fr/idees`) | `py _outils/construire.py --salon-idees #<salon>` (ou `discord.salon_idees` dans `etat.toml`) |
 | Votifier actif, ligne « vote » de la confidentialité publiée, fiches en ligne | les trois `vote.sites.adresse`, puis `vote.ouvert = true` |
 | `/report` livré sous ce nom | `jeu.commande_report = true` |
+| Mise à jour 051 en ligne (défi « Mission Control » : code Explorer à chercher sur l'accueil) | `explorateur.code` (vide : aucune ligne) ; le code n'apparaît que sur l'accueil, EN et FR, avec la commande `/website <code>`, sans promesse de récompense |
 | Premier ping du serveur public | `serveur.versions` |
 | Nouvelle à annoncer | un bloc `[[nouvelles]]` en tête de liste |

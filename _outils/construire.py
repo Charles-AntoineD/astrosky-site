@@ -147,6 +147,8 @@ class Contexte:
         self.votes = etat["vote"]["sites"]
         self.comptes = etat["comptes"]
         self.nouvelles = etat.get("nouvelles", [])
+        # Code Explorer affiché sur l'accueil (spec 051) : vide, aucune ligne.
+        self.code_explorateur = str(etat.get("explorateur", {}).get("code", "")).strip()
 
     def legale(self, cle: str, lang: str) -> str | None:
         chemin = LEGALES[cle][0 if lang == "en" else 1]
@@ -406,6 +408,17 @@ def accueil(c: Contexte, lang: str) -> str:
         pack_html = t(lang, f' Optional: <a href="{pack}">the resource packs we recommend</a> polish the night sky.',
                       f' Facultatif : <a href="{pack}">les packs de ressources qu’on conseille</a> soignent le ciel de nuit.')
 
+    # Le défi « Mission Control » du jeu renvoie les joueurs chercher ce code ici, puis taper /website <code>.
+    explorateur = ""
+    if c.code_explorateur:
+        code = e(c.code_explorateur)
+        explorateur = "\n" + t(
+            lang,
+            f'<div class="avis"><p><strong>Explorer code:</strong> <code>{code}</code>. In game, type '
+            f'<code>/website {code}</code>.</p></div>',
+            f'<div class="avis"><p><strong>Code Explorer :</strong> <code>{code}</code>. En jeu, tape '
+            f'<code>/website {code}</code>.</p></div>')
+
     corps = f"""<section class="heros">
 <div class="conteneur">
 <p class="descripteur">{t(lang, "AstroSky — a Minecraft SkyBlock server", "AstroSky — un serveur SkyBlock Minecraft")}</p>
@@ -413,7 +426,7 @@ def accueil(c: Contexte, lang: str) -> str:
 <p class="chapeau">{t(lang, "Grow an island from a single block with your friends, trade with other players, and climb the island ranking.", "Fais grandir une île à partir d’un seul bloc avec tes amis, échange avec les autres joueurs et grimpe au classement des îles.") if j["classement_iles"] else t(lang, "Grow an island from a single block with your friends and trade with other players.", "Fais grandir une île à partir d’un seul bloc avec tes amis et échange avec les autres joueurs.")}</p>
 {carte_adresse(c, lang, "copie-haut")}
 <p class="statut">{statut(c, lang)}</p>
-<div class="actions"><a class="bouton" href="{rejoindre}">{t(lang, "How to join", "Comment rejoindre")}</a>{second}</div>
+<div class="actions"><a class="bouton" href="{rejoindre}">{t(lang, "How to join", "Comment rejoindre")}</a>{second}</div>{explorateur}
 </div>
 </section>
 
@@ -983,7 +996,38 @@ def verifier(sorties: dict[str, str], c: Contexte) -> list[str]:
                 erreurs.append(f"{nom} : lien interne cassé {chemin}")
         if not nom.startswith("_layouts/") and "NOT AN OFFICIAL MINECRAFT SERVICE" not in page:
             erreurs.append(f"{nom} : mention de non-affiliation absente")
-    return erreurs + verifier_discord(sorties, c) + verifier_idees(sorties, c)
+    return erreurs + verifier_discord(sorties, c) + verifier_idees(sorties, c) + verifier_explorateur(sorties, c)
+
+
+# Le code Explorer ne promet rien : ni coins, ni récompense, ni gain (le jeu dit ce que l'étape donne).
+RECOMPENSE = re.compile(r"(?i)\b(rewards?|prizes?|win|free|coins?|xp|récompenses?|prix|gagn\w*|gratuit\w*|pièces?)\b")
+
+
+def verifier_explorateur(sorties: dict[str, str], c: Contexte) -> list[str]:
+    """Code Explorer (spec 051) : une ligne sur l'accueil, EN et FR, avec la commande, et nulle part ailleurs ; sans
+    code renseigné, ni code ni /website sur le site."""
+    code = c.code_explorateur
+    erreurs = []
+    accueils = {"index.html": ("Explorer code", "In game, type"), "fr/index.html": ("Code Explorer", "En jeu, tape")}
+    if code and not re.fullmatch(r"[A-Z0-9]{4,12}", code):
+        erreurs.append(f"explorateur.code invalide : {code!r} (4 à 12 majuscules ou chiffres)")
+    for nom, page in sorties.items():
+        if not nom.endswith(".html") or nom.startswith("_layouts/"):
+            continue
+        if nom in accueils and code:
+            libelle, phrase = accueils[nom]
+            bloc = re.search(r'<div class="avis"><p><strong>' + libelle + r'[^<]*</strong>.*?</p></div>', page, re.S)
+            if page.count(f"<code>{code}</code>") != 1 or page.count(f"<code>/website {code}</code>") != 1 or not bloc:
+                erreurs.append(f"{nom} : la ligne du code Explorer doit apparaître une fois, avec la commande")
+            elif phrase not in bloc.group(0):
+                erreurs.append(f"{nom} : phrase « {phrase} » absente de la ligne du code Explorer")
+            elif RECOMPENSE.search(html.unescape(re.sub(r"<[^>]+>", " ", bloc.group(0)))):
+                erreurs.append(f"{nom} : promesse de récompense dans la ligne du code Explorer")
+        elif code and re.search(rf"\b{re.escape(code)}\b", page):
+            erreurs.append(f"{nom} : le code Explorer ne doit figurer que sur l'accueil")
+        elif not code and re.search(r"Explorer code|Code Explorer|/website", page):
+            erreurs.append(f"{nom} : code Explorer ou /website alors qu'aucun code n'est renseigné")
+    return erreurs
 
 
 ACHAT = re.compile(r"(?i)\b(store|shop|buy|purchase|prices?|ranks?|donations?|cosmetics?|boutique|achat|acheter|prix|"
@@ -1100,6 +1144,8 @@ def combinaisons(etat: dict):
         variante["serveur"]["taille_equipe"] = 4 if valeurs[3] else 0
         variante["serveur"]["ouverture_en"] = "Friday, November 6, 2026, at 6 p.m. Eastern Time (Québec time)" if valeurs[4] else ""
         variante["serveur"]["ouverture_fr"] = "le vendredi 6 novembre 2026, à 18 h, heure du Québec" if valeurs[4] else ""
+        # Le code Explorer suit le bit de /report : il est vu avec et sans chacun des autres interrupteurs.
+        variante["explorateur"] = {"code": "LIFTOFF" if valeurs[10] else ""}
         # Le salon des suggestions : avec l'invitation, la page des idées existe ou non selon le salon ; sans
         # invitation, un salon renseigné ne doit rien construire.
         if variante["discord"]["invitation"]:
