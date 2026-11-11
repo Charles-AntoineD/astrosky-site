@@ -2,6 +2,7 @@
 
     py _outils/construire.py              construit les pages, puis les vérifie
     py _outils/construire.py --verifier   vérifie seulement (toutes les combinaisons d'interrupteurs)
+    py _outils/test_verifications.py      essais des vérifications de la charte (exception 18+, attributs lus)
 
 Bibliothèque standard seulement (Python 3.11 ou plus récent). Règle du site : une phrase ne s'affiche que le jour où
 elle est vraie ; chaque phrase conditionnelle dépend d'un interrupteur de etat.toml ou de la présence d'une page
@@ -1027,24 +1028,44 @@ def ressources_externes(page: str) -> list[str]:
     return trouvees
 
 
+# Attributs lus par les visiteurs, les lecteurs d'écran ou les aperçus de liens : contrôlés comme le texte visible.
+ATTRIBUTS_LUS = re.compile(r'\b(?:alt|title|aria-label|content|placeholder)="([^"]*)"')
+BANDE_CHIFFRES = re.compile(r'<div class="chiffres">.*?</ul></div>\s*</div>', flags=re.S)
+
+
+def texte_controle(page: str) -> str:
+    """Texte visible de la page, plus les attributs lus (alt, title, aria-label, content des meta, placeholder)."""
+    attributs = " ".join(m.group(1) for m in ATTRIBUTS_LUS.finditer(page))
+    return html.unescape(re.sub(r"<[^>]+>", " ", page) + " " + attributs)
+
+
+def interdits(nom: str, page: str) -> list[str]:
+    """Formulations interdites par la charte dans une page générée."""
+    erreurs = []
+    for motif, raison in INTERDITS:
+        if nom.startswith("_layouts/") and raison == "balise de gabarit non résolue":
+            continue
+        if raison == "balise de gabarit non résolue":
+            texte = page
+        elif motif == r"18\+" and nom in ("index.html", "fr/index.html"):
+            # Exception : décision de l'Owner du 2026-11-11 (18-A, écart à la charte approuvé). « 18+ » /
+            # « adultes seulement » est permis dans la seule bande de chiffres de l'accueil, une seule fois par page ;
+            # « 18 and over » reste la règle partout ailleurs, y compris dans le reste de ces deux pages.
+            texte = texte_controle(BANDE_CHIFFRES.sub(" ", page, count=1))
+        else:
+            texte = texte_controle(page)
+        m = re.search(motif, texte)
+        if m:
+            erreurs.append(f"{nom} : {raison} ({m.group(0)!r})")
+    return erreurs
+
+
 def verifier(sorties: dict[str, str], c: Contexte) -> list[str]:
     erreurs = []
     for nom, page in sorties.items():
         if not nom.endswith(".html"):
             continue
-        for motif, raison in INTERDITS:
-            if nom.startswith("_layouts/") and raison == "balise de gabarit non résolue":
-                continue
-            texte = page
-            if motif == r"18\+" and nom in ("index.html", "fr/index.html"):
-                # Exception : décision de l'Owner du 2026-11-11 (18-A, écart à la charte approuvé). « 18+ » /
-                # « adultes seulement » est permis dans la seule bande de chiffres de l'accueil ; « 18 and over »
-                # reste la règle partout ailleurs, y compris dans le reste de ces deux pages.
-                texte = re.sub(r'<div class="chiffres">.*?</ul></div>\s*</div>', " ", page, flags=re.S)
-            visible = html.unescape(re.sub(r"<[^>]+>", " ", texte))
-            m = re.search(motif, visible if raison != "balise de gabarit non résolue" else page)
-            if m:
-                erreurs.append(f"{nom} : {raison} ({m.group(0)!r})")
+        erreurs += interdits(nom, page)
         for url in ressources_externes(page):
             erreurs.append(f"{nom} : ressource externe {url}")
         if "\r" in page:
