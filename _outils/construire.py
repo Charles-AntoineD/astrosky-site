@@ -2,6 +2,7 @@
 
     py _outils/construire.py              construit les pages, puis les vérifie
     py _outils/construire.py --verifier   vérifie seulement (toutes les combinaisons d'interrupteurs)
+    py _outils/test_verifications.py      essais des vérifications de la charte (exception 18+, attributs lus)
 
 Bibliothèque standard seulement (Python 3.11 ou plus récent). Règle du site : une phrase ne s'affiche que le jour où
 elle est vraie ; chaque phrase conditionnelle dépend d'un interrupteur de etat.toml ou de la présence d'une page
@@ -149,6 +150,8 @@ class Contexte:
         self.nouvelles = etat.get("nouvelles", [])
         # Code Explorer affiché sur l'accueil (spec 051) : vide, aucune ligne.
         self.code_explorateur = str(etat.get("explorateur", {}).get("code", "")).strip()
+        # Nombre de phases du bloc magique (bande de chiffres de l'accueil) ; 0 = pas de chiffre.
+        self.phases = int(self.jeu.get("phases", 0))
 
     def legale(self, cle: str, lang: str) -> str | None:
         chemin = LEGALES[cle][0 if lang == "en" else 1]
@@ -156,6 +159,13 @@ class Contexte:
 
     def page(self, cle: str, lang: str) -> str:
         return CHEMINS[cle][0 if lang == "en" else 1]
+
+
+# Bouton « Menu » du téléphone (assets/menu.js) : caché sans script, le menu reste alors affiché en entier.
+BOUTON_MENU = ('<button type="button" class="menu-bouton" hidden aria-expanded="false" aria-controls="menu-principal" '
+               'aria-label="Menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+               'stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false">'
+               '<path d="M4 7h16M4 12h16M4 17h16"/></svg></button>')
 
 
 # Gabarit commun ──────────────────────────────────────────────────────────────────────────
@@ -174,7 +184,8 @@ def entete(c: Contexte, lang: str, courant: str | None, autre: str) -> str:
 <header class="entete">
 <div class="conteneur">
 <a class="marque" href="{c.page("accueil", lang)}"><img src="/assets/img/logotype.svg" width="180" height="58" alt="AstroSky"></a>
-<nav class="menu" aria-label="{t(lang, "Main", "Principal")}"><ul>{"".join(lis)}</ul></nav>
+{BOUTON_MENU}
+<nav class="menu" id="menu-principal" aria-label="{t(lang, "Main", "Principal")}"><ul>{"".join(lis)}</ul></nav>
 </div>
 </header>"""
 
@@ -219,7 +230,7 @@ AstroSky est exploité par un exploitant indépendant, et non par Mojang ni Micr
 def document(c: Contexte, lang: str, chemin: str, autre: str, courant: str | None, titre: str, description: str,
              corps: str, image: str | None = None, donnees: dict | None = None,
              script: bool = False, refresh: str | None = None, image_alt: str | None = None,
-             noindex: bool = False, canonique: str | None = None) -> str:
+             noindex: bool = False, canonique: str | None = None, classe_corps: str = "") -> str:
     alternes = ""
     if autre:
         en_ch, fr_ch = (chemin, autre) if lang == "en" else (autre, chemin)
@@ -238,7 +249,9 @@ def document(c: Contexte, lang: str, chemin: str, autre: str, courant: str | Non
         ld = ('<script type="application/ld+json">' + json.dumps(donnees, ensure_ascii=False, separators=(",", ":"))
               .replace("</", "<\\/") + "</script>\n")
     rafraichir = f'<meta http-equiv="refresh" content="0; url={e(refresh)}">\n' if refresh else ""
-    js = '<script src="/assets/copier.js" defer></script>\n' if script else ""
+    js = '<script src="/assets/menu.js" defer></script>\n'
+    js += '<script src="/assets/copier.js" defer></script>\n' if script else ""
+    corps_ouvrant = f'<body class="{classe_corps}">' if classe_corps else "<body>"
     return f"""<!doctype html>
 <html lang="{lang}">
 <head>
@@ -263,7 +276,7 @@ def document(c: Contexte, lang: str, chemin: str, autre: str, courant: str | Non
 <link rel="preload" href="/assets/fonts/jost-400.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="/assets/site.css">
 {js}{ld}</head>
-<body>
+{corps_ouvrant}
 {entete(c, lang, courant, autre or chemin)}
 <main id="contenu">
 {corps}
@@ -351,17 +364,30 @@ def boutique_phrase(c: Contexte, lang: str) -> str:
     return phrase
 
 
+def chiffres_accueil(c: Contexte, lang: str) -> list[tuple[str, str]]:
+    """Bande de chiffres de l'accueil : textes approuvés par l'Owner mot pour mot (M5-A, 2026-11-11)."""
+    chiffres = [("1", t(lang, "magic block to start", "bloc magique pour commencer"))]
+    if c.phases > 0:
+        chiffres.append((str(c.phases), t(lang, "phases to unlock", "phases à débloquer")))
+    chiffres.append(("18+", t(lang, "adults only", "adultes seulement")))
+    return chiffres
+
+
 # Accueil ─────────────────────────────────────────────────────────────────────────────────
 
 def accueil(c: Contexte, lang: str) -> str:
     j = c.jeu
     rejoindre = c.page("rejoindre", lang)
+    # Un seul bouton or ; le second choix est un simple lien (maquette approuvée le 2026-11-11).
     if c.discord:
-        second = f'<a class="bouton secondaire" href="{c.page("discord", lang)}">{t(lang, "Join the Discord", "Rejoindre le Discord")}</a>'
+        second = f'<a class="lien-fort" href="{c.page("discord", lang)}">{t(lang, "Join the Discord", "Rejoindre le Discord")}</a>'
     else:
-        second = f'<a class="bouton secondaire" href="{c.page("faq", lang)}">FAQ</a>'
+        second = f'<a class="lien-fort" href="{c.page("faq", lang)}">FAQ</a>'
+    # Chaque carte : (image d'illustration, titre, texte). Les images n'ont pas de texte alternatif : elles
+    # illustrent le texte voisin, sans rien y ajouter (aucun texte public nouveau). Ce sont des rendus Chunky
+    # d'îles faites par code dans un monde local (jamais la production ni le spawn acheté), décision M2-B / M4-A.
     cartes = []
-    cartes.append((t(lang, "One block, then a whole island", "Un bloc, puis toute une île"),
+    cartes.append(("ile-bloc.jpg", t(lang, "One block, then a whole island", "Un bloc, puis toute une île"),
                    t(lang, "Start on a single magic block floating among the stars. Break it, and it comes back as "
                            "something new: wood, ores, animals, and new phases as you go. Invite friends to your "
                            f"island and build it together{equipe(c, lang)}.",
@@ -370,7 +396,7 @@ def accueil(c: Contexte, lang: str) -> str:
                      f"et bâtissez-la ensemble{equipe(c, lang)}.")))
     eco = economie(c, lang)
     if eco:
-        cartes.append((t(lang, "An economy run by players", "Une économie tenue par les joueurs"), eco))
+        cartes.append(("ile-marche.jpg", t(lang, "An economy run by players", "Une économie tenue par les joueurs"), eco))
     buts = []
     if j["defis"]:
         buts.append(t(lang, "Challenges guide your first hours, then give longer goals.",
@@ -379,15 +405,22 @@ def accueil(c: Contexte, lang: str) -> str:
         buts.append(t(lang, "The island level ranking measures what you build.",
                       "Le classement du niveau d’île mesure ce que tu construis."))
     if buts:
-        cartes.append((t(lang, "Goals for every session", "Un but à chaque séance"), " ".join(buts)))
+        cartes.append(("ile-grandie.jpg", t(lang, "Goals for every session", "Un but à chaque séance"), " ".join(buts)))
     if j["metiers"]:
-        cartes.append((t(lang, "Jobs", "Métiers"),
+        cartes.append(("ile-metiers.jpg", t(lang, "Jobs", "Métiers"),
                        t(lang, "Pick a job and earn coins for the work you already do on your island.",
                          "Choisis un métier et gagne des coins pour le travail que tu fais déjà sur ton île.")))
-    cartes.append((t(lang, "A store for looks only", "Une boutique pour le style seulement"), boutique_phrase(c, lang)))
-    grille = "\n".join(f'<div class="carte"><h3>{titre}</h3><p>{texte}</p></div>' for titre, texte in cartes)
+    cartes.append(("ile-vitrine.jpg", t(lang, "A store for looks only", "Une boutique pour le style seulement"),
+                   boutique_phrase(c, lang)))
+    atouts = "\n".join(
+        f'<article class="atout"><figure class="atout-image">'
+        f'<img src="/assets/img/{image}" alt="" width="1120" height="700" loading="lazy" decoding="async"></figure>'
+        f'<div><h3>{titre}</h3><p>{texte}</p></div></article>'
+        for image, titre, texte in cartes)
     prevu = a_venir(c, lang)
     prevu_html = f'<p class="intro">{prevu}</p>' if prevu else ""
+    chiffres = "".join(f'<li><span class="nombre">{e(nombre)}</span><span class="libelle">{libelle}</span></li>'
+                       for nombre, libelle in chiffres_accueil(c, lang))
 
     nouvelles = ""
     if c.nouvelles:
@@ -414,51 +447,70 @@ def accueil(c: Contexte, lang: str) -> str:
         code = e(c.code_explorateur)
         explorateur = "\n" + t(
             lang,
-            f'<div class="avis"><p><strong>Explorer code:</strong> <code>{code}</code>. In game, type '
-            f'<code>/website {code}</code>.</p></div>',
-            f'<div class="avis"><p><strong>Code Explorer :</strong> <code>{code}</code>. En jeu, tape '
-            f'<code>/website {code}</code>.</p></div>')
+            f'<div class="conteneur explorateur"><div class="avis"><p><strong>Explorer code:</strong> <code>{code}</code>. '
+            f'In game, type <code>/website {code}</code>.</p></div></div>',
+            f'<div class="conteneur explorateur"><div class="avis"><p><strong>Code Explorer :</strong> <code>{code}</code>. '
+            f'En jeu, tape <code>/website {code}</code>.</p></div></div>')
 
-    corps = f"""<section class="heros">
+    meta = "".join(f"<li>{m}</li>" for m in (
+        f'{t(lang, "Minecraft: Java Edition", "Minecraft: Java Edition")} {e(c.versions)}',
+        t(lang, "Java only, no Bedrock", "Java seulement, pas Bedrock"),
+        t(lang, "For players 18 and over", "Pour les 18 ans et plus")))
+    # Hero : la nébuleuse du Cœur (photo du fondateur), trois couches d'étoiles qui scintillent (arrêtées si le
+    # visiteur demande moins d'animations), tout centré (variante 3 de la maquette, choisie par l'Owner).
+    corps = f"""<section class="ciel" aria-labelledby="t-titre">
+<div class="ciel-photo" aria-hidden="true"></div>
+<div class="etoiles" aria-hidden="true"><span></span><span></span><span></span></div>
 <div class="conteneur">
-<p class="descripteur">{t(lang, "AstroSky — a Minecraft SkyBlock server", "AstroSky — un serveur SkyBlock Minecraft")}</p>
-<h1>{t(lang, "Co-op SkyBlock among the stars", "Le SkyBlock coopératif parmi les étoiles")}</h1>
+<p class="descripteur">{t(lang, "AstroSky — a Minecraft OneBlock server", "AstroSky — un serveur OneBlock Minecraft")}</p>
+<h1 id="t-titre">{t(lang, "OneBlock among the stars", "Le OneBlock parmi les étoiles")}</h1>
 <p class="chapeau">{t(lang, "Grow an island from a single block with your friends, trade with other players, and climb the island ranking.", "Fais grandir une île à partir d’un seul bloc avec tes amis, échange avec les autres joueurs et grimpe au classement des îles.") if j["classement_iles"] else t(lang, "Grow an island from a single block with your friends and trade with other players.", "Fais grandir une île à partir d’un seul bloc avec tes amis et échange avec les autres joueurs.")}</p>
-{carte_adresse(c, lang, "copie-haut")}
-<p class="statut">{statut(c, lang)}</p>
-<div class="actions"><a class="bouton" href="{rejoindre}">{t(lang, "How to join", "Comment rejoindre")}</a>{second}</div>{explorateur}
+<div class="adresse-bloc">
+<p class="etiquette">{t(lang, "Server address", "Adresse du serveur")}</p>
+<div class="adresse-ligne"><span class="adresse">{e(c.adresse)}</span>{bouton_copier(c, lang, "copie-haut")}</div>
 </div>
-</section>
+<div class="actions"><a class="bouton grand" href="{rejoindre}">{t(lang, "How to join", "Comment rejoindre")}</a>{second}</div>
+<ul class="pastilles">{meta}</ul>
+<p class="statut">{statut(c, lang)}</p>
+</div>
+</section>{explorateur}
 
-<section class="bloc" aria-labelledby="t-atouts">
+<div class="chiffres">
+<div class="conteneur"><ul>{chiffres}</ul></div>
+</div>
+
+<section class="atouts" aria-labelledby="t-atouts">
 <div class="conteneur">
 <h2 id="t-atouts">{t(lang, "What you do on AstroSky", "Ce qu’on fait sur AstroSky")}</h2>
-<div class="grille">
-{grille}
-</div>
 {prevu_html}
+<div class="atouts-liste">
+{atouts}
+</div>
 </div>
 </section>
 
 {nouvelles}
 
-<section class="bloc" aria-labelledby="t-appel">
+<section class="appel" aria-labelledby="t-appel">
 <div class="conteneur">
 <h2 id="t-appel">{t(lang, "See you among the stars", "On se voit parmi les étoiles")}</h2>
-{carte_adresse(c, lang, "copie-bas")}
-<p>{t(lang, "Four steps:", "Quatre étapes :")} <a href="{rejoindre}">{t(lang, "how to join AstroSky", "comment rejoindre AstroSky")}</a>.{pack_html}</p>
+<div class="adresse-bloc">
+<p class="etiquette">{t(lang, "Server address", "Adresse du serveur")}</p>
+<div class="adresse-ligne"><span class="adresse">{e(c.adresse)}</span>{bouton_copier(c, lang, "copie-bas")}</div>
+</div>
+<p class="suite">{t(lang, "Four steps:", "Quatre étapes :")} <a href="{rejoindre}">{t(lang, "how to join AstroSky", "comment rejoindre AstroSky")}</a>.{pack_html}</p>
 <h3>{t(lang, "Follow AstroSky", "Suivre AstroSky")}</h3>
 <ul class="comptes">{comptes}</ul>
-<p>{t(lang, "Only the addresses on <a href=\"/links/\">our official links page</a> are ours.", "Seules les adresses de <a href=\"/fr/liens/\">notre page des liens officiels</a> sont à nous.")}</p>
+<p class="officiels">{t(lang, "Only the addresses on <a href=\"/links/\">our official links page</a> are ours.", "Seules les adresses de <a href=\"/fr/liens/\">notre page des liens officiels</a> sont à nous.")}</p>
 </div>
 </section>"""
-    titre = t(lang, "AstroSky — Co-op SkyBlock among the stars", "AstroSky — Le SkyBlock coopératif parmi les étoiles")
-    desc = t(lang, f"AstroSky is a co-op OneBlock SkyBlock server for Minecraft: Java Edition {c.versions}, for "
+    titre = t(lang, "AstroSky — OneBlock among the stars", "AstroSky — Le OneBlock parmi les étoiles")
+    desc = t(lang, f"AstroSky is a OneBlock server for Minecraft: Java Edition {c.versions}, for "
                    f"players 18 and over. Server address: {c.adresse}.",
-             f"AstroSky est un serveur SkyBlock OneBlock coopératif pour Minecraft: Java Edition {c.versions}, "
+             f"AstroSky est un serveur OneBlock pour Minecraft: Java Edition {c.versions}, "
              f"pour les 18 ans et plus. Adresse du serveur : {c.adresse}.")
     return document(c, lang, c.page("accueil", lang), CHEMINS["accueil"][1 if lang == "en" else 0], "accueil",
-                    titre, desc, corps, script=True)
+                    titre, desc, corps, script=True, classe_corps="accueil")
 
 
 # Rejoindre ───────────────────────────────────────────────────────────────────────────────
@@ -537,10 +589,10 @@ def questions(c: Contexte, lang: str) -> list[tuple[str, str]]:
     contact = c.legale("contact", lang)
     lien_contact = (f'<a href="{contact}">{t(lang, "contact page", "page de contact")}</a>' if contact else None)
     q.append((t(lang, "What is AstroSky?", "Qu’est-ce qu’AstroSky ?"),
-              t(lang, "A co-op OneBlock SkyBlock server for Minecraft: Java Edition: you start on a single block "
+              t(lang, "A OneBlock server for Minecraft: Java Edition: you start on a single block "
                       "floating among the stars and grow it into an island with your friends. AstroSky is run by an "
                       "independent operator, not by Mojang or Microsoft.",
-                "Un serveur SkyBlock OneBlock coopératif pour Minecraft: Java Edition : tu commences sur un seul bloc "
+                "Un serveur OneBlock pour Minecraft: Java Edition : tu commences sur un seul bloc "
                 "qui flotte parmi les étoiles et tu en fais une île avec tes amis. AstroSky est exploité par un "
                 "exploitant indépendant, et non par Mojang ni Microsoft.")))
     q.append((t(lang, "What is the server address and version?", "Quelle est l’adresse du serveur, et quelle version ?"),
@@ -828,7 +880,7 @@ def entree(c: Contexte, chemin: str) -> str:
 <p lang="en">Taking you to <a href="/">astrosky.gg</a>.</p>
 <p lang="fr">Redirection vers <a href="/fr/">astrosky.gg</a>.</p>
 </div></section>"""
-    return document(c, "en", chemin, "", None, "AstroSky — Co-op SkyBlock among the stars", "AstroSky", corps,
+    return document(c, "en", chemin, "", None, "AstroSky — OneBlock among the stars", "AstroSky", corps,
                     image=None, refresh="/", noindex=True, canonique="/")
 
 
@@ -853,7 +905,8 @@ def gabarit_legal(c: Contexte) -> str:
 <header class="entete">
 <div class="conteneur">
 <a class="marque" href="{c.page("accueil", lang)}"><img src="/assets/img/logotype.svg" width="180" height="58" alt="AstroSky"></a>
-<nav class="menu" aria-label="{t(lang, "Main", "Principal")}"><ul>{lis}</ul></nav>
+{BOUTON_MENU}
+<nav class="menu" id="menu-principal" aria-label="{t(lang, "Main", "Principal")}"><ul>{lis}</ul></nav>
 </div>
 </header>"""
     return f"""<!doctype html>
@@ -869,6 +922,7 @@ def gabarit_legal(c: Contexte) -> str:
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/menu.js" defer></script>
 </head>
 <body>
 {{% if page.lang == "fr" %}}
@@ -974,18 +1028,44 @@ def ressources_externes(page: str) -> list[str]:
     return trouvees
 
 
+# Attributs lus par les visiteurs, les lecteurs d'écran ou les aperçus de liens : contrôlés comme le texte visible.
+ATTRIBUTS_LUS = re.compile(r'\b(?:alt|title|aria-label|content|placeholder)="([^"]*)"')
+BANDE_CHIFFRES = re.compile(r'<div class="chiffres">.*?</ul></div>\s*</div>', flags=re.S)
+
+
+def texte_controle(page: str) -> str:
+    """Texte visible de la page, plus les attributs lus (alt, title, aria-label, content des meta, placeholder)."""
+    attributs = " ".join(m.group(1) for m in ATTRIBUTS_LUS.finditer(page))
+    return html.unescape(re.sub(r"<[^>]+>", " ", page) + " " + attributs)
+
+
+def interdits(nom: str, page: str) -> list[str]:
+    """Formulations interdites par la charte dans une page générée."""
+    erreurs = []
+    for motif, raison in INTERDITS:
+        if nom.startswith("_layouts/") and raison == "balise de gabarit non résolue":
+            continue
+        if raison == "balise de gabarit non résolue":
+            texte = page
+        elif motif == r"18\+" and nom in ("index.html", "fr/index.html"):
+            # Exception : décision de l'Owner du 2026-11-11 (18-A, écart à la charte approuvé). « 18+ » /
+            # « adultes seulement » est permis dans la seule bande de chiffres de l'accueil, une seule fois par page ;
+            # « 18 and over » reste la règle partout ailleurs, y compris dans le reste de ces deux pages.
+            texte = texte_controle(BANDE_CHIFFRES.sub(" ", page, count=1))
+        else:
+            texte = texte_controle(page)
+        m = re.search(motif, texte)
+        if m:
+            erreurs.append(f"{nom} : {raison} ({m.group(0)!r})")
+    return erreurs
+
+
 def verifier(sorties: dict[str, str], c: Contexte) -> list[str]:
     erreurs = []
     for nom, page in sorties.items():
         if not nom.endswith(".html"):
             continue
-        for motif, raison in INTERDITS:
-            if nom.startswith("_layouts/") and raison == "balise de gabarit non résolue":
-                continue
-            visible = html.unescape(re.sub(r"<[^>]+>", " ", page))
-            m = re.search(motif, visible if raison != "balise de gabarit non résolue" else page)
-            if m:
-                erreurs.append(f"{nom} : {raison} ({m.group(0)!r})")
+        erreurs += interdits(nom, page)
         for url in ressources_externes(page):
             erreurs.append(f"{nom} : ressource externe {url}")
         if "\r" in page:

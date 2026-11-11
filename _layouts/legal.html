@@ -11,6 +11,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/menu.js" defer></script>
 </head>
 <body>
 {% if page.lang == "fr" %}
@@ -18,7 +19,8 @@
 <header class="entete">
 <div class="conteneur">
 <a class="marque" href="/fr/"><img src="/assets/img/logotype.svg" width="180" height="58" alt="AstroSky"></a>
-<nav class="menu" aria-label="Principal"><ul><li><a href="/fr/">Accueil</a></li><li><a href="/fr/rejoindre/">Rejoindre</a></li><li><a href="/fr/faq/">FAQ</a></li><li><a href="/fr/liens/">Liens</a></li></ul></nav>
+<button type="button" class="menu-bouton" hidden aria-expanded="false" aria-controls="menu-principal" aria-label="Menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<nav class="menu" id="menu-principal" aria-label="Principal"><ul><li><a href="/fr/">Accueil</a></li><li><a href="/fr/rejoindre/">Rejoindre</a></li><li><a href="/fr/faq/">FAQ</a></li><li><a href="/fr/liens/">Liens</a></li></ul></nav>
 </div>
 </header>
 {% else %}
@@ -26,7 +28,8 @@
 <header class="entete">
 <div class="conteneur">
 <a class="marque" href="/"><img src="/assets/img/logotype.svg" width="180" height="58" alt="AstroSky"></a>
-<nav class="menu" aria-label="Main"><ul><li><a href="/">Home</a></li><li><a href="/join/">How to join</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/links/">Links</a></li></ul></nav>
+<button type="button" class="menu-bouton" hidden aria-expanded="false" aria-controls="menu-principal" aria-label="Menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<nav class="menu" id="menu-principal" aria-label="Main"><ul><li><a href="/">Home</a></li><li><a href="/join/">How to join</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/links/">Links</a></li></ul></nav>
 </div>
 </header>
 {% endif %}

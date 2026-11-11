@@ -34,6 +34,10 @@ classement_iles = true       # classement du niveau d'île
 metiers = false              # métiers en jeu (Mise à jour 1, ou bascule du 2026-11-06)
 equipes_agrandies = false    # équipes d'île agrandies en jeu (Mise à jour 1)
 commande_report = false      # /report livré sous ce nom (P-022)
+# Nombre de phases du bloc magique, affiché dans la bande de chiffres de l'accueil (« phases to unlock »). Même valeur
+# que le nombre de phases de docs/studio/discovery/entrevues/2026-11-09-wiki/wiki-donnees.json (dépôt du studio).
+# 0 = pas de chiffre.
+phases = 20
 
 [boutique]
 # true seulement quand la boutique Tebex est ouverte, avec ses prix visibles sans compte. Sans les conditions de la

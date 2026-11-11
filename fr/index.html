@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
-<title>AstroSky — Le SkyBlock coopératif parmi les étoiles</title>
-<meta name="description" content="AstroSky est un serveur SkyBlock OneBlock coopératif pour Minecraft: Java Edition 26.2, pour les 18 ans et plus. Adresse du serveur : astrosky.gg.">
+<title>AstroSky — Le OneBlock parmi les étoiles</title>
+<meta name="description" content="AstroSky est un serveur OneBlock pour Minecraft: Java Edition 26.2, pour les 18 ans et plus. Adresse du serveur : astrosky.gg.">
 <link rel="canonical" href="https://astrosky.gg/fr/">
 
 <link rel="alternate" hreflang="en" href="https://astrosky.gg/">
@@ -14,8 +14,8 @@
 <link rel="alternate" hreflang="x-default" href="https://astrosky.gg/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AstroSky">
-<meta property="og:title" content="AstroSky — Le SkyBlock coopératif parmi les étoiles">
-<meta property="og:description" content="AstroSky est un serveur SkyBlock OneBlock coopératif pour Minecraft: Java Edition 26.2, pour les 18 ans et plus. Adresse du serveur : astrosky.gg.">
+<meta property="og:title" content="AstroSky — Le OneBlock parmi les étoiles">
+<meta property="og:description" content="AstroSky est un serveur OneBlock pour Minecraft: Java Edition 26.2, pour les 18 ans et plus. Adresse du serveur : astrosky.gg.">
 <meta property="og:url" content="https://astrosky.gg/fr/">
 <meta property="og:locale" content="fr_CA">
 <meta name="theme-color" content="#0A0F1F">
@@ -24,60 +24,67 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/jost-400.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/menu.js" defer></script>
 <script src="/assets/copier.js" defer></script>
 </head>
-<body>
+<body class="accueil">
 <a class="saut" href="#contenu">Aller au contenu</a>
 <header class="entete">
 <div class="conteneur">
 <a class="marque" href="/fr/"><img src="/assets/img/logotype.svg" width="180" height="58" alt="AstroSky"></a>
-<nav class="menu" aria-label="Principal"><ul><li><a href="/fr/" aria-current="page">Accueil</a></li><li><a href="/fr/rejoindre/">Rejoindre</a></li><li><a href="/fr/faq/">FAQ</a></li><li><a href="/fr/liens/">Liens</a></li><li class="langue"><a href="/" lang="en" hreflang="en">English</a></li></ul></nav>
+<button type="button" class="menu-bouton" hidden aria-expanded="false" aria-controls="menu-principal" aria-label="Menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<nav class="menu" id="menu-principal" aria-label="Principal"><ul><li><a href="/fr/" aria-current="page">Accueil</a></li><li><a href="/fr/rejoindre/">Rejoindre</a></li><li><a href="/fr/faq/">FAQ</a></li><li><a href="/fr/liens/">Liens</a></li><li class="langue"><a href="/" lang="en" hreflang="en">English</a></li></ul></nav>
 </div>
 </header>
 <main id="contenu">
-<section class="heros">
+<section class="ciel" aria-labelledby="t-titre">
+<div class="ciel-photo" aria-hidden="true"></div>
+<div class="etoiles" aria-hidden="true"><span></span><span></span><span></span></div>
 <div class="conteneur">
-<p class="descripteur">AstroSky — un serveur SkyBlock Minecraft</p>
-<h1>Le SkyBlock coopératif parmi les étoiles</h1>
+<p class="descripteur">AstroSky — un serveur OneBlock Minecraft</p>
+<h1 id="t-titre">Le OneBlock parmi les étoiles</h1>
 <p class="chapeau">Fais grandir une île à partir d’un seul bloc avec tes amis, échange avec les autres joueurs et grimpe au classement des îles.</p>
-<div class="adresse-carte">
+<div class="adresse-bloc">
 <p class="etiquette">Adresse du serveur</p>
 <div class="adresse-ligne"><span class="adresse">astrosky.gg</span><button type="button" class="bouton" hidden data-copier="astrosky.gg" data-statut="copie-haut" data-libelle="Copier l’adresse" data-ok="Copiée" data-echec="Sélectionne-la, puis copie" data-annonce="Adresse copiée : astrosky.gg">Copier l’adresse</button><span id="copie-haut" class="hors-ecran" role="status" aria-live="polite"></span></div>
-<p class="meta">Minecraft: Java Edition 26.2 · Java seulement, pas Bedrock · Pour les 18 ans et plus</p>
 </div>
+<div class="actions"><a class="bouton grand" href="/fr/rejoindre/">Comment rejoindre</a><a class="lien-fort" href="/fr/discord/">Rejoindre le Discord</a></div>
+<ul class="pastilles"><li>Minecraft: Java Edition 26.2</li><li>Java seulement, pas Bedrock</li><li>Pour les 18 ans et plus</li></ul>
 <p class="statut">Date d’ouverture à annoncer.</p>
-<div class="actions"><a class="bouton" href="/fr/rejoindre/">Comment rejoindre</a><a class="bouton secondaire" href="/fr/discord/">Rejoindre le Discord</a></div>
-<div class="avis"><p><strong>Code Explorer :</strong> <code>LIFTOFF</code>. En jeu, tape <code>/website LIFTOFF</code>.</p></div>
 </div>
 </section>
+<div class="conteneur explorateur"><div class="avis"><p><strong>Code Explorer :</strong> <code>LIFTOFF</code>. En jeu, tape <code>/website LIFTOFF</code>.</p></div></div>
 
-<section class="bloc" aria-labelledby="t-atouts">
+<div class="chiffres">
+<div class="conteneur"><ul><li><span class="nombre">1</span><span class="libelle">bloc magique pour commencer</span></li><li><span class="nombre">20</span><span class="libelle">phases à débloquer</span></li><li><span class="nombre">18+</span><span class="libelle">adultes seulement</span></li></ul></div>
+</div>
+
+<section class="atouts" aria-labelledby="t-atouts">
 <div class="conteneur">
 <h2 id="t-atouts">Ce qu’on fait sur AstroSky</h2>
-<div class="grille">
-<div class="carte"><h3>Un bloc, puis toute une île</h3><p>Commence sur un seul bloc magique qui flotte parmi les étoiles. Casse-le : il revient en autre chose, bois, minerais, animaux, et de nouvelles phases au fil du jeu. Invite tes amis sur ton île et bâtissez-la ensemble.</p></div>
-<div class="carte"><h3>Une économie tenue par les joueurs</h3><p>Vends au serveur, tiens un coffre-boutique sur ton île, mets des objets en vente à l’hôtel des ventes et partage le compte de l’île avec ton équipe.</p></div>
-<div class="carte"><h3>Un but à chaque séance</h3><p>Des défis guident tes premières heures, puis donnent des buts plus longs. Le classement du niveau d’île mesure ce que tu construis.</p></div>
-<div class="carte"><h3>Une boutique pour le style seulement</h3><p>La boutique ne vend que des cosmétiques, par exemple des titres et des couleurs de pseudo. Rien de ce qui est vendu ne change le jeu, les coins ne se vendent jamais, et aucun achat n’est au hasard.</p></div>
-</div>
 <p class="intro">La Mise à jour 1 est prévue : métiers et équipes d’île agrandies.</p>
+<div class="atouts-liste">
+<article class="atout"><figure class="atout-image"><img src="/assets/img/ile-bloc.jpg" alt="" width="1120" height="700" loading="lazy" decoding="async"></figure><div><h3>Un bloc, puis toute une île</h3><p>Commence sur un seul bloc magique qui flotte parmi les étoiles. Casse-le : il revient en autre chose, bois, minerais, animaux, et de nouvelles phases au fil du jeu. Invite tes amis sur ton île et bâtissez-la ensemble.</p></div></article>
+<article class="atout"><figure class="atout-image"><img src="/assets/img/ile-marche.jpg" alt="" width="1120" height="700" loading="lazy" decoding="async"></figure><div><h3>Une économie tenue par les joueurs</h3><p>Vends au serveur, tiens un coffre-boutique sur ton île, mets des objets en vente à l’hôtel des ventes et partage le compte de l’île avec ton équipe.</p></div></article>
+<article class="atout"><figure class="atout-image"><img src="/assets/img/ile-grandie.jpg" alt="" width="1120" height="700" loading="lazy" decoding="async"></figure><div><h3>Un but à chaque séance</h3><p>Des défis guident tes premières heures, puis donnent des buts plus longs. Le classement du niveau d’île mesure ce que tu construis.</p></div></article>
+<article class="atout"><figure class="atout-image"><img src="/assets/img/ile-vitrine.jpg" alt="" width="1120" height="700" loading="lazy" decoding="async"></figure><div><h3>Une boutique pour le style seulement</h3><p>La boutique ne vend que des cosmétiques, par exemple des titres et des couleurs de pseudo. Rien de ce qui est vendu ne change le jeu, les coins ne se vendent jamais, et aucun achat n’est au hasard.</p></div></article>
+</div>
 </div>
 </section>
 
 
 
-<section class="bloc" aria-labelledby="t-appel">
+<section class="appel" aria-labelledby="t-appel">
 <div class="conteneur">
 <h2 id="t-appel">On se voit parmi les étoiles</h2>
-<div class="adresse-carte">
+<div class="adresse-bloc">
 <p class="etiquette">Adresse du serveur</p>
 <div class="adresse-ligne"><span class="adresse">astrosky.gg</span><button type="button" class="bouton" hidden data-copier="astrosky.gg" data-statut="copie-bas" data-libelle="Copier l’adresse" data-ok="Copiée" data-echec="Sélectionne-la, puis copie" data-annonce="Adresse copiée : astrosky.gg">Copier l’adresse</button><span id="copie-bas" class="hors-ecran" role="status" aria-live="polite"></span></div>
-<p class="meta">Minecraft: Java Edition 26.2 · Java seulement, pas Bedrock · Pour les 18 ans et plus</p>
 </div>
-<p>Quatre étapes : <a href="/fr/rejoindre/">comment rejoindre AstroSky</a>. Facultatif : <a href="/fr/pack/">les packs de ressources qu’on conseille</a> soignent le ciel de nuit.</p>
+<p class="suite">Quatre étapes : <a href="/fr/rejoindre/">comment rejoindre AstroSky</a>. Facultatif : <a href="/fr/pack/">les packs de ressources qu’on conseille</a> soignent le ciel de nuit.</p>
 <h3>Suivre AstroSky</h3>
 <ul class="comptes"><li><a href="https://www.tiktok.com/@astrosky.gg" rel="noopener">TikTok @astrosky.gg</a></li><li><a href="https://www.youtube.com/@astroskygg" rel="noopener">YouTube @astroskygg</a></li><li><a href="https://www.instagram.com/astrosky.gg" rel="noopener">Instagram astrosky.gg</a></li><li><a href="https://x.com/astroskygg" rel="noopener">X @astroskygg</a></li></ul>
-<p>Seules les adresses de <a href="/fr/liens/">notre page des liens officiels</a> sont à nous.</p>
+<p class="officiels">Seules les adresses de <a href="/fr/liens/">notre page des liens officiels</a> sont à nous.</p>
 </div>
 </section>
 </main>
