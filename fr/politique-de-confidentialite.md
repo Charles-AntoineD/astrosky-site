@@ -31,6 +31,7 @@ Cette politique couvre le serveur Minecraft AstroSky (`astrosky.gg`), sa boutiqu
   vos données et ne nous en servons jamais pour la publicité, le marketing ou le profilage.
 - Le serveur et ses enregistrements sont hébergés par OVHcloud à Vint Hill, en Virginie (États-Unis) (section 9).
 - Si vous achetez, c'est Tebex qui vous vend l'article et s'occupe du paiement. Nous ne voyons jamais votre numéro de carte.
+- Notre serveur utilise le plugin officiel de Tebex. Pour chaque joueur qui se connecte, qu'il achète ou non, il envoie à Tebex votre identifiant de compte Minecraft, votre pseudo, votre adresse IP et l'heure de votre connexion (section 8).
 - Vous pouvez demander à consulter, corriger ou supprimer vos données, gratuitement : écrivez à `support@astrosky.gg`.
 - Un parent ou un tuteur peut nous écrire pour faire retirer l'accès d'un joueur et supprimer ses données ; nous ne
   lui envoyons jamais les données du joueur (section 10).
@@ -163,6 +164,7 @@ l'explique sa politique.
   l'adresse IP utilisée. Nous ne les consultons que pour répondre à votre demande ou examiner une contestation de paiement ; chaque consultation est notée dans notre journal des accès, et nous ne les copions pas dans nos propres
   registres.
 - Pour une demande sur ce que Tebex détient, y compris une demande d'effacement, vous pouvez écrire directement à Tebex ([contact de Tebex](https://www.tebex.io/contact)), ou à nous : nous la transmettons à Tebex dans les 3 jours.
+- Notre serveur utilise le **plugin officiel de Tebex**. Pour chaque joueur qui se connecte, qu'il achète ou non, il envoie à Tebex, par lot chaque minute : l'identifiant de compte Minecraft (UUID), le pseudo, l'adresse IP (une adresse IPv4 sans son dernier nombre, une adresse IPv6 entière) et l'heure de la connexion. Tebex Limited, vendeur officiel des achats, traite ces données selon sa propre politique de confidentialité ([politique de confidentialité de Tebex](https://www.tebex.io/terms-creator-agreement/privacy-policy)). Cette politique ne fixe aucune durée précise pour ces données : Tebex garde les données personnelles seulement le temps nécessaire aux fins pour lesquelles il les a recueillies, et les renseignements de base sur ses clients jusqu'à 10 ans après la fin de la relation, pour des raisons fiscales. Pour livrer les achats, le serveur demande à Tebex, avec sa clé secrète, quels achats attendent (pseudo, UUID, commande) et confirme chaque livraison par son seul numéro de commande. Au démarrage du serveur, le plugin n'envoie que des informations techniques (logiciel et versions), aucune donnée de joueur. Nous avons coupé les rapports d'erreur du plugin vers Tebex et l'achat depuis le jeu (`/buy`).
 
 ## 9. Avec qui nous les partageons
 
@@ -172,7 +174,7 @@ l'explique sa politique.
 | Backblaze B2 (stockage des sauvegardes) | les sauvegardes chiffrées | restaurer le serveur | Toronto, Ontario, Canada |
 | TCPShield (protection contre les attaques réseau) | votre adresse IP, votre pseudo, la version de votre jeu et vos heures de connexion, qu'il garde 30 jours selon sa propre politique | protéger le serveur | Canada (entreprise en Alberta ; journaux au Québec) ; son réseau passe aussi par les États-Unis |
 | Mojang et Microsoft | votre pseudo et une vérification de connexion quand vous arrivez (connexion standard de Minecraft) ; votre pseudo et votre UUID quand un menu du jeu affiche votre tête (skin) | confirmer que vous avez un compte Minecraft authentique ; afficher les skins dans les menus | services de Microsoft (Microsoft, États-Unis ; Mojang, Suède) |
-| Tebex Limited, si vous achetez | les informations de livraison de la section 8 | vendre, encaisser, livrer | Royaume-Uni |
+| Tebex Limited | si vous achetez : les informations de livraison de la section 8 ; pour chaque joueur qui se connecte, qu'il achète ou non : l'identifiant de compte, le pseudo, l'adresse IP et l'heure de connexion que son plugin envoie (section 8) | vendre, encaisser, livrer | Royaume-Uni |
 | Zoho (notre fournisseur de courriel) | les courriels que vous nous envoyez | vous répondre | Canada |
 | Anthropic (fournisseur de l'assistant d'IA qui aide à exploiter le serveur) | les conversations de l'assistant avec l'exploitant, dont les commandes lancées sur la machine du serveur et leur sortie (état du service, résultat des redémarrages et des sauvegardes), conçues pour ne contenir aucune donnée de joueur (si une apparaît, nous la traitons comme un incident, section 14) ; Anthropic les garde 30 jours et n'entraîne pas ses modèles dessus tant que le réglage « Aider à améliorer Claude » de l'exploitant est désactivé ; nous mettons cette ligne à jour s'il change | exploiter le serveur | Anthropic est une entreprise des États-Unis ; ce forfait n'indique pas où les données sont stockées ou traitées, peut-être ailleurs |
 | GitHub Pages (hébergeur du site) | les données techniques de votre visite, dont votre adresse IP | afficher le site | États-Unis |

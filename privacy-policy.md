@@ -28,6 +28,7 @@ This policy covers the AstroSky Minecraft server (`astrosky.gg`), its store (`as
   advertising, marketing or profiling.
 - The server and its records are hosted by OVHcloud in Vint Hill, Virginia, United States (section 9).
 - If you buy something, Tebex sells it to you and handles the payment. We never see your card number.
+- Our server runs the official Tebex plugin. For every player who joins, whether or not they buy, it sends Tebex your Minecraft account ID, your username, your IP address and the time you joined (section 8).
 - You can ask to see, correct or delete your data, for free: write to `support@astrosky.gg`.
 - A parent or guardian can write to us to have a player's access removed and their data deleted; we never
   send them the player's data (section 10).
@@ -153,6 +154,7 @@ pages use cookies, as its policy explains.
   only to answer your request or check a payment dispute; each look is noted in our access log, and we do
   not copy them into our own records.
 - For a request about what Tebex holds, including a request to erase it, you can write to Tebex directly ([Tebex contact](https://www.tebex.io/contact)), or to us: we pass it on to Tebex within 3 days.
+- Our server runs the **official Tebex plugin**. For every player who joins, whether or not they buy, it sends Tebex, in a batch every minute: the Minecraft account ID (UUID), the username, the IP address (an IPv4 address without its last number, an IPv6 address in full) and the time of the connection. Tebex Limited, the official seller of the purchases, handles this data under its own privacy policy ([Tebex's privacy policy](https://www.tebex.io/terms-creator-agreement/privacy-policy)). That policy sets no fixed period for this data: Tebex keeps personal data only as long as necessary for the purposes it collected it for, and basic customer information for up to 10 years after a person stops being a customer, for tax reasons. To deliver purchases, the server asks Tebex, with its secret key, which purchases are waiting (username, UUID, command) and confirms each delivery by order number only. When the server starts, the plugin sends technical information only (software and versions), no player data. We turned off the plugin's error reports to Tebex and buying from inside the game (`/buy`).
 
 ## 9. Who we share it with
 
@@ -162,7 +164,7 @@ pages use cookies, as its policy explains.
 | Backblaze B2 (backup storage) | encrypted backups | restore the server | Toronto, Ontario, Canada |
 | TCPShield (protection against network attacks) | your IP address, username, game version and connection times, which it keeps 30 days under its own policy | protect the server | Canada (company in Alberta; logs in Québec); its network also runs in the United States |
 | Mojang and Microsoft | your username and a login check when you join (standard Minecraft login); your username and UUID when a game menu shows your head (skin) | confirm that you own a genuine Minecraft account; show skins in menus | Microsoft's services (Microsoft, United States; Mojang, Sweden) |
-| Tebex Limited, if you buy | the delivery details in section 8 | sell, take payment, deliver | United Kingdom |
+| Tebex Limited | if you buy: the delivery details in section 8; for every player who joins, bought or not: the account ID, username, IP address and join time that its plugin sends (section 8) | sell, take payment, deliver | United Kingdom |
 | Zoho (our email provider) | the emails you send us | answer you | Canada |
 | Anthropic (provider of the AI assistant that helps operate the server) | the assistant's conversations with the operator, including the commands it runs on the server machine and their output (service state, results of restarts and backups), designed to contain no player data (if some ever appears, we treat it as an incident, section 14); Anthropic keeps them 30 days and does not train its models on them while the operator's "Help improve Claude" setting is off; we update this line if it changes | operate the server | Anthropic is a U.S. company; this plan does not say where data is stored or processed, so possibly elsewhere |
 | GitHub Pages (website host) | technical data of your visit, including your IP address | show the website | United States |
