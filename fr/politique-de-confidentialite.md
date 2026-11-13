@@ -6,16 +6,14 @@ permalink: /fr/confidentialite/
 ---
 # AstroSky — Politique de confidentialité
 
-**Version :** `2026-10-31`
-
-**État :** AstroSky n'est pas encore ouvert : le serveur est fermé aux joueurs (liste blanche) et la boutique n'a pas ouvert. Cette page décrit son fonctionnement dès le jour de l'ouverture ; la date de version change si quelque chose diffère.
+**Version :** `2026-11-13`
 
 Cette politique couvre le serveur Minecraft AstroSky (`astrosky.gg`), sa boutique (`astrosky.gg/store`), son site
 (`astrosky.gg`) et son adresse de contact (`support@astrosky.gg`).
 
 ## En bref
 
-- AstroSky est un serveur Minecraft pour adultes, 18 ans et plus. Il est exploité par Charles-Antoine Daneau au Québec
+- AstroSky est un serveur Minecraft pour adultes, 18 ans et plus. Il est exploité par Chuck au Québec
   (Canada), et non par Mojang ni Microsoft. C'est nous qui sommes responsables de protéger les renseignements
   personnels que traite le serveur.
 - Pour protéger les joueurs, le serveur enregistre ce qui s'y passe : le chat public, les messages privés, les
@@ -39,7 +37,7 @@ Cette politique couvre le serveur Minecraft AstroSky (`astrosky.gg`), sa boutiqu
 
 ## 1. Qui nous sommes
 
-AstroSky est exploité par Charles-Antoine Daneau (« nous »), au Québec, Canada. C'est nous, et non Mojang ni Microsoft, qui
+AstroSky est exploité par Chuck (« nous »), au Québec, Canada. C'est nous, et non Mojang ni Microsoft, qui
 sommes responsables d'AstroSky et des renseignements personnels que traitent le serveur, le site et notre boîte de
 courriel. Tebex est responsable des renseignements que vous lui donnez quand vous payez (section 8).
 
@@ -67,11 +65,12 @@ création.
 | Quoi | Pourquoi | Combien de temps |
 |---|---|---|
 | Votre pseudo Minecraft et l'identifiant de votre compte (UUID), reçus quand vous vous connectez | faire fonctionner le jeu et reconnaître votre compte | tant que votre compte existe ; supprimés sur demande |
-| Vos données de jeu : île et ses membres, niveau d'île, solde, boutiques, défis, cosmétiques possédés, points de vote, rang et permissions | faire fonctionner le jeu | tant que votre compte existe ; supprimées sur demande |
+| Vos données de jeu : île et ses membres, niveau d'île, solde, boutiques, défis, cosmétiques possédés, points de vote, votre solde de Nebula (achetées et données en jeu), vos clés de caisse et les récompenses de caisse que vous avez gagnées, une trace de ce que les votes, les paliers de défis et les missions du mois vous ont déjà donné ou ont encore en attente pour vous, rang et permissions ; vos achats dans la boutique premium (article, prix, monnaie, mois, état) et, pour chaque générateur acheté et posé, son lieu ; votre confirmation, donnée une fois en jeu avant votre premier achat en Nebula, que vous avez 18 ans ou plus (un oui seulement : ni âge, ni date de naissance, ni preuve) | faire fonctionner le jeu ; ne donner chaque récompense qu'une fois ; pour la confirmation 18+, permettre les achats en Nebula en jeu | tant que votre compte existe ; supprimées sur demande (achats de la boutique premium payés en coins : 40 jours au plus après leur règlement ; lieu d'un générateur : tant qu'il est posé) |
+| Vos achats de clés de caisse en Nebula : la clé, son prix, la part payée avec des Nebula gagnées en jeu, la date et l'heure ; si un paiement est contesté, ce qui en a été repris | répondre à un paiement contesté ou remboursé : reprendre les clés payées avec les Nebula contestés et ce qui en est sorti, sans toucher à ce que vous avez gagné gratuitement | 40 jours au plus après l'achat ; supprimés avec votre compte |
 | **Enregistrements de sûreté** (pour tous les joueurs, dès la première connexion) : chat public ; messages privés (`/msg`, `/tell`) ; texte des commandes tapées ; blocs posés ou cassés ; objets mis dans un contenant ou retirés ; arrivées et départs | sûreté et intégrité des joueurs et du serveur, sécurité, sanctions et appels | **90 jours au plus**, puis suppression automatique |
 | La dernière adresse IP d'où vous vous êtes connecté (un de nos plugins la garde et n'a aucun réglage pour l'en empêcher ; les adresses précédentes ne sont pas gardées) | sûreté et sécurité des joueurs et du serveur, comme les enregistrements de sûreté ; personne ne la lit en jeu, et nous ne sanctionnons, ne relions ni ne situons jamais un compte par son adresse IP | supprimée 88 jours après la connexion qui l'a écrite (90 jours au plus) |
 | Historique du marché (hôtel des ventes) : vendeur, acheteur, objet, prix ; les ventes des coffres-boutiques n'apparaissent que dans les enregistrements de sûreté | faire fonctionner le marché, expliquer une vente contestée, détecter une fraude économique | 90 jours au plus |
-| Journal des votes : votre compte, la liste de serveurs, la date, vos achats en points de vote et toute correction (la liste nous envoie aussi votre adresse IP : elle n'est jamais gardée) | corriger une fraude au vote, répondre à un crédit contesté | 90 jours au plus |
+| Journal des votes : votre compte, la liste de serveurs, la date, vos achats en points de vote et toute correction (la liste nous envoie aussi l'adresse IP d'où vous avez voté : elle n'est jamais écrite ; pour les Nebula de vote seulement, elle devient en mémoire une empreinte qui change chaque jour, pour qu'une connexion ne reçoive les Nebula d'une liste qu'une fois par jour, et elle est oubliée à la fin du jour UTC ou au redémarrage du serveur) | corriger une fraude au vote, répondre à un crédit contesté | 90 jours au plus |
 | Événements de détection de l'anti-triche | détecter la triche | 88 jours, supprimés avec le journal du serveur ; seul un extrait gardé pour un dossier suit ce dossier |
 | Signalements restés sans suite | traiter les signalements | 90 jours au plus |
 | Sanctions : la mesure, la règle, la raison, qui a décidé, l'appel (jamais une adresse IP) | appliquer et expliquer une sanction, traiter un appel, reconnaître une récidive | tant que la sanction s'applique, puis 12 mois après sa fin |
@@ -287,7 +286,7 @@ différer, la plus favorable pour vous s'applique.
 
 ## 17. Contact
 
-Charles-Antoine Daneau, Québec, Canada — `support@astrosky.gg` (objet : « Confidentialité »).
+Chuck, Québec, Canada — `support@astrosky.gg` (objet : « Confidentialité »).
 
 NOT AN OFFICIAL MINECRAFT SERVICE. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.
 
