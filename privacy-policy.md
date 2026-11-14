@@ -6,16 +6,14 @@ permalink: /privacy/
 ---
 # AstroSky — Privacy Policy
 
-**Version:** `2026-10-31`
-
-**Status:** AstroSky is not open yet: the server is closed to players (whitelist) and the store has not opened. This page describes how it will work from opening day; the version date changes if anything differs.
+**Version:** `2026-11-13`
 
 This policy covers the AstroSky Minecraft server (`astrosky.gg`), its store (`astrosky.gg/store`), its website
 (`astrosky.gg`) and its contact address (`support@astrosky.gg`).
 
 ## The short version
 
-- AstroSky is a Minecraft server for adults, 18 and over. It is run by Charles-Antoine Daneau in Québec, Canada, not by
+- AstroSky is a Minecraft server for adults, 18 and over. It is run by Chuck in Québec, Canada, not by
   Mojang or Microsoft. We are responsible for protecting the personal information the server handles.
 - To protect players, the server records what happens on it: public chat, private messages, the commands you type,
   blocks placed or broken, chest use, and when you join and leave. These records are **deleted automatically after
@@ -30,13 +28,14 @@ This policy covers the AstroSky Minecraft server (`astrosky.gg`), its store (`as
   advertising, marketing or profiling.
 - The server and its records are hosted by OVHcloud in Vint Hill, Virginia, United States (section 9).
 - If you buy something, Tebex sells it to you and handles the payment. We never see your card number.
+- Our server runs the official Tebex plugin. For every player who joins, whether or not they buy, it sends Tebex your Minecraft account ID, your username, your IP address and the time you joined (section 8).
 - You can ask to see, correct or delete your data, for free: write to `support@astrosky.gg`.
 - A parent or guardian can write to us to have a player's access removed and their data deleted; we never
   send them the player's data (section 10).
 
 ## 1. Who we are
 
-AstroSky is operated by Charles-Antoine Daneau ("we", "us"), based in Québec, Canada. We, not Mojang or Microsoft, are
+AstroSky is operated by Chuck ("we", "us"), based in Québec, Canada. We, not Mojang or Microsoft, are
 responsible for AstroSky and for the personal information the server, the website and our mailbox handle. Tebex is
 responsible for the information you give it when you pay (section 8).
 
@@ -63,11 +62,12 @@ section 10 if a player turns out to be under 18.
 | What | Why | How long |
 |---|---|---|
 | Your Minecraft username and account ID (UUID), received when you join | run the game and recognise your account | as long as your account exists; deleted on request |
-| Your game data: island and its members, island level, balance, shops, challenges, cosmetics you own, vote points, rank and permissions | run the game | as long as your account exists; deleted on request |
+| Your game data: island and its members, island level, balance, shops, challenges, cosmetics you own, vote points, your Nebula balance (bought and given in game), your crate keys and the crate rewards you won, a record of what votes, challenge tiers and the monthly missions have already given you or still have waiting for you, rank and permissions; your premium shop purchases (item, price, currency, month, status) and, for each spawner you bought and placed, its place; your confirmation, given once in game before your first Nebula purchase, that you are 18 or older (a yes only: no age, no date of birth, no proof) | run the game; give each reward only once; for the 18+ confirmation, allow Nebula purchases in game | as long as your account exists; deleted on request (premium shop purchases paid in coins: at most 40 days after they are settled; a spawner's place: while it is placed) |
+| Your crate key purchases with Nebula: the key, its price, the part paid with Nebula earned in game, the date and time; if a payment is disputed, what was taken back from it | answer a disputed or refunded payment: take back the keys paid with the disputed Nebula and what came out of them, without touching what you earned for free | at most 40 days after the purchase; deleted with your account |
 | **Safety records** (for every player, from the first connection): public chat; private messages (`/msg`, `/tell`); the text of the commands you type; blocks placed or broken; items put in or taken out of containers; joins and leaves | safety and integrity of players and of the server, security, sanctions and appeals | **90 days at most**, then deleted automatically |
 | The last IP address you joined from (one of our plugins keeps it and has no setting to turn this off; earlier addresses are not kept) | safety and security of players and of the server, like the safety records; nobody reads it in game, and we never sanction, link or locate accounts by IP address | deleted 88 days after the connection that wrote it (90 days at most) |
 | Market history (auction house): seller, buyer, item, price; chest shop sales appear only in the safety records | run the market, explain a disputed sale, detect economic fraud | 90 days at most |
-| Vote journal: your account, the server list, the date, what you bought with vote points and any correction (the list also sends us your IP address: it is never kept) | correct vote fraud, answer a disputed credit | 90 days at most |
+| Vote journal: your account, the server list, the date, what you bought with vote points and any correction (the list also sends us the IP address you voted from: it is never written down; for vote Nebula only, it is turned in memory into a fingerprint that changes every day, so that one connection gets a list's Nebula once a day, and forgotten at the end of the UTC day or when the server restarts) | correct vote fraud, answer a disputed credit | 90 days at most |
 | Anti-cheat detection events | detect cheating | 88 days, deleted with the server log; only an excerpt kept for a case follows that case |
 | Reports that lead to no action | handle reports | 90 days at most |
 | Sanctions: the measure, the rule, the reason, who decided, the appeal (never an IP address) | apply and explain a sanction, handle an appeal, recognise repeat offences | while the sanction applies, then 12 months after it ends |
@@ -154,6 +154,7 @@ pages use cookies, as its policy explains.
   only to answer your request or check a payment dispute; each look is noted in our access log, and we do
   not copy them into our own records.
 - For a request about what Tebex holds, including a request to erase it, you can write to Tebex directly ([Tebex contact](https://www.tebex.io/contact)), or to us: we pass it on to Tebex within 3 days.
+- Our server runs the **official Tebex plugin**. For every player who joins, whether or not they buy, it sends Tebex, in a batch every minute: the Minecraft account ID (UUID), the username, the IP address (an IPv4 address without its last number, an IPv6 address in full) and the time of the connection. Tebex Limited, the official seller of the purchases, handles this data under its own privacy policy ([Tebex's privacy policy](https://www.tebex.io/terms-creator-agreement/privacy-policy)). That policy sets no fixed period for this data: Tebex keeps personal data only as long as necessary for the purposes it collected it for, and basic customer information for up to 10 years after a person stops being a customer, for tax reasons. To deliver purchases, the server asks Tebex, with its secret key, which purchases are waiting (username, UUID, command) and confirms each delivery by order number only. When the server starts, the plugin sends technical information only (software and versions), no player data. We turned off the plugin's error reports to Tebex and buying from inside the game (`/buy`).
 
 ## 9. Who we share it with
 
@@ -163,7 +164,7 @@ pages use cookies, as its policy explains.
 | Backblaze B2 (backup storage) | encrypted backups | restore the server | Toronto, Ontario, Canada |
 | TCPShield (protection against network attacks) | your IP address, username, game version and connection times, which it keeps 30 days under its own policy | protect the server | Canada (company in Alberta; logs in Québec); its network also runs in the United States |
 | Mojang and Microsoft | your username and a login check when you join (standard Minecraft login); your username and UUID when a game menu shows your head (skin) | confirm that you own a genuine Minecraft account; show skins in menus | Microsoft's services (Microsoft, United States; Mojang, Sweden) |
-| Tebex Limited, if you buy | the delivery details in section 8 | sell, take payment, deliver | United Kingdom |
+| Tebex Limited | if you buy: the delivery details in section 8; for every player who joins, bought or not: the account ID, username, IP address and join time that its plugin sends (section 8) | sell, take payment, deliver | United Kingdom |
 | Zoho (our email provider) | the emails you send us | answer you | Canada |
 | Anthropic (provider of the AI assistant that helps operate the server) | the assistant's conversations with the operator, including the commands it runs on the server machine and their output (service state, results of restarts and backups), designed to contain no player data (if some ever appears, we treat it as an incident, section 14); Anthropic keeps them 30 days and does not train its models on them while the operator's "Help improve Claude" setting is off; we update this line if it changes | operate the server | Anthropic is a U.S. company; this plan does not say where data is stored or processed, so possibly elsewhere |
 | GitHub Pages (website host) | technical data of your visit, including your IP address | show the website | United States |
@@ -270,6 +271,6 @@ more favourable to you applies.
 
 ## 17. Contact
 
-Charles-Antoine Daneau, Québec, Canada — `support@astrosky.gg` (subject: "Privacy").
+Chuck, Québec, Canada — `support@astrosky.gg` (subject: "Privacy").
 
 NOT AN OFFICIAL MINECRAFT SERVICE. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.

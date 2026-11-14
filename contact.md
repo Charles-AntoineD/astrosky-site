@@ -10,7 +10,7 @@ permalink: /contact/
 
 ## Who runs AstroSky
 
-AstroSky is operated by **Charles-Antoine Daneau**, Québec, Canada. We, not Mojang or Microsoft, are responsible for the
+AstroSky is operated by **Chuck**, Québec, Canada. We, not Mojang or Microsoft, are responsible for the
 server, its store and its website. Purchases are sold by Tebex Limited, which handles payments (our Store Terms are
 published when the store opens).
 
