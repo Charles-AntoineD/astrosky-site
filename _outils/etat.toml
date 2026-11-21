@@ -13,8 +13,9 @@ adresse = "astrosky.gg"
 # Versions de Minecraft: Java Edition acceptées, relevées au premier ping du serveur public.
 # Écrire "26.2–26.3" seulement si un client 26.3 a pu se connecter le jour même.
 versions = "26.2"
-# true seulement quand le serveur est ouvert à tous.
-ouvert = false
+# true seulement quand le serveur est ouvert à tous (liste blanche retirée). Ouvert, le site ne dit plus rien d'une date
+# d'ouverture ni d'une liste blanche, et refuse d'écrire si une page le fait encore (les dates ci-dessous restent vides).
+ouvert = true
 # Date d'ouverture annoncée, telle qu'elle s'affiche (accueil, page « Rejoindre »). Vide : « date à annoncer ». À remplir
 # le jour de l'annonce (jamais avant : aucune date à l'écran avant l'essai fermé) ; les deux ou aucune. Exemple :
 #   ouverture_en = "Friday, November 6, 2026, at 6 p.m. Eastern Time (Québec time)"
@@ -31,7 +32,7 @@ coffres_boutiques = true     # coffres-boutiques des joueurs
 banque_ile = true            # compte commun de l'île
 defis = true                 # défis importés
 classement_iles = true       # classement du niveau d'île
-metiers = false              # métiers en jeu (Mise à jour 1, ou bascule du 2026-11-06)
+metiers = true               # métiers en jeu (Mise à jour 1, ou bascule du 2026-11-06)
 equipes_agrandies = false    # équipes d'île agrandies en jeu (Mise à jour 1)
 commande_report = false      # /report livré sous ce nom (P-022)
 # Nombre de phases du bloc magique, affiché dans la bande de chiffres de l'accueil (« phases to unlock »). Même valeur
