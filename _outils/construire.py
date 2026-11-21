@@ -1064,7 +1064,7 @@ def interdits(nom: str, page: str) -> list[str]:
 
 
 def verifier(sorties: dict[str, str], c: Contexte) -> list[str]:
-    erreurs = []
+    erreurs = verifier_vote(sorties, c)
     for nom, page in sorties.items():
         if not nom.endswith(".html"):
             continue
@@ -1079,8 +1079,7 @@ def verifier(sorties: dict[str, str], c: Contexte) -> list[str]:
                 erreurs.append(f"{nom} : lien interne cassé {chemin}")
         if not nom.startswith("_layouts/") and "NOT AN OFFICIAL MINECRAFT SERVICE" not in page:
             erreurs.append(f"{nom} : mention de non-affiliation absente")
-    return (erreurs + verifier_discord(sorties, c) + verifier_idees(sorties, c) + verifier_explorateur(sorties, c)
-            + verifier_vote(sorties, c))
+    return erreurs + verifier_discord(sorties, c) + verifier_idees(sorties, c) + verifier_explorateur(sorties, c)
 
 
 # Le code Explorer ne promet rien : ni coins, ni récompense, ni gain (le jeu dit ce que l'étape donne).
