@@ -24,20 +24,22 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/jost-400.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/menu.js" defer></script>
 </head>
 <body>
 <a class="saut" href="#contenu">Aller au contenu</a>
 <header class="entete">
 <div class="conteneur">
 <a class="marque" href="/fr/"><img src="/assets/img/logotype.svg" width="180" height="58" alt="AstroSky"></a>
-<nav class="menu" aria-label="Principal"><ul><li><a href="/fr/">Accueil</a></li><li><a href="/fr/rejoindre/">Rejoindre</a></li><li><a href="/fr/faq/">FAQ</a></li><li><a href="/fr/wiki/" aria-current="page">Wiki</a></li><li><a href="/fr/liens/">Liens</a></li><li class="langue"><a href="/wiki/" lang="en" hreflang="en">English</a></li></ul></nav>
+<button type="button" class="menu-bouton" hidden aria-expanded="false" aria-controls="menu-principal" aria-label="Menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<nav class="menu" id="menu-principal" aria-label="Principal"><ul><li><a href="/fr/">Accueil</a></li><li><a href="/fr/rejoindre/">Rejoindre</a></li><li><a href="/fr/faq/">FAQ</a></li><li><a href="/fr/wiki/" aria-current="page">Wiki</a></li><li><a href="/fr/liens/">Liens</a></li><li class="langue"><a href="/wiki/" lang="en" hreflang="en">English</a></li></ul></nav>
 </div>
 </header>
 <main id="contenu">
 <section class="page wiki"><div class="conteneur">
 <h1>Wiki d’AstroSky</h1>
 <p class="chapeau">Chaque nombre de ce wiki est calculé depuis les fichiers que le serveur charge : les phases du bloc magique et la chance de chaque bloc, animal, monstre et coffre. Et aussi ce que chaque métier te donne selon ton niveau.</p>
-<p class="tampon">Calculé depuis les fichiers du serveur : Minecraft: Java Edition 26.2, AOneBlock 1.28.0, AuraSkills 2.4.0, Level 2.29.0 · empreinte des données <code>21288cd44a45</code></p>
+<p class="tampon">Calculé depuis les fichiers du serveur : Minecraft: Java Edition 26.2, AOneBlock 1.28.0, AuraSkills 2.4.0, Level 2.29.0 · empreinte des données <code>aee39460feed</code></p>
 <h2 id="bloc-magique">Comment marche le bloc magique</h2>
 <ul>
 <li>Chaque fois que tu casses le bloc magique, le serveur tire la suite dans un seul lot : blocs, animaux et monstres ensemble. Les pourcentages ci-dessous sont la chance à chaque casse.</li>
@@ -49,26 +51,26 @@
 <table>
 <thead><tr><th class="n">#</th><th>Phase</th><th class="n">Blocs</th><th>Biome</th><th class="n">Mob par casse</th><th class="n">Coffre par casse</th></tr></thead>
 <tbody>
-<tr><td class="n">1</td><td><a href="/fr/wiki/phases/plains/">Plains</a></td><td class="n">0–699</td><td>Plains</td><td class="n">5,49 %</td><td class="n">1,65 %</td></tr>
+<tr><td class="n">1</td><td><a href="/fr/wiki/phases/plains/">Plains</a></td><td class="n">0–699</td><td>Plains</td><td class="n">5,64 %</td><td class="n">1,65 %</td></tr>
 <tr><td class="n">2</td><td><a href="/fr/wiki/phases/underground/">Underground</a></td><td class="n">700–1 999</td><td>Taiga</td><td class="n">11,7 %</td><td class="n">1,88 %</td></tr>
 <tr><td class="n">3</td><td><a href="/fr/wiki/phases/winter/">Winter</a></td><td class="n">2 000–2 999</td><td>Snowy Taiga</td><td class="n">13,8 %</td><td class="n">2,69 %</td></tr>
 <tr><td class="n">4</td><td><a href="/fr/wiki/phases/ocean/">Ocean</a></td><td class="n">3 000–3 999</td><td>Ocean</td><td class="n">15,6 %</td><td class="n">3,02 %</td></tr>
 <tr><td class="n">5</td><td><a href="/fr/wiki/phases/jungle/">Jungle</a></td><td class="n">4 000–4 999</td><td>Jungle</td><td class="n">13,4 %</td><td class="n">3,04 %</td></tr>
-<tr><td class="n">6</td><td><a href="/fr/wiki/phases/swamp/">Swamp</a></td><td class="n">5 000–5 999</td><td>Swamp</td><td class="n">38,4 %</td><td class="n">4,07 %</td></tr>
+<tr><td class="n">6</td><td><a href="/fr/wiki/phases/swamp/">Swamp</a></td><td class="n">5 000–5 999</td><td>Swamp</td><td class="n">37,5 %</td><td class="n">4,13 %</td></tr>
 <tr><td class="n">7</td><td><a href="/fr/wiki/phases/dungeon/">Dungeon</a></td><td class="n">6 000–6 999</td><td>Dark Forest</td><td class="n">30,9 %</td><td class="n">2,94 %</td></tr>
 <tr><td class="n">8</td><td><a href="/fr/wiki/phases/desert/">Desert</a></td><td class="n">7 000–7 499</td><td>Desert</td><td class="n">12,9 %</td><td class="n">4,31 %</td></tr>
-<tr><td class="n">9</td><td><a href="/fr/wiki/phases/the-nether/">The Nether</a></td><td class="n">7 500–8 499</td><td>Nether Wastes</td><td class="n">24,8 %</td><td class="n">2,20 %</td></tr>
-<tr><td class="n">10</td><td><a href="/fr/wiki/phases/plenty/">Plenty</a></td><td class="n">8 500–9 499</td><td>Plains</td><td class="n">23,7 %</td><td class="n">3,39 %</td></tr>
+<tr><td class="n">9</td><td><a href="/fr/wiki/phases/the-nether/">The Nether</a></td><td class="n">7 500–8 499</td><td>The Void</td><td class="n">24,8 %</td><td class="n">2,20 %</td></tr>
+<tr><td class="n">10</td><td><a href="/fr/wiki/phases/plenty/">Plenty</a></td><td class="n">8 500–9 499</td><td>Plains</td><td class="n">22,9 %</td><td class="n">3,50 %</td></tr>
 <tr><td class="n">11</td><td><a href="/fr/wiki/phases/desolation/">Desolation</a></td><td class="n">9 500–10 499</td><td>Badlands</td><td class="n">39,2 %</td><td class="n">1,61 %</td></tr>
 <tr><td class="n">12</td><td><a href="/fr/wiki/phases/deep-dark/">Deep Dark</a></td><td class="n">10 500–11 499</td><td>Deep Dark</td><td class="n">0,030 %</td><td class="n">3,32 %</td></tr>
 <tr><td class="n">13</td><td><a href="/fr/wiki/phases/the-end/">The End</a></td><td class="n">11 500–11 999</td><td>The End</td><td class="n">20,1 %</td><td class="n">6,94 %</td></tr>
-<tr><td class="n">14</td><td><a href="/fr/wiki/phases/lush-caves/">Lush Caves</a></td><td class="n">12 000–12 499</td><td>Lush Caves</td><td class="n">20,9 %</td><td class="n">2,68 %</td></tr>
-<tr><td class="n">15</td><td><a href="/fr/wiki/phases/dripstone-caves/">Dripstone Caves</a></td><td class="n">12 500–12 999</td><td>Dripstone Caves</td><td class="n">23,0 %</td><td class="n">2,67 %</td></tr>
-<tr><td class="n">16</td><td><a href="/fr/wiki/phases/mangrove-swamp/">Mangrove Swamp</a></td><td class="n">13 000–13 499</td><td>Mangrove Swamp</td><td class="n">29,5 %</td><td class="n">2,30 %</td></tr>
-<tr><td class="n">17</td><td><a href="/fr/wiki/phases/meadow/">Meadow</a></td><td class="n">13 500–13 999</td><td>Meadow</td><td class="n">21,7 %</td><td class="n">1,63 %</td></tr>
-<tr><td class="n">18</td><td><a href="/fr/wiki/phases/cherry-grove/">Cherry Grove</a></td><td class="n">14 000–14 499</td><td>Cherry Grove</td><td class="n">41,9 %</td><td class="n">3,69 %</td></tr>
-<tr><td class="n">19</td><td><a href="/fr/wiki/phases/jagged-peaks/">Jagged Peaks</a></td><td class="n">14 500–14 999</td><td>Jagged Peaks</td><td class="n">21,8 %</td><td class="n">2,31 %</td></tr>
-<tr><td class="n">20</td><td><a href="/fr/wiki/phases/sulfur-caves/">Sulfur Caves</a></td><td class="n">15 000–15 499</td><td>Sulfur Caves</td><td class="n">15,6 %</td><td class="n">1,92 %</td></tr>
+<tr><td class="n">14</td><td><a href="/fr/wiki/phases/lush-caves/">Lush Caves</a></td><td class="n">12 000–12 499</td><td>Lush Caves</td><td class="n">20,8 %</td><td class="n">2,68 %</td></tr>
+<tr><td class="n">15</td><td><a href="/fr/wiki/phases/dripstone-caves/">Dripstone Caves</a></td><td class="n">12 500–12 999</td><td>Dripstone Caves</td><td class="n">22,9 %</td><td class="n">2,67 %</td></tr>
+<tr><td class="n">16</td><td><a href="/fr/wiki/phases/mangrove-swamp/">Mangrove Swamp</a></td><td class="n">13 000–13 499</td><td>Mangrove Swamp</td><td class="n">29,4 %</td><td class="n">2,30 %</td></tr>
+<tr><td class="n">17</td><td><a href="/fr/wiki/phases/meadow/">Meadow</a></td><td class="n">13 500–13 999</td><td>Meadow</td><td class="n">21,6 %</td><td class="n">1,63 %</td></tr>
+<tr><td class="n">18</td><td><a href="/fr/wiki/phases/cherry-grove/">Cherry Grove</a></td><td class="n">14 000–14 499</td><td>Cherry Grove</td><td class="n">41,8 %</td><td class="n">3,69 %</td></tr>
+<tr><td class="n">19</td><td><a href="/fr/wiki/phases/jagged-peaks/">Jagged Peaks</a></td><td class="n">14 500–14 999</td><td>Jagged Peaks</td><td class="n">21,7 %</td><td class="n">2,32 %</td></tr>
+<tr><td class="n">20</td><td><a href="/fr/wiki/phases/sulfur-caves/">Sulfur Caves</a></td><td class="n">15 000–15 499</td><td>Sulfur Caves</td><td class="n">15,4 %</td><td class="n">1,92 %</td></tr>
 </tbody>
 </table>
 <p>Après Sulfur Caves (bloc 15 500), le bloc magique repart à Plains. Ton total à vie continue de monter.</p>

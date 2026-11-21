@@ -24,13 +24,15 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/jost-400.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/menu.js" defer></script>
 </head>
 <body>
 <a class="saut" href="#contenu">Aller au contenu</a>
 <header class="entete">
 <div class="conteneur">
 <a class="marque" href="/fr/"><img src="/assets/img/logotype.svg" width="180" height="58" alt="AstroSky"></a>
-<nav class="menu" aria-label="Principal"><ul><li><a href="/fr/">Accueil</a></li><li><a href="/fr/rejoindre/">Rejoindre</a></li><li><a href="/fr/faq/">FAQ</a></li><li><a href="/fr/wiki/" aria-current="page">Wiki</a></li><li><a href="/fr/liens/">Liens</a></li><li class="langue"><a href="/wiki/island-level/" lang="en" hreflang="en">English</a></li></ul></nav>
+<button type="button" class="menu-bouton" hidden aria-expanded="false" aria-controls="menu-principal" aria-label="Menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<nav class="menu" id="menu-principal" aria-label="Principal"><ul><li><a href="/fr/">Accueil</a></li><li><a href="/fr/rejoindre/">Rejoindre</a></li><li><a href="/fr/faq/">FAQ</a></li><li><a href="/fr/wiki/" aria-current="page">Wiki</a></li><li><a href="/fr/liens/">Liens</a></li><li class="langue"><a href="/wiki/island-level/" lang="en" hreflang="en">English</a></li></ul></nav>
 </div>
 </header>
 <main id="contenu">
@@ -38,7 +40,7 @@
 <nav class="fil" aria-label="Fil d’Ariane"><a href="/fr/wiki/">Wiki</a> › <span aria-current="page">Niveau d’île</span></nav>
 <h1>Niveau d’île</h1>
 <p class="chapeau">Ce que vaut chaque bloc, jusqu’à quelle limite, et jusqu’où ton île peut monter.</p>
-<p class="tampon">Calculé depuis les fichiers du serveur : Minecraft: Java Edition 26.2, AOneBlock 1.28.0, AuraSkills 2.4.0, Level 2.29.0 · empreinte des données <code>21288cd44a45</code></p>
+<p class="tampon">Calculé depuis les fichiers du serveur : Minecraft: Java Edition 26.2, AOneBlock 1.28.0, AuraSkills 2.4.0, Level 2.29.0 · empreinte des données <code>aee39460feed</code></p>
 <div class="grille">
 <div class="carte"><h3>Des points au niveau</h3><p>Ton niveau d’île, c’est tes points divisés par 100, arrondi vers le bas.</p></div>
 <div class="carte"><h3>Niveau maximum</h3><p>Si ton île avait chaque bloc ci-dessous jusqu’à sa limite, elle aurait 38 232 points : niveau d’île 382. C’est le plus haut niveau qu’on peut atteindre en construisant.</p></div>
