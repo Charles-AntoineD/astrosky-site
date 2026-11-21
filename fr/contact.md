@@ -6,7 +6,7 @@ permalink: /fr/contact/
 ---
 # AstroSky — Contact
 
-**Version :** `2026-10-31`
+**Version :** `2026-11-21`
 
 ## Qui exploite AstroSky
 

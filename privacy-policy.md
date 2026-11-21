@@ -6,7 +6,7 @@ permalink: /privacy/
 ---
 # AstroSky — Privacy Policy
 
-**Version:** `2026-11-13`
+**Version:** `2026-11-21`
 
 This policy covers the AstroSky Minecraft server (`astrosky.gg`), its store (`astrosky.gg/store`), its website
 (`astrosky.gg`) and its contact address (`support@astrosky.gg`).
@@ -75,6 +75,7 @@ section 10 if a player turns out to be under 18.
 | A record that a player's access was removed because they are under 18 (no age and no proof are stored) | keep the removal in place | 12 months, then reviewed |
 | Server log: joins, leaves, usernames and anti-cheat alerts | operate the server, fix problems, detect cheating | 90 days |
 | Staff logs: who looked at which records and why, staff actions, permission changes | hold the operator, and any moderator, accountable | 24 months |
+| Admin requests the operator makes through the AI assistant (section 13): the time, the request's reference, the action and its limits (an item and a count, a duration, a rule), the result, the reference of the sanction if there is one, and your username only if the action was carried out (otherwise, in place of your username, a fingerprint made with a secret key, which does not show your username); for 31 days, a fingerprint of the same kind with the items given | hold the operator and the assistant accountable for every admin action; apply the limits on gifts | 24 months; limits on gifts: 31 days |
 | Purchases, as Tebex reports them to us: transaction ID, username, UUID, item, price, currency, date, status (paid, refunded, disputed), delivery | deliver your purchase, keep your purchase history, refund, prevent payment fraud, meet accounting and tax duties | cosmetics you own: as long as your account exists; accounting records: 6 years (the legal period) |
 | Emails you send us: your address, the content, attachments | answer you | deleted 52 days after we receive them, 84 days at most counting our email provider's recovery period; a privacy request and our answer: 24 months at most; for a report, a sanction or an appeal, the case keeps our decision and its reasons, not your email, unless the law requires us to keep it |
 | Website visits | show the website | we keep no access logs; GitHub, our website host, processes your IP address to serve the page, under its own policy |
@@ -90,6 +91,10 @@ daily deletion and destroyed automatically 2 days after it is made, so no copy i
 The operator plays and moderates with an ordinary Minecraft game client. That client keeps, on the operator's own
 computer, the chat and private messages it receives; these local logs are deleted after 90 days at most. Safety records are looked up from the
 server console, never through the game chat.
+
+The AI assistant keeps, on the operator's own computer, a copy of its conversations with the operator, including the
+username of a player named for an admin action. These copies have no automatic deletion date; the operator deletes
+them within 24 months. Anthropic also keeps these conversations (section 9).
 
 **What we do not collect:** your age, your real name (unless you write it to us), identity documents, card numbers,
 or voice. We do not use your IP address to find where you are.
@@ -122,7 +127,9 @@ or voice. We do not use your IP address to find where you are.
 **No automated tool sanctions you**: every sanction is decided by a person. The anti-cheat only alerts us. If you
 send public chat messages too fast, the extra messages are not sent and you see a notice; this is not a sanction. The chat filter works the same way: a public message with a link to another website (our own site and our store excepted) or a word on our list (hate speech and slurs, explicit sexual words and sexual insults, and incitement directed at someone to harm themselves) is not sent, and you see a notice that does not say which word or link.
 The server can also disconnect you automatically after 30 minutes idle, or if your client floods the chat or sends
-too much data; you can rejoin right away. If we ever add an automated measure against an account (a stopped message is not one), it will be short (1 hour at most, or removal from the current session), limited to 3 per account
+too much data; you can rejoin right away. To pause the Ultimate perk when you are away, the server checks, in memory
+only, whether you moved, turned or used anything in the last 5 minutes; nothing is recorded, and it is forgotten when
+you log out. That pause is how the perk works, not a sanction. If we ever add an automated measure against an account (a stopped message is not one), it will be short (1 hour at most, or removal from the current session), limited to 3 per account
 in 24 hours, with a person reviewing beyond that, and we will update this policy before it applies.
 
 You can ask us what information an automated measure used, why it was applied and which factors mattered, ask for that
@@ -166,7 +173,7 @@ pages use cookies, as its policy explains.
 | Mojang and Microsoft | your username and a login check when you join (standard Minecraft login); your username and UUID when a game menu shows your head (skin) | confirm that you own a genuine Minecraft account; show skins in menus | Microsoft's services (Microsoft, United States; Mojang, Sweden) |
 | Tebex Limited | if you buy: the delivery details in section 8; for every player who joins, bought or not: the account ID, username, IP address and join time that its plugin sends (section 8) | sell, take payment, deliver | United Kingdom |
 | Zoho (our email provider) | the emails you send us | answer you | Canada |
-| Anthropic (provider of the AI assistant that helps operate the server) | the assistant's conversations with the operator, including the commands it runs on the server machine and their output (service state, results of restarts and backups), designed to contain no player data (if some ever appears, we treat it as an incident, section 14); Anthropic keeps them 30 days and does not train its models on them while the operator's "Help improve Claude" setting is off; we update this line if it changes | operate the server | Anthropic is a U.S. company; this plan does not say where data is stored or processed, so possibly elsewhere |
+| Anthropic (provider of the AI assistant that helps operate the server) | the assistant's conversations with the operator, including the commands it runs on the server machine and their result (service state, results of restarts and backups); when the operator asks it for an admin action for a player (section 13), the conversation contains that player's username, the action asked (for a warning or a mute, the rule concerned) and whether it was done, and nothing else about them: never their account ID, IP address, chat or other records; any other player data in a conversation is treated as an incident (section 14); Anthropic keeps them 30 days (up to 2 years if its automated safety systems flag a conversation) and does not train its models on them while the operator's "Help improve Claude" setting is off; we never send them to Anthropic as feedback or bug reports; we update this line if it changes | operate the server | Anthropic is a U.S. company; this plan does not say where data is stored or processed, so possibly elsewhere |
 | GitHub Pages (website host) | technical data of your visit, including your IP address | show the website | United States |
 | Discord (community server) | copies of messages blocked by AutoMod (section 3), kept on Discord | review a possible danger | United States |
 | A creator, only if you ask us to blur or remove their video | the link and what to blur or remove, never who asked | blur or remove the video | where the creator is |
@@ -231,7 +238,7 @@ complaint with it. If you live elsewhere, you can also contact the data protecti
 ## 13. How we govern privacy
 
 - **Responsibility:** the person in charge (section 1) approves these rules and answers for them.
-- **Roles:** the operator can access the server machine and its backups. One AI assistant (Claude, made by Anthropic), directed by the operator for operating the server only, also has restricted access to that machine. Its administrator rights are limited to a short fixed list of operations (such as checking the state of the service, stopping and restarting it, and running backups). It reads no player data. Every command it runs is logged on the machine, and the operator can remove its access at any time. Its conversations with the operator go to its provider, Anthropic (section 9). For a given case, a designated
+- **Roles:** the operator can access the server machine and its backups. One AI assistant (Claude, made by Anthropic), directed by the operator for operating the server only, also has restricted access to that machine. Its administrator rights are limited to a short fixed list of operations (such as checking the state of the service, stopping and restarting it, and running backups) and, only when the operator asks for it, a short fixed list of admin actions for one player at a time: give an item from a fixed list, in small amounts; send back to spawn; give a warning, or mute for 1 hour, only where the sanctions grid of the server rules (section 4) provides it. The operator names the player by username only. The assistant never decides a sanction: the operator does, and the usual rules on sanctions and appeals apply. It reads no player data: it only learns whether the action was done, which shows whether the player was online, and the number of players online. Every request is logged on the machine before it is carried out (section 3), and the operator can remove this access at any time. Its conversations with the operator go to its provider, Anthropic (section 9). For a given case, a designated
   moderator can read the records of that case. The operator reviews appeals; a trusted adult who helps with an appeal
   can read the case under appeal. Before a suspension or a ban that follows a case where someone may be in danger,
   the operator asks, where possible, a second trusted adult to review it; that person can read the case concerned,
@@ -245,7 +252,7 @@ complaint with it. If you live elsewhere, you can also contact the data protecti
 - The server runs on a machine rented from our host, separate from our computers.
 - Access follows the roles above, and our moderation tools log every look made through them (section 4).
 - Every command of the operations assistant, and whether it succeeded, is logged on the server machine.
-- We cannot guarantee deletion at Anthropic. If player data ever appears in an assistant conversation, we turn off the "Help improve Claude" setting for the operator's account and delete the conversation.
+- We cannot guarantee deletion at Anthropic. The "Help improve Claude" setting of the operator's account is off. Apart from the username of a player the operator names for an admin action (section 13), if player data ever appears in an assistant conversation, we treat it as an incident and delete the conversation.
 - Backups are encrypted.
 
 No system is perfect, and we cannot promise that an incident will never happen. We keep a register of confidentiality
