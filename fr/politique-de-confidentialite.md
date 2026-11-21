@@ -6,7 +6,7 @@ permalink: /fr/confidentialite/
 ---
 # AstroSky — Politique de confidentialité
 
-**Version :** `2026-11-13`
+**Version :** `2026-11-21`
 
 Cette politique couvre le serveur Minecraft AstroSky (`astrosky.gg`), sa boutique (`astrosky.gg/store`), son site
 (`astrosky.gg`) et son adresse de contact (`support@astrosky.gg`).
@@ -79,6 +79,7 @@ création.
 | Trace du retrait d'accès d'un joueur de moins de 18 ans (ni l'âge ni la preuve ne sont gardés) | maintenir le retrait | 12 mois, puis réexamen |
 | Journal du serveur : arrivées, départs, pseudos et alertes de l'anti-triche | exploiter le serveur, corriger les problèmes, détecter la triche | 90 jours |
 | Journaux de l'équipe : qui a consulté quels enregistrements et pourquoi, actions de l'équipe, changements de permissions | rendre l'exploitant, et tout modérateur, responsables de leurs gestes | 24 mois |
+| Demandes d'administration que l'exploitant passe par l'assistant d'IA (section 13) : l'heure, la référence de la demande, l'action et ses bornes (un objet et un nombre, une durée, une règle), le résultat, la référence de la sanction s'il y en a une, et votre pseudo seulement si l'action a été faite (sinon, à la place de votre pseudo, une empreinte faite avec une clé secrète, qui ne montre pas votre pseudo) ; pendant 31 jours, une empreinte du même genre avec les objets donnés | rendre l'exploitant et l'assistant responsables de chaque geste d'administration ; appliquer les limites des dons | 24 mois ; limites des dons : 31 jours |
 | Achats, tels que Tebex nous les transmet : identifiant de transaction, pseudo, UUID, article, prix, devise, date, statut (payé, remboursé, contesté), livraison | livrer votre achat, tenir votre historique d'achats, rembourser, prévenir la fraude au paiement, respecter les obligations comptables et fiscales | cosmétiques possédés : tant que votre compte existe ; pièces comptables : 6 ans (le délai légal) |
 | Courriels que vous nous envoyez : votre adresse, le contenu, les pièces jointes | vous répondre | supprimés 52 jours après leur réception, 84 jours au plus en comptant le délai de récupération de notre fournisseur de courriel ; une demande sur vos données et notre réponse : 24 mois au plus ; pour un signalement, une sanction ou un appel, le dossier garde notre décision et ses motifs, pas votre courriel, sauf si la loi nous oblige à le garder |
 | Visites du site | afficher le site | nous ne gardons aucun journal d'accès ; GitHub, l'hébergeur de notre site, traite votre adresse IP pour servir la page, selon sa propre politique |
@@ -95,6 +96,10 @@ n'a donc jamais plus de 90 jours.
 L'exploitant joue et modère avec un client Minecraft ordinaire. Ce client garde, sur son propre ordinateur, le chat et
 les messages privés qu'il reçoit ; ces journaux locaux sont supprimés au bout de 90 jours au plus. Les enregistrements
 de sûreté se consultent depuis la console du serveur, jamais par le chat du jeu.
+
+L'assistant d'IA garde, sur l'ordinateur de l'exploitant, une copie de ses conversations avec l'exploitant, y
+compris le pseudo d'un joueur désigné pour un geste d'administration. Ces copies n'ont pas de date d'effacement
+automatique ; l'exploitant les supprime dans les 24 mois. Anthropic garde aussi ces conversations (section 9).
 
 **Ce que nous ne recueillons pas :** votre âge, votre vrai nom (sauf si vous nous l'écrivez), une pièce d'identité, un
 numéro de carte ou votre voix. Nous ne nous servons pas de votre adresse IP pour savoir où vous êtes.
@@ -128,7 +133,10 @@ numéro de carte ou votre voix. Nous ne nous servons pas de votre adresse IP pou
 
 **Aucun outil automatique ne vous sanctionne** : chaque sanction est décidée par une personne. L'anti-triche ne
 fait que nous alerter. Si vous envoyez des messages dans le chat public trop vite, les messages en trop ne sont pas envoyés et un avis s'affiche ; ce n'est pas une sanction. Le filtre du chat fonctionne de la même façon : un message public qui contient un lien vers un autre site (notre site et notre boutique exceptés) ou un mot de notre liste (propos haineux et insultes discriminatoires, mots sexuels explicites et insultes à caractère sexuel, et incitation dirigée à se faire du mal) n'est pas envoyé, et un avis s'affiche sans dire quel mot ni quel lien. Le serveur peut aussi vous déconnecter automatiquement
-après 30 minutes d'inactivité, ou si votre client inonde le chat ou envoie trop de données ; vous pouvez revenir
+après 30 minutes d'inactivité, ou si votre client inonde le chat ou envoie trop de données ; pour mettre en pause le
+perk Ultimate pendant votre absence, le serveur vérifie, en mémoire seulement, si vous avez bougé, tourné la tête ou
+utilisé quelque chose dans les 5 dernières minutes : rien n'est enregistré, tout est oublié à votre déconnexion, et
+cette pause est le fonctionnement du perk, pas une sanction ; vous pouvez revenir
 aussitôt. Si nous ajoutons un jour une mesure automatique contre un compte (un message arrêté n'en est pas une), elle sera courte (une heure au
 plus, ou une expulsion de la session en cours), limitée à 3 par compte sur 24 heures, avec l'examen d'une personne
 au-delà, et nous mettrons cette politique à jour avant qu'elle s'applique.
@@ -176,7 +184,7 @@ l'explique sa politique.
 | Mojang et Microsoft | votre pseudo et une vérification de connexion quand vous arrivez (connexion standard de Minecraft) ; votre pseudo et votre UUID quand un menu du jeu affiche votre tête (skin) | confirmer que vous avez un compte Minecraft authentique ; afficher les skins dans les menus | services de Microsoft (Microsoft, États-Unis ; Mojang, Suède) |
 | Tebex Limited | si vous achetez : les informations de livraison de la section 8 ; pour chaque joueur qui se connecte, qu'il achète ou non : l'identifiant de compte, le pseudo, l'adresse IP et l'heure de connexion que son plugin envoie (section 8) | vendre, encaisser, livrer | Royaume-Uni |
 | Zoho (notre fournisseur de courriel) | les courriels que vous nous envoyez | vous répondre | Canada |
-| Anthropic (fournisseur de l'assistant d'IA qui aide à exploiter le serveur) | les conversations de l'assistant avec l'exploitant, dont les commandes lancées sur la machine du serveur et leur sortie (état du service, résultat des redémarrages et des sauvegardes), conçues pour ne contenir aucune donnée de joueur (si une apparaît, nous la traitons comme un incident, section 14) ; Anthropic les garde 30 jours et n'entraîne pas ses modèles dessus tant que le réglage « Aider à améliorer Claude » de l'exploitant est désactivé ; nous mettons cette ligne à jour s'il change | exploiter le serveur | Anthropic est une entreprise des États-Unis ; ce forfait n'indique pas où les données sont stockées ou traitées, peut-être ailleurs |
+| Anthropic (fournisseur de l'assistant d'IA qui aide à exploiter le serveur) | les conversations de l'assistant avec l'exploitant, dont les commandes lancées sur la machine du serveur et leur résultat (état du service, résultat des redémarrages et des sauvegardes) ; quand l'exploitant lui demande un geste d'administration pour un joueur (section 13), la conversation contient le pseudo de ce joueur, l'action demandée (pour un avertissement ou une sourdine, la règle en cause) et si elle a été faite, et rien d'autre à son sujet : jamais son identifiant de compte, son adresse IP, son chat ni ses autres enregistrements ; toute autre donnée de joueur dans une conversation est traitée comme un incident (section 14) ; Anthropic les garde 30 jours (jusqu'à 2 ans si ses systèmes automatiques de sûreté signalent une conversation) et n'entraîne pas ses modèles dessus tant que le réglage « Aider à améliorer Claude » de l'exploitant est désactivé ; nous ne les envoyons jamais à Anthropic comme commentaire ou rapport de bogue ; nous mettons cette ligne à jour s'il change | exploiter le serveur | Anthropic est une entreprise des États-Unis ; ce forfait n'indique pas où les données sont stockées ou traitées, peut-être ailleurs |
 | GitHub Pages (hébergeur du site) | les données techniques de votre visite, dont votre adresse IP | afficher le site | États-Unis |
 | Discord (serveur communautaire) | les copies de messages bloqués par l'AutoMod (section 3), gardées sur Discord | examiner un danger possible | États-Unis |
 | Un créateur, seulement si vous nous demandez de flouter ou de retirer sa vidéo | le lien et ce qu'il faut flouter ou retirer, jamais qui l'a demandé | flouter ou retirer la vidéo | là où se trouve le créateur |
@@ -247,7 +255,7 @@ protection des données de votre pays.
 ## 13. Notre gouvernance de la confidentialité
 
 - **Responsabilité :** le responsable (section 1) approuve ces règles et en répond.
-- **Rôles :** l'exploitant a accès à la machine du serveur et à ses sauvegardes. Un assistant d'IA (Claude, d'Anthropic), dirigé par l'exploitant pour l'exploitation du serveur seulement, a aussi un accès restreint à cette machine. Ses droits d'administration sont limités à une courte liste fixe d'opérations (par exemple vérifier l'état du service, l'arrêter et le relancer, et lancer des sauvegardes). Il ne lit aucune donnée des joueurs. Chaque commande qu'il lance est consignée sur la machine, et l'exploitant peut retirer cet accès en tout temps. Ses conversations avec l'exploitant vont à son fournisseur, Anthropic (section 9). Pour un dossier donné, un
+- **Rôles :** l'exploitant a accès à la machine du serveur et à ses sauvegardes. Un assistant d'IA (Claude, d'Anthropic), dirigé par l'exploitant pour l'exploitation du serveur seulement, a aussi un accès restreint à cette machine. Ses droits d'administration sont limités à une courte liste fixe d'opérations (par exemple vérifier l'état du service, l'arrêter et le relancer, et lancer des sauvegardes) et, seulement quand l'exploitant le demande, à une courte liste fixe de gestes d'administration pour un joueur à la fois : donner un objet d'une liste fixe, en petite quantité ; renvoyer au point d'apparition ; donner un avertissement, ou mettre en sourdine 1 heure, seulement là où la grille des sanctions des règles du serveur (section 4) le prévoit. L'exploitant désigne le joueur par son pseudo seulement. L'assistant ne décide jamais d'une sanction : c'est l'exploitant, et les règles habituelles des sanctions et des appels s'appliquent. Il ne lit aucune donnée des joueurs : il apprend seulement si le geste a été fait, ce qui montre si le joueur était en ligne, et le nombre de joueurs en ligne. Chaque demande est consignée sur la machine avant d'être exécutée (section 3), et l'exploitant peut retirer cet accès en tout temps. Ses conversations avec l'exploitant vont à son fournisseur, Anthropic (section 9). Pour un dossier donné, un
   modérateur désigné peut lire les enregistrements de ce dossier. L'exploitant examine les appels ; un adulte de
   confiance qui l'aide pour un appel peut lire le dossier en appel. Avant une suspension ou un bannissement qui suit
   un dossier où quelqu'un est peut-être en danger, l'exploitant demande, si possible, à un second adulte de confiance
@@ -262,7 +270,7 @@ protection des données de votre pays.
 - Le serveur tourne sur une machine louée chez notre hébergeur, séparée de nos ordinateurs.
 - L'accès suit les rôles ci-dessus, et nos outils de modération journalisent chaque consultation faite par leur intermédiaire (section 4).
 - Chaque commande de l'assistant d'exploitation, et son résultat (réussie ou non), est consignée sur la machine du serveur.
-- Nous ne pouvons pas garantir l'effacement chez Anthropic. Si une donnée de joueur apparaît un jour dans une conversation de l'assistant, nous désactivons le réglage « Aider à améliorer Claude » du compte de l'exploitant et supprimons la conversation.
+- Nous ne pouvons pas garantir l'effacement chez Anthropic. Le réglage « Aider à améliorer Claude » du compte de l'exploitant est désactivé. Hors le pseudo d'un joueur que l'exploitant désigne pour un geste d'administration (section 13), si une donnée de joueur apparaît un jour dans une conversation de l'assistant, nous la traitons comme un incident et supprimons la conversation.
 - Les sauvegardes sont chiffrées.
 
 Aucun système n'est parfait, et nous ne pouvons pas promettre qu'aucun incident n'arrivera. Nous tenons un registre des

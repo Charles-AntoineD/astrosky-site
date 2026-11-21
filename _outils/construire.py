@@ -13,6 +13,7 @@ produit est supprimé. GitHub Pages copie ces pages telles quelles (aucun en-tê
 from __future__ import annotations
 
 import argparse
+import functools
 import html
 import itertools
 import json
@@ -123,6 +124,9 @@ class Contexte:
         self.equipe = int(s.get("taille_equipe", 0))
         # Date d'ouverture annoncée, telle qu'elle s'affiche (EN, FR) ; vide = « date à annoncer ».
         self.ouverture = (str(s.get("ouverture_en", "")).strip(), str(s.get("ouverture_fr", "")).strip())
+        # Lancement officiel annoncé, serveur déjà ouvert (EN, FR) ; vide = aucune ligne (décision de l'Owner du
+        # 2026-11-21 : ouverture publique le mardi 1er décembre 2026).
+        self.lancement = (str(s.get("lancement_en", "")).strip(), str(s.get("lancement_fr", "")).strip())
         self.jeu = etat["jeu"]
         prive = all(p in legales_presentes for p in LEGALES["confidentialite"])
         conditions = all(p in legales_presentes for p in LEGALES["conditions"])
@@ -307,10 +311,20 @@ def carte_adresse(c: Contexte, lang: str, ident: str) -> str:
 </div>"""
 
 
+def lancement(c: Contexte, lang: str) -> str:
+    """« Official launch: … » quand le serveur est ouvert et le lancement annoncé ; sinon rien."""
+    quand = c.lancement[0 if lang == "en" else 1]
+    if not (c.ouvert and quand):
+        return ""
+    return t(lang, f" Official launch: {quand}.", f" Lancement officiel : {quand}.")
+
+
 def statut(c: Contexte, lang: str) -> str:
     if c.ouvert:
-        return t(lang, "AstroSky is open. Copy the address, then in Minecraft: Multiplayer → Add Server.",
-                 "AstroSky est ouvert. Copie l’adresse, puis dans Minecraft : Multijoueur → Ajouter un serveur.")
+        return t(lang, "Open now." + lancement(c, lang) + " Copy the address, add it in Minecraft (Multiplayer → Add Server), then type "
+                       "<code>/is go</code> in game to reach your island.",
+                 "Ouvert maintenant." + lancement(c, lang) + " Copie l’adresse, ajoute-la dans Minecraft (Multijoueur → Ajouter un serveur), "
+                 "puis tape <code>/is go</code> en jeu pour aller sur ton île.")
     quand = c.ouverture[0 if lang == "en" else 1]
     if quand:
         return t(lang, f"Opens {quand}.", f"Ouverture {quand}.")
@@ -352,16 +366,38 @@ def a_venir(c: Contexte, lang: str) -> str | None:
              f"La Mise à jour 1 est prévue : {' et '.join(prevu)}.")
 
 
-def boutique_phrase(c: Contexte, lang: str) -> str:
-    phrase = t(lang, "The store sells cosmetics only, such as titles and name colours. Nothing sold "
-                     "changes how the game plays, coins are never sold, and no purchase is random.",
-               "La boutique ne vend que des cosmétiques, par exemple des titres et des couleurs de pseudo. "
-               "Rien de ce qui est vendu ne change le jeu, les coins ne se vendent jamais, et aucun achat n’est au "
-               "hasard.")
+def boutique_titre(c: Contexte, lang: str) -> str:
+    """Titre de la carte des caisses et de la boutique (accueil)."""
     if c.boutique:
-        phrase += t(lang, ' Prices are visible without an account at <a href="/store">astrosky.gg/store</a>.',
-                    ' Les prix sont visibles sans compte sur <a href="/store">astrosky.gg/store</a>.')
-    return phrase
+        return t(lang, "A store, and crates with the odds shown", "Une boutique, et des caisses aux chances affichées")
+    return t(lang, "Crates, with the odds shown", "Des caisses, chances affichées")
+
+
+def boutique_phrase(c: Contexte, lang: str) -> str:
+    """Les caisses (spec 052) donnent des récompenses au hasard, dont certaines aident dans le jeu : le site ne dit plus
+    « cosmétiques seulement » ni « aucun achat n'est au hasard ». Boutique fermée : seulement ce que le jeu fait (clé
+    Comète gratuite chaque jour, chances en jeu). Boutique ouverte (ses conditions en ligne disent qu'elle vend des
+    paquets de Nebula) : la réponse « Peut-on acheter un avantage ? » du Discord, approuvée mot pour mot par l'Owner
+    (spec 052, T004 et T005), avec la clé gratuite et le lien des prix."""
+    if not c.boutique:
+        return t(lang, "Every account gets a free Comet key each day, and a key opens a crate. Crates give a reward at "
+                       "random, and some rewards (blocks, tools, a few coins, <code>/fly</code>) help in the game. The "
+                       "odds of every reward are shown in game with <code>/info Crates</code>, before you open one.",
+                 "Chaque compte reçoit une clé Comète gratuite par jour, et une clé ouvre une caisse. Une caisse donne "
+                 "une récompense au hasard, et certaines récompenses (blocs, outils, quelques coins, "
+                 "<code>/fly</code>) aident dans le jeu. Les chances de chaque récompense sont affichées en jeu avec "
+                 "<code>/info Crates</code>, avant l’ouverture.")
+    return t(lang, "The store sells cosmetics, titles and Nebula packs. With Nebula you buy crate keys in game; crates "
+                   "give random rewards, and some (blocks, tools, a few coins, <code>/fly</code>) help in the game. "
+                   "Every reward’s odds are shown before you buy a key. Every account also gets a free Comet key each "
+                   "day. Coins are never sold directly, and Nebula can’t be traded or exchanged for coins at a fixed "
+                   'rate. Prices are visible without an account at <a href="/store">astrosky.gg/store</a>.',
+             "La boutique vend des cosmétiques, des titres et des paquets de Nebula. Avec des Nebula, tu achètes en "
+             "jeu des clés de caisses ; les caisses donnent des récompenses au hasard, et certaines (blocs, outils, "
+             "quelques coins, <code>/fly</code>) aident dans le jeu. Les chances de chaque récompense sont affichées "
+             "avant l’achat d’une clé. Chaque compte reçoit aussi une clé Comète gratuite par jour. Les coins ne se "
+             "vendent jamais directement, et les Nebula ne s’échangent ni entre joueurs ni contre des coins à taux "
+             'fixe. Les prix sont visibles sans compte sur <a href="/store">astrosky.gg/store</a>.')
 
 
 def chiffres_accueil(c: Contexte, lang: str) -> list[tuple[str, str]]:
@@ -410,8 +446,7 @@ def accueil(c: Contexte, lang: str) -> str:
         cartes.append(("ile-metiers.jpg", t(lang, "Jobs", "Métiers"),
                        t(lang, "Pick a job and earn coins for the work you already do on your island.",
                          "Choisis un métier et gagne des coins pour le travail que tu fais déjà sur ton île.")))
-    cartes.append(("ile-vitrine.jpg", t(lang, "A store for looks only", "Une boutique pour le style seulement"),
-                   boutique_phrase(c, lang)))
+    cartes.append(("ile-vitrine.jpg", boutique_titre(c, lang), boutique_phrase(c, lang)))
     atouts = "\n".join(
         f'<article class="atout"><figure class="atout-image">'
         f'<img src="/assets/img/{image}" alt="" width="1120" height="700" loading="lazy" decoding="async"></figure>'
@@ -452,6 +487,27 @@ def accueil(c: Contexte, lang: str) -> str:
             f'<div class="conteneur explorateur"><div class="avis"><p><strong>Code Explorer :</strong> <code>{code}</code>. '
             f'En jeu, tape <code>/website {code}</code>.</p></div></div>')
 
+    # Serveur ouvert : sous les boutons, où lire les règles et comment signaler (l'âge est déjà sur la carte de l'adresse).
+    consignes = ""
+    if c.ouvert:
+        regles_page = c.legale("regles", lang)
+        contact_page = c.legale("contact", lang)
+        morceaux = []
+        if regles_page:
+            morceaux.append(t(lang, f'Read the <a href="{regles_page}">rules</a>.',
+                              f'Lis les <a href="{regles_page}">règles</a>.'))
+        voies = []
+        if j["commande_report"]:
+            voies.append(t(lang, "type <code>/report</code> in game", "tape <code>/report</code> en jeu"))
+        if contact_page:
+            voies.append(t(lang, f'write to us from the <a href="{contact_page}">contact page</a>',
+                           f'écris-nous depuis la <a href="{contact_page}">page de contact</a>'))
+        if voies:
+            morceaux.append(t(lang, "To report a problem, ", "Pour signaler un problème, ")
+                            + t(lang, " or ", " ou ").join(voies) + ".")
+        if morceaux:
+            consignes = '\n<p class="consignes">' + " ".join(morceaux) + "</p>"
+
     meta = "".join(f"<li>{m}</li>" for m in (
         f'{t(lang, "Minecraft: Java Edition", "Minecraft: Java Edition")} {e(c.versions)}',
         t(lang, "Java only, no Bedrock", "Java seulement, pas Bedrock"),
@@ -471,7 +527,7 @@ def accueil(c: Contexte, lang: str) -> str:
 </div>
 <div class="actions"><a class="bouton grand" href="{rejoindre}">{t(lang, "How to join", "Comment rejoindre")}</a>{second}</div>
 <ul class="pastilles">{meta}</ul>
-<p class="statut">{statut(c, lang)}</p>
+<p class="statut">{statut(c, lang)}</p>{consignes}
 </div>
 </section>{explorateur}
 
@@ -519,7 +575,10 @@ def rejoindre(c: Contexte, lang: str) -> str:
     v = e(c.versions)
     premiere = e(re.split(r"[–\-]", c.versions)[0].strip())
     avant = ""
-    if not c.ouvert:
+    if c.ouvert:
+        avant = '<div class="avis"><p>' + t(lang, "Open now, for players 18 and over.",
+                                            "Ouvert maintenant, pour les 18 ans et plus.") + lancement(c, lang) + "</p></div>"
+    else:
         avant = f'<div class="avis"><p>{statut(c, lang)} ' + t(
             lang, "Until then, the server is closed to players (whitelist).",
             "D’ici là, le serveur est fermé aux joueurs (liste blanche).") + "</p></div>"
@@ -560,7 +619,7 @@ def rejoindre(c: Contexte, lang: str) -> str:
 <li><p>{t(lang, "Open the Minecraft Launcher and choose <strong>Minecraft: Java Edition</strong>.", "Ouvre le Minecraft Launcher et choisis <strong>Minecraft: Java Edition</strong>.")}</p></li>
 <li><p>{t(lang, f"Use version <strong>{v}</strong>. If the launcher starts another version: <strong>Installations → New installation</strong>, pick version <strong>{premiere}</strong>, click <strong>Create</strong>, then <strong>Play</strong>.", f"Utilise la version <strong>{v}</strong>. Si le launcher lance une autre version : <strong>Installations → Nouvelle installation</strong>, choisis la version <strong>{premiere}</strong>, clique sur <strong>Créer</strong>, puis sur <strong>Jouer</strong>.")}</p></li>
 <li><p>{t(lang, f"In the game: <strong>Multiplayer → Add Server</strong>. Server Name: <code>AstroSky</code>. Server Address: <code>{e(c.adresse)}</code>. Click <strong>Done</strong>.", f"Dans le jeu : <strong>Multijoueur → Ajouter un serveur</strong>. Nom du serveur : <code>AstroSky</code>. Adresse du serveur : <code>{e(c.adresse)}</code>. Clique sur <strong>Terminé</strong>.")}</p></li>
-<li><p>{t(lang, "Select AstroSky in the list and click <strong>Join Server</strong>. In game, type <code>/ob</code> to reach your island and <code>/help</code> for help.", "Choisis AstroSky dans la liste et clique sur <strong>Rejoindre le serveur</strong>. En jeu, tape <code>/ob</code> pour aller sur ton île et <code>/help</code> pour l’aide.")}</p></li>
+<li><p>{t(lang, "Select AstroSky in the list and click <strong>Join Server</strong>. In game, type <code>/is go</code> to reach your island and <code>/help</code> for help.", "Choisis AstroSky dans la liste et clique sur <strong>Rejoindre le serveur</strong>. En jeu, tape <code>/is go</code> pour aller sur ton île et <code>/help</code> pour l’aide.")}</p></li>
 </ol>
 {pack_html}
 <h2>{t(lang, "If it doesn’t work", "Si ça ne marche pas")}</h2>
@@ -603,7 +662,13 @@ def questions(c: Contexte, lang: str) -> list[tuple[str, str]]:
     q.append((t(lang, "Can I play on Bedrock, a console or a phone?", "Puis-je jouer sur Bedrock, une console ou un téléphone ?"),
               t(lang, "No. AstroSky is for Minecraft: Java Edition on a computer only.",
                 "Non. AstroSky est réservé à Minecraft: Java Edition, sur ordinateur.")))
-    if not c.ouvert:
+    if c.ouvert:
+        q.append((t(lang, "Is AstroSky open?", "AstroSky est-il ouvert ?"),
+                  t(lang, f'Yes, open now: <code>{e(c.adresse)}</code>, on Minecraft: Java Edition {e(c.versions)}, for '
+                          f'players 18 and over.{lancement(c, lang)} Step by step: <a href="{rejoindre}">how to join</a>.',
+                    f'Oui, ouvert maintenant : <code>{e(c.adresse)}</code>, sur Minecraft: Java Edition '
+                    f'{e(c.versions)}, pour les 18 ans et plus.{lancement(c, lang)} Pas à pas : <a href="{rejoindre}">comment rejoindre</a>.')))
+    else:
         q.append((t(lang, "When does AstroSky open?", "Quand AstroSky ouvre-t-il ?"),
                   statut(c, lang) + " " + t(lang, "Until then, the server is closed to players (whitelist).",
                                             "D’ici là, le serveur est fermé aux joueurs (liste blanche).")))
@@ -633,8 +698,6 @@ def questions(c: Contexte, lang: str) -> list[tuple[str, str]]:
     amis += (t(lang, "; your team shares ", " ; ton équipe partage ") + t(lang, " and ", " et ").join(partage) + "."
              if partage else ".")
     q.append((t(lang, "Can I play with friends?", "Puis-je jouer avec mes amis ?"), amis))
-    q.append((t(lang, "Can you buy an advantage?", "Peut-on acheter un avantage ?"),
-              t(lang, "No. ", "Non. ") + boutique_phrase(c, lang)))
     if c.vote:
         q.append((t(lang, "How do I vote for AstroSky?", "Comment voter pour AstroSky ?"),
                   t(lang, f'Voting is optional: <a href="{c.page("vote", lang)}">the vote page</a> lists the three sites and how vote points work.',
@@ -713,8 +776,8 @@ def liens(c: Contexte, lang: str) -> str:
                        + " · ".join(f'<a href="{e(v["adresse"])}" rel="noopener">{e(v["nom"])}</a>' for v in c.votes)))
     if c.boutique:
         lignes.append((t(lang, "Store", "Boutique"),
-                       t(lang, '<a href="/store">astrosky.gg/store</a> (cosmetics only, prices visible without an account)',
-                         '<a href="/store">astrosky.gg/store</a> (cosmétiques seulement, prix visibles sans compte)')))
+                       t(lang, '<a href="/store">astrosky.gg/store</a> (cosmetics, titles and Nebula packs; prices visible without an account)',
+                         '<a href="/store">astrosky.gg/store</a> (cosmétiques, titres et paquets de Nebula ; prix visibles sans compte)')))
     else:
         lignes.append((t(lang, "Store", "Boutique"),
                        t(lang, "not open yet; when it opens, it will be reachable only from this page",
@@ -1005,6 +1068,9 @@ INTERDITS = [
      "ancien spawn (acheté : aucun texte ne laisse entendre qu'AstroSky l'a construit)"),
     (r"(?i)November 16|16 novembre", "ancienne date d'ouverture (annoncée le 4 novembre pour le 6)"),
     (r"(?i)forever|pour toujours|never expire|n.expirent jamais", "promesse de durée"),
+    (r"(?i)sells cosmetics only|looks only|nothing sold changes|no purchase is random|ne vend que des cosmétiques|"
+     r"pour le style seulement|rien de ce qui est vendu ne change|n.est au hasard|\(cosmetics only|\(cosmétiques seulement",
+     "promesse « cosmétiques seulement, rien n'est au hasard » (fausse depuis les caisses, spec 052, FR-025)"),
     (r"(?i)official minecraft(?! service)|minecraft official", "« Official » à côté de Minecraft"),
     (r"(?i)\b(stardust|wish|poussière d’étoiles|vœu)\b", "vocabulaire réservé (charte, O8)"),
     (r"[\w.+-]+@[\w-]+\.[\w.]+", "adresse de courriel (garder la page de contact)"),
@@ -1076,7 +1142,8 @@ def verifier(sorties: dict[str, str], c: Contexte) -> list[str]:
                 erreurs.append(f"{nom} : lien interne cassé {chemin}")
         if not nom.startswith("_layouts/") and "NOT AN OFFICIAL MINECRAFT SERVICE" not in page:
             erreurs.append(f"{nom} : mention de non-affiliation absente")
-    return erreurs + verifier_discord(sorties, c) + verifier_idees(sorties, c) + verifier_explorateur(sorties, c)
+    return (erreurs + verifier_discord(sorties, c) + verifier_idees(sorties, c) + verifier_explorateur(sorties, c)
+            + verifier_ouverture(sorties, c))
 
 
 # Le code Explorer ne promet rien : ni coins, ni récompense, ni gain (le jeu dit ce que l'étape donne).
@@ -1107,6 +1174,65 @@ def verifier_explorateur(sorties: dict[str, str], c: Contexte) -> list[str]:
             erreurs.append(f"{nom} : le code Explorer ne doit figurer que sur l'accueil")
         elif not code and re.search(r"Explorer code|Code Explorer|/website", page):
             erreurs.append(f"{nom} : code Explorer ou /website alors qu'aucun code n'est renseigné")
+    return erreurs
+
+
+# Ce que dit un site fermé et qui devient faux le jour de l'ouverture : date d'ouverture, liste blanche, essai fermé,
+# ligne d'état des textes légaux. (« Boutique pas encore ouverte » reste vrai tant que la boutique est fermée.)
+FERME = re.compile(r"(?i)whitelist|liste blanche|closed to players|fermé aux joueurs|to be announced|à annoncer|"
+                   r"opening date|date d.ouverture|closed (?:test|trial|beta)|essai fermé|"
+                   r"AstroSky is not open|AstroSky n.est pas encore ouvert(?!e)")
+
+
+@functools.lru_cache(maxsize=None)
+def textes_md_publies(racine: Path = RACINE) -> dict[str, str]:
+    """Texte des pages .md (légales, pack) présentes dans le dépôt du site."""
+    return {str(f.relative_to(racine)).replace("\\", "/"): f.read_text(encoding="utf-8")
+            for f in sorted(list(racine.glob("*.md")) + list(racine.glob("fr/*.md")))}
+
+
+def verifier_ouverture(sorties: dict[str, str], c: Contexte) -> list[str]:
+    """Serveur ouvert : aucune page publique (générée ou .md) ne parle d'une date d'ouverture, d'une liste blanche ni
+    d'un essai fermé ; l'accueil et « Rejoindre » disent « ouvert » avec l'adresse et la commande de l'île, la FAQ
+    répond « ouvert », l'accueil renvoie aux règles et dit comment signaler (/report seulement s'il existe)."""
+    if not c.ouvert:
+        return []
+    erreurs = []
+    if bool(c.lancement[0]) != bool(c.lancement[1]):
+        erreurs.append("etat.toml : lancement_en et lancement_fr vont ensemble (les deux ou aucune)")
+    textes = {nom: re.sub(r"<[^>]+>", " ", page) for nom, page in sorties.items()
+              if nom.endswith(".html") and not nom.startswith("_layouts/")}
+    textes.update(textes_md_publies())
+    for nom, texte in textes.items():
+        m = FERME.search(html.unescape(texte))
+        if m:
+            erreurs.append(f"{nom} : parle de l'état fermé alors que le serveur est ouvert ({m.group(0)!r})")
+    for lang in ("en", "fr"):
+        ouvert = "Open now" if lang == "en" else "Ouvert maintenant"
+        age = "18 and over" if lang == "en" else "18 ans et plus"
+        def page_de(cle: str) -> str:
+            return sorties.get(c.page(cle, lang).lstrip("/") + "index.html", "")
+        accueil_, rejoindre_, faq_ = page_de("accueil"), page_de("rejoindre"), page_de("faq")
+        for nom, page in (("accueil", accueil_), ("rejoindre", rejoindre_)):
+            visible = html.unescape(re.sub(r"<[^>]+>", " ", page))
+            if ouvert not in visible:
+                erreurs.append(f"{lang}/{nom} : « {ouvert} » absent alors que le serveur est ouvert")
+            if c.adresse not in visible:
+                erreurs.append(f"{lang}/{nom} : adresse absente")
+            if "/is go" not in visible:
+                erreurs.append(f"{lang}/{nom} : commande de l'île (/is go) absente")
+            if age not in visible:
+                erreurs.append(f"{lang}/{nom} : mention « {age} » absente")
+        if "When does AstroSky open?" in faq_ or "Quand AstroSky ouvre-t-il ?" in faq_:
+            erreurs.append(f"{lang}/faq : question sur la date d'ouverture alors que le serveur est ouvert")
+        if ("Is AstroSky open?" if lang == "en" else "AstroSky est-il ouvert ?") not in faq_:
+            erreurs.append(f"{lang}/faq : question « ouvert ? » absente")
+        regles = c.legale("regles", lang)
+        consignes = accueil_.split('class="consignes"')[1].split("</p>")[0] if 'class="consignes"' in accueil_ else ""
+        if regles and f'href="{regles}"' not in consignes:
+            erreurs.append(f"{lang}/accueil : lien vers les règles absent sous les boutons")
+        if ("/report" in consignes) != bool(c.jeu["commande_report"]):
+            erreurs.append(f"{lang}/accueil : /report cité alors qu'il n'existe pas, ou absent alors qu'il existe")
     return erreurs
 
 

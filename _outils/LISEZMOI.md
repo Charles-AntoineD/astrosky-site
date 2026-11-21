@@ -49,7 +49,7 @@ Il ne touche pas non plus aux redirections des réseaux (`tiktok/`, `youtube/`, 
 | Quand | Interrupteur |
 |---|---|
 | Annonce de la date (jamais avant l'essai fermé) | `serveur.ouverture_en` et `serveur.ouverture_fr` (vides : « date à annoncer »), et un bloc `[[nouvelles]]` si on veut la nouvelle datée |
-| Ouverture | `serveur.ouvert = true` ; `boutique.ouverte = true` si la boutique ouvre en même temps |
+| Ouverture | `serveur.ouvert = true` (dates laissées vides si l'ouverture n'est pas annoncée) ; `boutique.ouverte = true` si la boutique ouvre en même temps. Avant : régénérer les règles et la confidentialité avec `--ouvert` (le préparateur des pages légales retire leur ligne « pas encore ouvert »). Le script refuse d'écrire si une page parle encore d'une date d'ouverture, d'une liste blanche ou d'un essai fermé |
 | Bascule du 2026-11-06 | `serveur.taille_equipe` ; `jeu.metiers` et `jeu.equipes_agrandies` si on les garde au lancement |
 | Invitation Discord publique (permanente) | `py _outils/construire.py --invitation https://discord.gg/<code>` (ou `discord.invitation` dans `etat.toml`) |
 | Nom du salon des suggestions connu (ouvre `/ideas` et `/fr/idees`) | `py _outils/construire.py --salon-idees #<salon>` (ou `discord.salon_idees` dans `etat.toml`) |
