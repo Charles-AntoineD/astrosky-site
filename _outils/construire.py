@@ -124,6 +124,9 @@ class Contexte:
         self.equipe = int(s.get("taille_equipe", 0))
         # Date d'ouverture annoncée, telle qu'elle s'affiche (EN, FR) ; vide = « date à annoncer ».
         self.ouverture = (str(s.get("ouverture_en", "")).strip(), str(s.get("ouverture_fr", "")).strip())
+        # Lancement officiel annoncé, serveur déjà ouvert (EN, FR) ; vide = aucune ligne (décision de l'Owner du
+        # 2026-11-21 : ouverture publique le mardi 1er décembre 2026).
+        self.lancement = (str(s.get("lancement_en", "")).strip(), str(s.get("lancement_fr", "")).strip())
         self.jeu = etat["jeu"]
         prive = all(p in legales_presentes for p in LEGALES["confidentialite"])
         conditions = all(p in legales_presentes for p in LEGALES["conditions"])
@@ -308,11 +311,19 @@ def carte_adresse(c: Contexte, lang: str, ident: str) -> str:
 </div>"""
 
 
+def lancement(c: Contexte, lang: str) -> str:
+    """« Official launch: … » quand le serveur est ouvert et le lancement annoncé ; sinon rien."""
+    quand = c.lancement[0 if lang == "en" else 1]
+    if not (c.ouvert and quand):
+        return ""
+    return t(lang, f" Official launch: {quand}.", f" Lancement officiel : {quand}.")
+
+
 def statut(c: Contexte, lang: str) -> str:
     if c.ouvert:
-        return t(lang, "Open now. Copy the address, add it in Minecraft (Multiplayer → Add Server), then type "
+        return t(lang, "Open now." + lancement(c, lang) + " Copy the address, add it in Minecraft (Multiplayer → Add Server), then type "
                        "<code>/is go</code> in game to reach your island.",
-                 "Ouvert maintenant. Copie l’adresse, ajoute-la dans Minecraft (Multijoueur → Ajouter un serveur), "
+                 "Ouvert maintenant." + lancement(c, lang) + " Copie l’adresse, ajoute-la dans Minecraft (Multijoueur → Ajouter un serveur), "
                  "puis tape <code>/is go</code> en jeu pour aller sur ton île.")
     quand = c.ouverture[0 if lang == "en" else 1]
     if quand:
@@ -566,7 +577,7 @@ def rejoindre(c: Contexte, lang: str) -> str:
     avant = ""
     if c.ouvert:
         avant = '<div class="avis"><p>' + t(lang, "Open now, for players 18 and over.",
-                                            "Ouvert maintenant, pour les 18 ans et plus.") + "</p></div>"
+                                            "Ouvert maintenant, pour les 18 ans et plus.") + lancement(c, lang) + "</p></div>"
     else:
         avant = f'<div class="avis"><p>{statut(c, lang)} ' + t(
             lang, "Until then, the server is closed to players (whitelist).",
@@ -654,9 +665,9 @@ def questions(c: Contexte, lang: str) -> list[tuple[str, str]]:
     if c.ouvert:
         q.append((t(lang, "Is AstroSky open?", "AstroSky est-il ouvert ?"),
                   t(lang, f'Yes, open now: <code>{e(c.adresse)}</code>, on Minecraft: Java Edition {e(c.versions)}, for '
-                          f'players 18 and over. Step by step: <a href="{rejoindre}">how to join</a>.',
+                          f'players 18 and over.{lancement(c, lang)} Step by step: <a href="{rejoindre}">how to join</a>.',
                     f'Oui, ouvert maintenant : <code>{e(c.adresse)}</code>, sur Minecraft: Java Edition '
-                    f'{e(c.versions)}, pour les 18 ans et plus. Pas à pas : <a href="{rejoindre}">comment rejoindre</a>.')))
+                    f'{e(c.versions)}, pour les 18 ans et plus.{lancement(c, lang)} Pas à pas : <a href="{rejoindre}">comment rejoindre</a>.')))
     else:
         q.append((t(lang, "When does AstroSky open?", "Quand AstroSky ouvre-t-il ?"),
                   statut(c, lang) + " " + t(lang, "Until then, the server is closed to players (whitelist).",
@@ -1187,6 +1198,8 @@ def verifier_ouverture(sorties: dict[str, str], c: Contexte) -> list[str]:
     if not c.ouvert:
         return []
     erreurs = []
+    if bool(c.lancement[0]) != bool(c.lancement[1]):
+        erreurs.append("etat.toml : lancement_en et lancement_fr vont ensemble (les deux ou aucune)")
     textes = {nom: re.sub(r"<[^>]+>", " ", page) for nom, page in sorties.items()
               if nom.endswith(".html") and not nom.startswith("_layouts/")}
     textes.update(textes_md_publies())

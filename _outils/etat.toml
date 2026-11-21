@@ -22,6 +22,10 @@ ouvert = true
 #   ouverture_fr = "le vendredi 6 novembre 2026, à 18 h, heure du Québec"
 ouverture_en = ""
 ouverture_fr = ""
+# Lancement officiel annoncé, serveur déjà ouvert : « Official launch: … » sur l'accueil, « Rejoindre » et la FAQ. Les
+# deux ou aucune ; vider le jour du lancement (décision de l'Owner du 2026-11-21 : ouverture publique le 1er décembre).
+lancement_en = "Tuesday, December 1, 2026"
+lancement_fr = "le mardi 1er décembre 2026"
 # Nombre de joueurs par île à afficher. 0 = ne donner aucun nombre (taille fixée à la bascule du 2026-11-06).
 taille_equipe = 0
 
