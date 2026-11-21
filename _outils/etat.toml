@@ -73,19 +73,23 @@ code = "LIFTOFF"
 # true quand l'écouteur de votes est actif sur le serveur public, le test V3 passé sur le serveur public (aucune
 # adresse IP enregistrée), la ligne « vote » de la politique de confidentialité publiée, et chaque fiche ci-dessous en
 # ligne avec son adresse de vote. Sans la politique de confidentialité (EN et FR) dans le dépôt, la page ne se
-# construit pas.
+# construit pas. Chaque site garde l'ancre que le jeu donne (astrosky.gg/vote#<ancre>, minecraft/core, VoteSites.java) ;
+# l'Owner donne les trois adresses après ses inscriptions.
 ouvert = false
 
 [[vote.sites]]
 nom = "minecraft-mp.com"
+ancre = "minecraft-mp"
 adresse = ""
 
 [[vote.sites]]
 nom = "minecraftservers.org"
+ancre = "minecraftservers"
 adresse = ""
 
 [[vote.sites]]
 nom = "minecraft.buzz"
+ancre = "minecraft-buzz"
 adresse = ""
 
 # Comptes officiels (déjà en ligne).
