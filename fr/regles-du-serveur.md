@@ -6,9 +6,7 @@ permalink: /fr/regles/
 ---
 # AstroSky — Règles du serveur et conditions de jeu
 
-**Version :** `2026-10-31`
-
-**État :** AstroSky n'est pas encore ouvert : le serveur est fermé aux joueurs (liste blanche) et la boutique n'a pas ouvert. Cette page décrit son fonctionnement dès le jour de l'ouverture ; la date de version change si quelque chose diffère.
+**Version :** `2026-11-21`
 
 ## En bref
 
@@ -72,6 +70,10 @@ permalink: /fr/regles/
   montre déjà. Par exemple : Sodium, Lithium, OptiFine, Iris, et les minicartes sans radar d'entités ni vue des grottes.
 - Interdits : x-ray (packs de ressources compris), cliqueurs automatiques, macros. Un doute sur un mod ? Demandez-nous
   d'abord.
+- Les mods de changement d'outil, qui prennent un outil dans votre barre quand vous commencez à casser un bloc, sont
+  interdits. Nous ne les vérifions pas automatiquement : nous n'agissons que sur une preuve claire, par exemple si vous
+  nous le dites ou nous le montrez, et la première fois n'est qu'un avertissement. Miner avec le bouton d'attaque tenu pendant votre absence (souris
+  lestée, macro, cliqueur automatique) est interdit, avec ou sans le perk.
 - Être inactif est permis, tout comme être déconnecté après 30 minutes d'inactivité. Mais ne contournez pas cette
   déconnexion pendant votre absence : aucun logiciel, dispositif, long courant d'eau ni wagonnet en boucle qui garde
   votre île chargée sans que vous jouiez. Prendre un wagonnet pour vous déplacer est permis.

@@ -6,9 +6,7 @@ permalink: /rules/
 ---
 # AstroSky — Server Rules and Terms of Play
 
-**Version:** `2026-10-31`
-
-**Status:** AstroSky is not open yet: the server is closed to players (whitelist) and the store has not opened. This page describes how it will work from opening day; the version date changes if anything differs.
+**Version:** `2026-11-21`
 
 ## The short version
 
@@ -65,6 +63,10 @@ permalink: /rules/
 - Mods that give no advantage are fine: performance, shaders, and interface mods that only show what the game already
   shows. For example: Sodium, Lithium, OptiFine, Iris, and minimaps without an entity radar or cave view.
 - Not allowed: x-ray (resource packs included), auto-clickers, macros. Not sure about a mod? Ask us first.
+- Tool-switching mods, which pick a tool from your hotbar when you start breaking a block, are not allowed. We do not
+  check for them automatically: we act only on clear proof, such as you telling us or showing us, and the first time is
+  only a warning. Mining with the attack button held while you are away (weighted mouse, macro, auto-clicker)
+  is not allowed, with or without the perk.
 - Being idle is fine, and so is being disconnected after 30 minutes idle. But don't get around that disconnection while
   you are away: no software, device, long water current or minecart loop that keeps your island loaded without you
   playing. Riding a minecart to travel is fine.

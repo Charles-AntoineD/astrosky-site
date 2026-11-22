@@ -104,6 +104,7 @@ code { font-family: inherit; font-weight: 600; color: var(--clair); }
   letter-spacing: -0.01em; user-select: all; -webkit-user-select: all; }
 .adresse-carte .meta { margin: 0.6rem 0 0; color: var(--second); font-size: 0.97rem; }
 .statut { font-weight: 500; }
+.consignes { margin: 1rem 0 0; color: var(--second); font-size: 0.97rem; }
 
 /* Accueil : hero ──────────────────────────────────────────────────────────────── */
 .ciel { position: relative; overflow: hidden; min-height: max(100vh, 46rem); display: flex; flex-direction: column;
