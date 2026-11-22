@@ -821,7 +821,9 @@ def liens(c: Contexte, lang: str) -> str:
     if c.vote:
         lignes.append((t(lang, "Vote", "Vote"),
                        f'<a href="{c.page("vote", lang)}">astrosky.gg{c.page("vote", "en").rstrip("/")}</a> · '
-                       + " · ".join(f'<a href="{e(v["adresse"])}" rel="noopener">{e(v["nom"])}</a>' for v in c.votes)))
+                       + " · ".join(f'<a href="{e(v["adresse"])}" rel="noopener">{e(v["nom"])}</a>' for v in c.votes)
+                       # TS-6 (pas-à-pas des listes, section 3) : contre les fausses fiches.
+                       + t(lang, ". AstroSky is listed only on these sites.", ". AstroSky n’est inscrit que sur ces sites.")))
     if c.boutique:
         lignes.append((t(lang, "Store", "Boutique"),
                        t(lang, '<a href="/store">astrosky.gg/store</a> (cosmetics, titles and Nebula packs; prices visible without an account)',
@@ -890,20 +892,21 @@ def vote(c: Contexte, lang: str) -> str:
     chemin = c.legale("confidentialite", lang)
     politique = t(lang, f'Details: <a href="{chemin}">privacy policy</a>.',
                   f'Détails : <a href="{chemin}">politique de confidentialité</a>.')
-    sites = "\n".join(f'<li><p><a class="bouton secondaire" href="{e(v["adresse"])}" rel="noopener">{e(v["nom"])}</a></p></li>'
+    # Chaque site a l'ancre que le jeu donne (minecraft/core, VoteSites.java : astrosky.gg/vote#<ancre>).
+    sites = "\n".join(f'<li id="{e(v["ancre"])}"><p><a class="bouton secondaire" href="{e(v["adresse"])}" rel="noopener">{e(v["nom"])}</a></p></li>'
                       for v in c.votes)
     corps = f"""<section class="page">
 <div class="conteneur">
 <h1>{t(lang, "Vote for AstroSky", "Voter pour AstroSky")}</h1>
-<p class="chapeau">{t(lang, "Optional. Once a day per site, whenever you like. 1 vote = 1 vote point, on every site. Points have no expiry date and buy cosmetics only: never coins, items, discounts or anything sold. No streaks.", "Facultatif. Une fois par jour et par site, quand tu veux. 1 vote = 1 point de vote, sur chaque site. Les points n’ont pas de date d’expiration et n’achètent que des cosmétiques : jamais de coins, d’objets, de rabais ni rien de ce qui est vendu. Aucune série.")}</p>
+<p class="chapeau">{t(lang, "Optional. Once a day per site, whenever you like. 1 vote = 1 vote point and 5 Nebula ✦, on every site (Nebula once per site per day, from your first hour of play). Vote Nebula: once per connection, per site, per day. Points have no expiry date and buy cosmetics only. Nebula buy crate keys; they have no real-world value and can never be traded or cashed out. Crate odds: <code>/info Crates</code>. No streaks.", "Facultatif. Une fois par jour et par site, quand tu veux. 1 vote = 1 point de vote et 5 Nebula ✦, sur chaque site (Nebula une fois par site et par jour, une fois ta première heure de jeu faite). Nebula de vote : une fois par connexion, par site et par jour. Les points n’ont pas de date d’expiration et n’achètent que des cosmétiques. Les Nebula achètent des clés de caisse ; elles n’ont aucune valeur réelle et ne peuvent jamais être échangées ni converties en argent. Les chances des caisses : <code>/info Crates</code>. Aucune série.")}</p>
 <ol class="etapes">
 {sites}
 </ol>
-<p>{t(lang, "Join AstroSky once first, then vote with your exact Minecraft name. One vote per person per site per day, even with several accounts. Spend your points in game: <code>/vote</code>.", "Rejoins AstroSky une première fois, puis vote avec ton pseudo Minecraft exact. Un vote par personne, par site et par jour, même avec plusieurs comptes. Dépense tes points en jeu : <code>/vote</code>.")}</p>
+<p>{t(lang, "Join once, then vote with your exact Minecraft name. One vote per person per site per day, even with several accounts. Spend your points in game: <code>/vote</code>.", "Rejoins AstroSky une première fois, puis vote avec ton pseudo Minecraft exact. Un vote par personne, par site et par jour, même avec plusieurs comptes. Dépense tes points en jeu : <code>/vote</code>.")}</p>
 <div class="avis">
 <p>{t(lang, "No bots, scripts or auto-vote mods, no VPN or proxy to vote more than once a day on the same site, and no votes under someone else’s name: rewards gained that way are removed.", "Ni robot, ni script, ni mod de vote automatique, ni VPN ou mandataire pour voter plus d’une fois par jour sur un même site, ni vote au nom d’un autre : les récompenses obtenues ainsi sont retirées.")}{contester}</p>
 <p>{t(lang, "Each of these sites publishes the names of its voters (“Top voters”, “Latest votes”). Vote only if you’re fine with your Minecraft name appearing there.", "Chacun de ces sites publie le pseudo de ses votants (« Top voters », « Latest votes »). Ne vote que si tu acceptes que ton pseudo Minecraft y apparaisse.")}</p>
-<p>{t(lang, "When you vote, the site sends us your Minecraft name and your IP address. We read the name to credit your account and never keep the address. A vote journal (account, site, date, purchases and corrections) is kept 88 days to correct fraud.", "Quand tu votes, le site nous envoie ton pseudo Minecraft et ton adresse IP. On lit le pseudo pour créditer ton compte et on ne garde jamais l’adresse. Un journal des votes (compte, site, date, achats et corrections) est gardé 88 jours pour corriger la fraude.")} {politique}</p>
+<p>{t(lang, "When you vote, the site sends us your Minecraft name and your IP address. We read the name to credit your account and we never write the address down: so that one connection gets a site’s Nebula only once a day, the server turns it, in memory only, into a fingerprint that changes every day, and forgets it at the end of the UTC day or when it restarts. A vote journal (account, site, date, purchases and corrections) is kept 90 days at most to correct fraud.", "Quand tu votes, le site nous envoie ton pseudo Minecraft et ton adresse IP. On lit le pseudo pour créditer ton compte et on n’écrit jamais l’adresse : pour qu’une connexion ne reçoive les Nebula d’un site qu’une fois par jour, le serveur la transforme, en mémoire seulement, en une empreinte qui change chaque jour, et l’oublie à la fin du jour UTC ou au redémarrage. Un journal des votes (compte, site, date, achats et corrections) est gardé 90 jours au plus pour corriger la fraude.")} {politique}</p>
 </div>
 </div>
 </section>"""
@@ -1190,7 +1193,7 @@ def interdits(nom: str, page: str) -> list[str]:
 
 
 def verifier(sorties: dict[str, str], c: Contexte) -> list[str]:
-    erreurs = []
+    erreurs = verifier_vote(sorties, c)
     for nom, page in sorties.items():
         if not nom.endswith(".html"):
             continue
@@ -1211,6 +1214,33 @@ def verifier(sorties: dict[str, str], c: Contexte) -> list[str]:
 
 # Le code Explorer ne promet rien : ni coins, ni récompense, ni gain (le jeu dit ce que l'étape donne).
 RECOMPENSE = re.compile(r"(?i)\b(rewards?|prizes?|win|free|coins?|xp|récompenses?|prix|gagn\w*|gratuit\w*|pièces?)\b")
+
+
+# Ancres que le jeu donne (minecraft/core, VoteSites.java : astrosky.gg/vote#<ancre>).
+ANCRES_VOTE = {"minecraft-mp.com": "minecraft-mp", "minecraftservers.org": "minecraftservers",
+               "minecraft.buzz": "minecraft-buzz"}
+
+
+def verifier_vote(sorties: dict[str, str], c: Contexte) -> list[str]:
+    """Vote ouvert : chaque site garde l'ancre que le jeu donne, sur la page de vote (EN et FR), et la page des liens
+    officiels dit que les fiches sont les seules (TS-6)."""
+    erreurs = []
+    for v in c.votes:
+        attendue = ANCRES_VOTE.get(v["nom"])
+        if attendue and v.get("ancre") != attendue:
+            erreurs.append(f"etat.toml : ancre de {v['nom']} = {v.get('ancre')!r}, le jeu donne {attendue!r}")
+    if not c.vote:
+        return erreurs
+    for lang in ("en", "fr"):
+        page = sorties.get(c.page("vote", lang).lstrip("/") + "index.html", "")
+        for v in c.votes:
+            if f'id="{v["ancre"]}"' not in page:
+                erreurs.append(f"{lang}/vote : ancre #{v['ancre']} absente")
+        liens_ = sorties.get(c.page("liens", lang).lstrip("/") + "index.html", "")
+        phrase = "AstroSky is listed only on these sites." if lang == "en" else "AstroSky n’est inscrit que sur ces sites."
+        if phrase not in liens_:
+            erreurs.append(f"{lang}/liens : phrase TS-6 absente")
+    return erreurs
 
 
 def verifier_explorateur(sorties: dict[str, str], c: Contexte) -> list[str]:
